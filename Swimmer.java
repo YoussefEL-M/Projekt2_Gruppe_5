@@ -61,7 +61,7 @@ public class Swimmer implements Comparable<Swimmer>{
     private float backstrokeRecord;
     private float freestyleRecord;
     private LocalDate birthday;
-    String trainer; //Skal vi beholde den her?
+    Trainer trainer;
     private String memberType;
 
     // Konstruktor til at oprette en Swimmer-objekt
