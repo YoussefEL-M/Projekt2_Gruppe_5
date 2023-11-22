@@ -10,11 +10,11 @@ public class FileManager {
     public static void main(String randyDandyO){ //For testing
     }
     public static ArrayList<Swimmer> getMembers(){
+        ArrayList<Swimmer> list = new ArrayList<>();
         try {
             FileReader file = new FileReader("Members.txt");
             BufferedReader in = new BufferedReader(file);
             String line = in.readLine();
-            ArrayList<Swimmer> list = new ArrayList<>();
 
             while(line!=null){
                 String[] bits = line.split(",");
@@ -26,6 +26,7 @@ public class FileManager {
             System.out.println("Error: unable to read members from file.");
             E.printStackTrace();
         }
+        return list;
     }
-    public static ArrayList<Trainer> getTrainers(){}
+    //public static ArrayList<Trainer> getTrainers(){}
 }
