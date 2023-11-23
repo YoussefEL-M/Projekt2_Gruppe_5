@@ -11,7 +11,8 @@ public class Swimmer implements Comparable<Swimmer>{
         // Tilfoj Swimmer objekter til listen
         swimmers.add(new Swimmer("Greg Gregory", LocalDate.of(1995, 7, 31), true));
         swimmers.add(new Swimmer("Billy Bob", LocalDate.of(2010, 1, 10), false));
-        // Set records for different disciplines for each swimmer
+
+        // Set rekorder for hver svømmer for hver disciplin
         for (Swimmer swimmer : swimmers) {
             swimmer.setRecord(18.7f, 69.1f, 30.4f);
         }
@@ -35,9 +36,9 @@ public class Swimmer implements Comparable<Swimmer>{
         System.out.println("\nTesting addCharge and registerPayment methods:");
         System.out.println("Initial owed amount: " + testSwimmer.owedAmount);
         testSwimmer.addCharge((short) 50);
-        System.out.println("After adding a charge of 50. New owed amount: " + testSwimmer.owedAmount);
+        System.out.println("New owed amount: " + testSwimmer.owedAmount);
         testSwimmer.registerPayment(30.0f);
-        System.out.println("After registering a payment of 30. Remaining amount: " + testSwimmer.owedAmount);
+        System.out.println("Remaining amount: " + testSwimmer.owedAmount);
 
         // Test updateMemberType metode
         System.out.println("\nTesting updateMemberType method:");
@@ -56,7 +57,7 @@ public class Swimmer implements Comparable<Swimmer>{
     private String name;
     private int age;
     private boolean senior;
-    private int owedAmount = 0;
+    private short owedAmount = 0;
     private float butterflyRecord;
     private float backstrokeRecord;
     private float freestyleRecord;
@@ -76,7 +77,7 @@ public class Swimmer implements Comparable<Swimmer>{
 
     // Metode til at returnere leaselig tekst
     public String toString(){
-        return name+", "+age+", "+birthday+", "+senior+", "+isActive;
+        return name+", "+age+", "+birthday+", "+senior+", "+isActive+"\nButterfly rekord: "+butterflyRecord+"\nBackStroke rekord: "+backstrokeRecord+"\nFreeStyle rekord: "+freestyleRecord;
     }
     private int calculateAge(LocalDate birthday) {
         LocalDate currentDate = LocalDate.now();
@@ -137,6 +138,6 @@ public class Swimmer implements Comparable<Swimmer>{
         float totalRecordsSwimmer2 = swimmer.butterflyRecord + swimmer.backstrokeRecord + swimmer.freestyleRecord;
 
         // Sammenlign deres rekorder
-        return Float.compare(totalRecordsSwimmer, totalRecordsSwimmer2);
+        return  Float.compare(totalRecordsSwimmer, totalRecordsSwimmer2);
     }
 }
