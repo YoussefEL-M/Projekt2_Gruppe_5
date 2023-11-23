@@ -13,6 +13,7 @@ public class UI {
         ArrayList<Swimmer> swimmers = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
 
+        int subchoice=0;
         int choice = 0;
         do {
             try {
@@ -43,16 +44,16 @@ public class UI {
 
                 switch (choice) {
                     case 1 -> {
-                        while (choice != 4) {
+                        while (subchoice != 4) {
                             System.out.println();
                             System.out.println("1 Opret medlem");
                             System.out.println("2 Opdater stamoplysninger for medlem");
                             System.out.println("3 Generer oversigt over nuværende medlemmer");
                             System.out.println("4 Gå tilbage");
 
-                            choice = scanner.nextInt();
+                            subchoice = scanner.nextInt();
                             scanner.nextLine();
-                            switch (choice) {
+                            switch (subchoice) {
                                 case 1 -> {
                                     Swimmer newSwimmer = getSwimmerDetails(scanner);
                                     swimmers.add(newSwimmer);
@@ -64,7 +65,7 @@ public class UI {
                                     showSwimmers(swimmers);
                                 }
                                 case 4 -> {
-                                    System.out.println("Returning to the main menu.");
+                                    System.out.println("Går tilbage til main menu.");
                                 }
                                 default -> System.out.println("Error: Invalid input. Try again.");
                             }
@@ -78,7 +79,7 @@ public class UI {
                 System.out.println("An error has occurred " + e.getMessage());
                 scanner.nextLine();
             }
-        } while (choice != 5); // husk at opdatere her!
+        } while (choice != 4); // husk at opdatere her!
         scanner.close();
     }
 
