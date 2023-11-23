@@ -86,7 +86,7 @@ public class Swimmer implements Comparable<Swimmer>{
 
     // Metode til at returnere leaselig tekst
     public String toString(){
-        return name+", "+age+", "+birthday+", "+senior+", "+isActive+"\nButterfly rekord: "+butterflyRecord+"\nBackStroke rekord: "+backstrokeRecord+"\nFreeStyle rekord: "+freestyleRecord;
+        return name+", "+age+", "+birthday+", "+senior+", "+(isActive? "Active" : "Inactive")+"\nButterfly rekord: "+butterflyRecord+"\nBackStroke rekord: "+backstrokeRecord+"\nFreeStyle rekord: "+freestyleRecord;
     }
     private int calculateAge(LocalDate birthday) {
         LocalDate currentDate = LocalDate.now();
