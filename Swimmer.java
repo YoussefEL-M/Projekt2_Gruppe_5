@@ -177,4 +177,14 @@ public class Swimmer implements Comparable<Swimmer>{
     public float getOwedAmount(){
         return this.owedAmount;
     }
+    public float getButterflyRecord(){
+        return this.butterflyRecord;
+    }
+    public float getBackstrokeRecord(){
+        return this.backstrokeRecord;
+    }
+    public float getFreestyleRecord(){
+        return this.freestyleRecord;
+    }
 }
+
