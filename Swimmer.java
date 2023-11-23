@@ -146,4 +146,21 @@ public class Swimmer implements Comparable<Swimmer>{
         // Sammenlign deres rekorder
         return  Float.compare(totalRecordsSwimmer, totalRecordsSwimmer2);
     }
+
+    // Metode til at modtage navn på enkelt svømmer i liste.
+    public String getName(){
+        return name;
+    }
+    // Metode til at redigere navn på enkelt svømmer i liste.
+    public void setName(String newName){
+        this.name = newName;
+    }
+    // Metode til at redigere fødselsdato på enkelt svømmer i liste.
+    public void setBirthdate(LocalDate newBirthdate){
+        this.birthday = newBirthdate;
+    }
+    // Metode til at redigere aktivt medlemskab på enkelt svømmer i liste.
+    public void setActiveMember(boolean activeMember){
+        this.isActive=activeMember;
+    }
 }
