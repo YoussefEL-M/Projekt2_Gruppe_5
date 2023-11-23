@@ -53,31 +53,43 @@ public class Swimmer implements Comparable<Swimmer>{
         System.out.println("Backstroke record: " + testSwimmer.getRecord("backstroke"));
         System.out.println("Freestyle record: " + testSwimmer.getRecord("freestyle"));
     }
+    private static short noOfSwimmers = 0;
+    private short indexNo;
     private boolean isActive;
     private String name;
     private int age;
     private boolean senior;
-    private short owedAmount = 0;
+    private short owedAmount;
     private float butterflyRecord;
     private float backstrokeRecord;
     private float freestyleRecord;
     private LocalDate birthday;
     Trainer trainer;
-    private String memberType;
+    private boolean competitionSwimmer;
 
     // Konstruktor til at oprette en Swimmer-objekt
-    Swimmer(String name, LocalDate birthday, boolean isActive){
+    Swimmer( boolean isActive, String name, LocalDate birthday, short owedAmount,float butterflyRecord, float backstrokeRecord, float freestyleRecord, boolean competitionSwimmer, Trainer trainer){
+        indexNo=noOfSwimmers;
+        noOfSwimmers++;
         this.name = name;
         this.birthday = birthday;
         this.age=calculateAge(birthday);
-        this.memberType="Junior";
+        this.senior=(this.age >= 18);
         this.isActive = isActive;
-
+        this.owedAmount=owedAmount;
+        this.butterflyRecord=butterflyRecord;
+        this.backstrokeRecord=backstrokeRecord;
+        this.freestyleRecord=freestyleRecord;
+        this.trainer=trainer;
+        this.competitionSwimmer=competitionSwimmer;
     }
 
     // Metode til at returnere leaselig tekst
     public String toString(){
-        return name+", "+age+", "+birthday+", "+senior+", "+isActive+"\nButterfly rekord: "+butterflyRecord+"\nBackStroke rekord: "+backstrokeRecord+"\nFreeStyle rekord: "+freestyleRecord;
+        return name+", "+age+", "+birthday+", "+senior+", "+(isActive? "Active" : "Inactive")+"\nButterfly rekord: "+butterflyRecord+"\nBackStroke rekord: "+backstrokeRecord+"\nFreeStyle rekord: "+freestyleRecord;
+    }
+    public String fileOutput(){
+        return isActive+","+name+","+birthday+","+owedAmount+","+butterflyRecord+","+backstrokeRecord+","+freestyleRecord+","+competitionSwimmer+","+trainer.getName();
     }
     private int calculateAge(LocalDate birthday) {
         LocalDate currentDate = LocalDate.now();
@@ -119,16 +131,13 @@ public class Swimmer implements Comparable<Swimmer>{
 
     // Metode til at hente en rekord for en given svomme disciplin
     float getRecord(String discipline){
-        switch (discipline.toLowerCase()){
-            case "butterfly":
-                return butterflyRecord;
-            case "backstroke":
-                return backstrokeRecord;
-            case "freestyle":
-                return freestyleRecord;
-            default:
-                throw new IllegalArgumentException("Ugyldig disciplin: "+discipline+". Gyldige discipliner: butterfly, backstroke, freestyle");
-        }
+        return switch (discipline.toLowerCase()) {
+            case "butterfly" -> butterflyRecord;
+            case "backstroke" -> backstrokeRecord;
+            case "freestyle" -> freestyleRecord;
+            default ->
+                    throw new IllegalArgumentException("Ugyldig disciplin: " + discipline + ". Gyldige discipliner: butterfly, backstroke, freestyle");
+        };
     }
 
     // Metode til at sammenligne svommeres rekorder
