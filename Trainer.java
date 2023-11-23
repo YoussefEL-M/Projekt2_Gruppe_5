@@ -6,4 +6,7 @@ public class Trainer {
     Trainer(String name){
         this.name=name;
     }
+    public String getName(){
+        return name;
+    }
 }

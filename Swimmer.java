@@ -88,6 +88,9 @@ public class Swimmer implements Comparable<Swimmer>{
     public String toString(){
         return name+", "+age+", "+birthday+", "+senior+", "+(isActive? "Active" : "Inactive")+"\nButterfly rekord: "+butterflyRecord+"\nBackStroke rekord: "+backstrokeRecord+"\nFreeStyle rekord: "+freestyleRecord;
     }
+    public String fileOutput(){
+        return isActive+","+name+","+birthday+","+owedAmount+","+butterflyRecord+","+backstrokeRecord+","+freestyleRecord+","+competitionSwimmer+","+trainer.getName();
+    }
     private int calculateAge(LocalDate birthday) {
         LocalDate currentDate = LocalDate.now();
         return Period.between(birthday, currentDate).getYears();
