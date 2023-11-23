@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import static java.lang.System.exit;
 
 public class FileManager {
-    public static void main(String randyDandyO){ //For testing
+    public static void main(String[] randyDandyO){ //For testing
     }
     public static ArrayList<Swimmer> getMembers(){
         ArrayList<Swimmer> list = new ArrayList<>();
