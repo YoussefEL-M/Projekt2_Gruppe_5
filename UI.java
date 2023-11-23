@@ -10,6 +10,7 @@ public class UI {
     }
 
     public static void menu() {
+        ArrayList<Swimmer> swimmers = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
 
         int choice = 0;
@@ -54,13 +55,13 @@ public class UI {
                             switch (choice) {
                                 case 1 -> {
                                     Swimmer newSwimmer = getSwimmerDetails(scanner);
+                                    swimmers.add(newSwimmer);
                                 }
                                 case 2 -> {
 
                                 }
                                 case 3 -> {
-                                    //showSwimmers(swimmers);
-                                    // vi mangler arraylisten.
+                                    showSwimmers(swimmers);
                                 }
                                 case 4 -> {
                                     System.out.println("Returning to the main menu.");
@@ -112,7 +113,7 @@ public class UI {
         }
     }
 
-    static void showSwimmers(ArrayList<Swimmer> list, Scanner scanner) {
+    static void showSwimmers(ArrayList<Swimmer> list) {
         try {
             System.out.println("Medlemsliste:");
             for (Swimmer s : list) {
