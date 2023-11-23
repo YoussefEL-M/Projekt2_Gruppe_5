@@ -68,13 +68,13 @@ public class Swimmer implements Comparable<Swimmer>{
     private boolean competitionSwimmer;
 
     // Konstruktor til at oprette en Swimmer-objekt
-    Swimmer( boolean isActive, String name, LocalDate birthday, short owedAmount,float butterflyRecord, float backstrokeRecord, float freestyleRecord, Trainer trainer, boolean competitionSwimmer){
+    Swimmer( boolean isActive, String name, LocalDate birthday, short owedAmount,float butterflyRecord, float backstrokeRecord, float freestyleRecord, boolean competitionSwimmer, Trainer trainer){
         indexNo=noOfSwimmers;
         noOfSwimmers++;
         this.name = name;
         this.birthday = birthday;
         this.age=calculateAge(birthday);
-        this.memberType="Junior";
+        this.senior=(this.age >= 18);
         this.isActive = isActive;
         this.owedAmount=owedAmount;
         this.butterflyRecord=butterflyRecord;

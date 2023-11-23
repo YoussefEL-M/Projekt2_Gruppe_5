@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import static java.lang.System.exit;
@@ -18,6 +19,17 @@ public class FileManager {
 
             while(line!=null){
                 String[] bits = line.split(",");
+                boolean active = Boolean.parseBoolean(bits[0]);
+                String name = bits[1];
+                LocalDate birthday = LocalDate.parse(bits[2]);
+                short amount = Short.parseShort(bits[3]);
+                float butterfly = Float.parseFloat(bits[4]);
+                float breaststroke = Float.parseFloat(bits[5]);
+                float freestyle = Float.parseFloat(bits[6]);
+                boolean competition = Boolean.parseBoolean(bits[7]);
+                Trainer trainer = new Trainer(bits[8]);
+
+                list.add(new Swimmer(active,name,birthday,amount,butterfly,breaststroke,freestyle,competition, trainer));
 
                 line = in.readLine();
             }
