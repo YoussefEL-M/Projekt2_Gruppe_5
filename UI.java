@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ public class UI {
             try {
                 int subchoice1=0;
                 int subchoice2=0;
+                int subchoice3=0;
                 System.out.println();
                 System.out.println("**********************");
                 System.out.println("Svømmeklubben Delfinen");
@@ -70,7 +72,7 @@ public class UI {
                                 case 4 -> {
                                     System.out.println("Går tilbage til main menu.");
                                 }
-                                default -> System.out.println("Error: Invalid input. Try again.");
+                                default -> System.out.println("Fejl: Forkert input. Prøv igen.");
                             }
                         }
                     }
@@ -97,6 +99,30 @@ public class UI {
                                 case 5 -> {
                                     System.out.println("Går tilbage til main menu.");
                                 }
+                                default -> System.out.println("Fejl: Forkert input. Prøv igen.");
+                            }
+                        }
+                    }
+                    case 3 -> {
+                        while (subchoice3 != 3) {
+                            System.out.println();
+                            System.out.println("Kasserermenu");
+                            System.out.println("1 Vis medlemmer i restance");
+                            System.out.println("2 Opdater kontigentbetaling");
+                            System.out.println("3 Gå tilbage");
+                            System.out.println();
+
+                            subchoice3 = scanner.nextInt();
+                            scanner.nextLine();
+                            switch (subchoice3) {
+                                case 1 -> {
+                                    // print liste af medlemmer i restance.
+                                }
+                                case 2 -> {
+                                    updatePayment(swimmers, scanner);
+
+                                }
+                                default -> System.out.println("Fejl: Forkert input. Prøv igen.");
                             }
                         }
                     }
@@ -105,7 +131,7 @@ public class UI {
                 System.out.println("An error has occurred " + e.getMessage());
                 scanner.nextLine();
             }
-        } while (choice != 4); // husk at opdatere her!
+        } while (choice != 4);
         scanner.close();
     }
 
@@ -212,5 +238,44 @@ public class UI {
             e.printStackTrace();
 
         }
+    }
+    static void updatePayment(ArrayList<Swimmer> list, Scanner scanner){
+        try {
+            System.out.println("Opdater kontingentbetaling\n");
+            System.out.println("Indtast medlemmets navn:");
+
+            String searchName = scanner.nextLine();
+            Swimmer swimmerToEdit = null;
+
+            for (Swimmer s : list) {
+                if (s.getName().equals(searchName)) {
+                    swimmerToEdit = s; // Assign the found swimmer to swimmerToEdit.
+                    break;
+                }
+            }
+            if (swimmerToEdit!=null){
+                System.out.println("Medlem fundet med følgende info:");
+                System.out.println(swimmerToEdit);
+                System.out.println();
+                System.out.println("Medlem skylder følgende: "+swimmerToEdit.getOwedAmount());
+                System.out.println("Indtast beløb for betaling");
+                float paymentAmount = scanner.nextFloat();
+                scanner.nextLine();
+                if (paymentAmount <= swimmerToEdit.getOwedAmount()) {
+                    swimmerToEdit.registerPayment(paymentAmount);
+                    System.out.println("Payment registered. Remaining amount: " + swimmerToEdit.getOwedAmount());
+                    System.out.println("Beløb: " + paymentAmount + " opdateret for medlem: " + swimmerToEdit.getName());
+                    //beslut hvilken vi ønsker ovenstående!
+                    //System.out.println(swimmerToEdit);
+                } else{
+                    System.out.println("Beløb er for meget. Medlem skylder: " + swimmerToEdit.getOwedAmount());
+                    }
+            } else {
+            System.out.println("Fejl: Medlem ikke fundet.");
+            }
+        } catch (Exception e) {
+        System.out.println("An error has occurred: " + e.getMessage());
+        e.printStackTrace();
+    }
     }
 }
