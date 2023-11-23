@@ -40,7 +40,7 @@ public class UI {
 
                 switch (choice){
                     case 1 -> {
-                        while (choice !=3) {
+                        while (choice !=4) {
                             System.out.println();
                             System.out.println("1 Opret medlem");
                             System.out.println("2 Opdater stamoplysninger for medlem");
@@ -51,22 +51,18 @@ public class UI {
                             scanner.nextLine();
                             switch (choice) {
                                 case 1 -> {
-                                    try {
-                                        Swimmer newSwimmer = getSwimmerDetails(scanner);
-
-                                    } catch (IllegalArgumentException e) {
-                                        System.out.println("An error has occured! " + e.getMessage());
-                                    } catch (Exception e){
-                                        System.out.println("An error has occured! " + e.getMessage());
-                                    }
+                                    Swimmer newSwimmer = getSwimmerDetails(scanner);
                                 }
                                 case 2 -> {
+                                    break;
 
                                 }
                                 case 3 -> {
 
                                 }
-                                case 4 -> System.out.println("Returning to the main menu.");
+                                case 4 -> {
+                                    System.out.println("Returning to the main menu.");
+                                }
                                 default -> System.out.println("Error: Invalid input. Try again.");
                             }
                         }
@@ -75,30 +71,41 @@ public class UI {
 
                     }
                 }
-
             } catch (Exception e) {
                 System.out.println("An error has occurred " + e.getMessage());
                 scanner.nextLine();
             }
-        }while (choice != 4) ;
+        }while (choice != 5) ; // husk at opdatere her!
         scanner.close();
     }
-    private static Swimmer getSwimmerDetails(Scanner scanner){
-        System.out.println("Du har valgt Opret medlem");
-        System.out.println("Indtast navn:");
-        String name = scanner.nextLine();
-        System.out.println("Indtast fødselsdato:");
-        LocalDate birthdate = LocalDate.parse(scanner.nextLine());
-        System.out.println("Er det et aktivt medlem? Indtast Y/N");
-        String valg = scanner.nextLine();
-        boolean activeMember=false;
-        if (valg == "Y") {
-            activeMember = true;
-        } else if (valg == "N") {
-            activeMember = false;
-        } else {
-            System.out.println("Valg ugyldigt, prøv igen.");
+    private static Swimmer getSwimmerDetails(Scanner scanner) {
+        while (true) {
+            try {
+                System.out.println("Du har valgt Opret medlem");
+                System.out.println("Indtast navn:");
+                String name = scanner.nextLine();
+                System.out.println("Indtast fødselsdato:");
+                LocalDate birthdate = LocalDate.parse(scanner.nextLine());
+                System.out.println("Er det et aktivt medlem? Indtast Y/N");
+                String valg = scanner.nextLine();
+                boolean activeMember = false;
+                if (valg.equalsIgnoreCase("y")) {
+                    activeMember = true;
+                } else if (valg.equalsIgnoreCase("n")) {
+                    activeMember = false;
+                } else {
+                    System.out.println("Valg ugyldigt, prøv igen.");
+                }
+                System.out.println("Ny svømmer oprettet med følgende stamdata:");
+                System.out.println("Navn: "+name);
+                System.out.println("Fødselsdato: "+birthdate);
+                System.out.println("Aktivt medlem: "+valg);
+                return new Swimmer(name, birthdate, activeMember);
+            } catch (IllegalArgumentException e) {
+                System.out.println("An error has occured! " + e.getMessage());
+            } catch (Exception e) {
+                System.out.println("An error has occured! " + e.getMessage());
+            }
         }
-        return new Swimmer(name, birthdate, activeMember);
     }
 }
