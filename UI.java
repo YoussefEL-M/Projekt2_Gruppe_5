@@ -58,7 +58,7 @@ public class UI {
                                     swimmers.add(newSwimmer);
                                 }
                                 case 2 -> {
-
+                                    editSwimmer(swimmers, scanner);
                                 }
                                 case 3 -> {
                                     showSwimmers(swimmers);
@@ -119,6 +119,66 @@ public class UI {
             for (Swimmer s : list) {
                 System.out.println(list);
             }
+
+        } catch (Exception e) {
+            System.out.println("An error has occurred: " + e.getMessage());
+            e.printStackTrace();
+
+        }
+    }
+    static void editSwimmer(ArrayList<Swimmer> list, Scanner scanner){
+        try {
+            System.out.println("Medlemsliste:");
+            for (Swimmer s : list) {
+                System.out.println(list);
+            }
+            System.out.println("Indtast navn på svømmer, du ønsker at redigere");
+            String searchName = scanner.nextLine();
+            Swimmer swimmerToEdit = null;
+
+
+            for (Swimmer s : list) {
+                if (s.getName().equals(searchName)) {
+                    swimmerToEdit = s; // Assign the found swimmer to swimmerToEdit.
+                    break;
+                }
+            }
+
+            if (swimmerToEdit != null){
+                System.out.println("Svømmer stamdata:");
+                System.out.println(swimmerToEdit);
+
+                System.out.println("Vil du ændre navn? Indtast nyt navn eller tryk Enter for at bevare det nuværende:");
+                String newName = scanner.nextLine();
+                if (!newName.isEmpty()){
+                    swimmerToEdit.setName(newName);
+                }
+
+                System.out.println("Vil du ændre fødselsdato? Indtast nyt datoformat (YYYY-MM-DD) eller tryk Enter for at bevare det nuværende:");
+                String newBirthdate = scanner.nextLine();
+                if(!newBirthdate.isEmpty()){
+                    swimmerToEdit.setBirthdate(LocalDate.parse(newBirthdate));
+                }
+
+                System.out.println("Vil du ændre aktivt medlemskab? Indtast Y/N eller tryk Enter for at bevare det nuværende:");
+                String newActiveStatus = scanner.nextLine();
+                if (!newActiveStatus.isEmpty()) {
+                    if ("Y".equalsIgnoreCase(newActiveStatus)) {
+                        swimmerToEdit.setActiveMember(true);
+                    } else if ("N".equalsIgnoreCase(newActiveStatus)){
+                        swimmerToEdit.setActiveMember(false);
+                    } else {
+                        System.out.println("Ugyldigt input. Medlemsskab forbliver uændret.");
+                    }
+                }
+
+                System.out.println("Svømmer opdateret:");
+                System.out.println(swimmerToEdit);
+            }
+            else {
+                System.out.println("Fejl: Svømmer ikke fundet.");
+            }
+
 
         } catch (Exception e) {
             System.out.println("An error has occurred: " + e.getMessage());
