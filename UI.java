@@ -146,6 +146,11 @@ public class UI {
                 System.out.println("Er det et aktivt medlem? Indtast Y/N");
                 String valg = scanner.nextLine();
                 boolean activeMember = false;
+                short owedAmount=0;
+                float butterflyRecord=0,backstrokeRecord=0,freestyleRecord=0;
+                boolean competitionSwimmer=false;
+                Trainer trainer=null;
+
                 if (valg.equalsIgnoreCase("y")) {
                     activeMember = true;
                 } else if (valg.equalsIgnoreCase("n")) {
@@ -157,7 +162,7 @@ public class UI {
                 System.out.println("Navn: " + name);
                 System.out.println("Fødselsdato: " + birthdate);
                 System.out.println("Aktivt medlem: " + valg);
-                return new Swimmer(name, birthdate, activeMember);
+                return new Swimmer(activeMember,name,birthdate,owedAmount,butterflyRecord,backstrokeRecord,freestyleRecord,competitionSwimmer,trainer);
             } catch (IllegalArgumentException e) {
                 System.out.println("An error has occured! " + e.getMessage());
             } catch (Exception e) {
