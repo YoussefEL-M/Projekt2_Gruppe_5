@@ -1,12 +1,14 @@
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class UI {
     public static void main(String[] args) throws IOException {
         menu();
     }
+
     public static void menu() {
         Scanner scanner = new Scanner(System.in);
 
@@ -38,9 +40,9 @@ public class UI {
                 choice = scanner.nextInt();
                 scanner.nextLine();
 
-                switch (choice){
+                switch (choice) {
                     case 1 -> {
-                        while (choice !=4) {
+                        while (choice != 4) {
                             System.out.println();
                             System.out.println("1 Opret medlem");
                             System.out.println("2 Opdater stamoplysninger for medlem");
@@ -54,11 +56,11 @@ public class UI {
                                     Swimmer newSwimmer = getSwimmerDetails(scanner);
                                 }
                                 case 2 -> {
-                                    break;
 
                                 }
                                 case 3 -> {
-
+                                    //showSwimmers(swimmers);
+                                    // vi mangler arraylisten.
                                 }
                                 case 4 -> {
                                     System.out.println("Returning to the main menu.");
@@ -75,9 +77,10 @@ public class UI {
                 System.out.println("An error has occurred " + e.getMessage());
                 scanner.nextLine();
             }
-        }while (choice != 5) ; // husk at opdatere her!
+        } while (choice != 5); // husk at opdatere her!
         scanner.close();
     }
+
     private static Swimmer getSwimmerDetails(Scanner scanner) {
         while (true) {
             try {
@@ -97,15 +100,29 @@ public class UI {
                     System.out.println("Valg ugyldigt, prøv igen.");
                 }
                 System.out.println("Ny svømmer oprettet med følgende stamdata:");
-                System.out.println("Navn: "+name);
-                System.out.println("Fødselsdato: "+birthdate);
-                System.out.println("Aktivt medlem: "+valg);
+                System.out.println("Navn: " + name);
+                System.out.println("Fødselsdato: " + birthdate);
+                System.out.println("Aktivt medlem: " + valg);
                 return new Swimmer(name, birthdate, activeMember);
             } catch (IllegalArgumentException e) {
                 System.out.println("An error has occured! " + e.getMessage());
             } catch (Exception e) {
                 System.out.println("An error has occured! " + e.getMessage());
             }
+        }
+    }
+
+    static void showSwimmers(ArrayList<Swimmer> list, Scanner scanner) {
+        try {
+            System.out.println("Medlemsliste:");
+            for (Swimmer s : list) {
+                System.out.println(list);
+            }
+
+        } catch (Exception e) {
+            System.out.println("An error has occurred: " + e.getMessage());
+            e.printStackTrace();
+
         }
     }
 }
