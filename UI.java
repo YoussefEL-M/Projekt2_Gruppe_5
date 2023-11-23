@@ -1,7 +1,5 @@
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -17,9 +15,9 @@ public class UI {
         int choice = 0;
         do {
             try {
-                int subchoice1=0;
-                int subchoice2=0;
-                int subchoice3=0;
+                int subchoice1 = 0;
+                int subchoice2 = 0;
+                int subchoice3 = 0;
                 System.out.println();
                 System.out.println("**********************");
                 System.out.println("Svømmeklubben Delfinen");
@@ -32,7 +30,7 @@ public class UI {
                 System.out.println();
                 System.out.println("2. Trænermenu");
                 System.out.println("2.1 Tilføj svømmere til hold");
-                System.out.println("2.2 Registrer discipliner");
+                System.out.println("2.2 Registrer disciplin rekorder");
                 System.out.println("2.3 Registrer konkurrencedeltagere");
                 System.out.println("2.4 Generer top 5 oversigt");
                 System.out.println();
@@ -60,7 +58,7 @@ public class UI {
                             scanner.nextLine();
                             switch (subchoice1) {
                                 case 1 -> {
-                                    Swimmer newSwimmer = getSwimmerDetails(scanner);
+                                    Swimmer newSwimmer = createSwimmer(scanner);
                                     swimmers.add(newSwimmer);
                                 }
                                 case 2 -> {
@@ -77,11 +75,11 @@ public class UI {
                         }
                     }
                     case 2 -> {
-                        while (subchoice2!=5) {
+                        while (subchoice2 != 5) {
                             System.out.println();
                             System.out.println("Trænermenu");
                             System.out.println("1 Tilføj svømmere til hold");
-                            System.out.println("2 Registrer discipliner");
+                            System.out.println("2 Registrer disciplin rekorder");
                             System.out.println("3 Registrer konkurrencedeltagere");
                             System.out.println("4 Generer top 5 oversigt");
                             System.out.println("5 Gå tilbage");
@@ -89,12 +87,18 @@ public class UI {
                             subchoice2 = scanner.nextInt();
                             scanner.nextLine();
 
-                            switch(subchoice2){
+                            switch (subchoice2) {
                                 case 1 -> {
                                     System.out.println("Tilføj svømmere til hold");
                                 }
                                 case 2 -> {
+                                    registerDiscipline(swimmers,scanner);
+                                }
+                                case 3 -> {
 
+                                }
+                                case 4 -> {
+                                    registerCompetitionSwimmer(swimmers,scanner);
                                 }
                                 case 5 -> {
                                     System.out.println("Går tilbage til main menu.");
@@ -135,7 +139,7 @@ public class UI {
         scanner.close();
     }
 
-    private static Swimmer getSwimmerDetails(Scanner scanner) {
+    private static Swimmer createSwimmer(Scanner scanner) {
         while (true) {
             try {
                 System.out.println("Du har valgt Opret medlem");
@@ -146,10 +150,10 @@ public class UI {
                 System.out.println("Er det et aktivt medlem? Indtast Y/N");
                 String valg = scanner.nextLine();
                 boolean activeMember = false;
-                short owedAmount=0;
-                float butterflyRecord=0,backstrokeRecord=0,freestyleRecord=0;
-                boolean competitionSwimmer=false;
-                Trainer trainer=null;
+                short owedAmount = 0;
+                float butterflyRecord = 0, backstrokeRecord = 0, freestyleRecord = 0;
+                boolean competitionSwimmer = false;
+                Trainer trainer = null;
 
                 if (valg.equalsIgnoreCase("y")) {
                     activeMember = true;
@@ -162,7 +166,7 @@ public class UI {
                 System.out.println("Navn: " + name);
                 System.out.println("Fødselsdato: " + birthdate);
                 System.out.println("Aktivt medlem: " + valg);
-                return new Swimmer(activeMember,name,birthdate,owedAmount,butterflyRecord,backstrokeRecord,freestyleRecord,competitionSwimmer,trainer);
+                return new Swimmer(activeMember, name, birthdate, owedAmount, butterflyRecord, backstrokeRecord, freestyleRecord, competitionSwimmer, trainer);
             } catch (IllegalArgumentException e) {
                 System.out.println("An error has occured! " + e.getMessage());
             } catch (Exception e) {
@@ -177,14 +181,13 @@ public class UI {
             for (Swimmer s : list) {
                 System.out.println(list);
             }
-
         } catch (Exception e) {
             System.out.println("An error has occurred: " + e.getMessage());
             e.printStackTrace();
-
         }
     }
-    static void editSwimmer(ArrayList<Swimmer> list, Scanner scanner){
+
+    static void editSwimmer(ArrayList<Swimmer> list, Scanner scanner) {
         try {
             System.out.println("Medlemsliste:");
             for (Swimmer s : list) {
@@ -202,19 +205,19 @@ public class UI {
                 }
             }
 
-            if (swimmerToEdit != null){
+            if (swimmerToEdit != null) {
                 System.out.println("Svømmer stamdata:");
                 System.out.println(swimmerToEdit);
 
                 System.out.println("Vil du ændre navn? Indtast nyt navn eller tryk Enter for at bevare det nuværende:");
                 String newName = scanner.nextLine();
-                if (!newName.isEmpty()){
+                if (!newName.isEmpty()) {
                     swimmerToEdit.setName(newName);
                 }
 
                 System.out.println("Vil du ændre fødselsdato? Indtast nyt datoformat (YYYY-MM-DD) eller tryk Enter for at bevare det nuværende:");
                 String newBirthdate = scanner.nextLine();
-                if(!newBirthdate.isEmpty()){
+                if (!newBirthdate.isEmpty()) {
                     swimmerToEdit.setBirthdate(LocalDate.parse(newBirthdate));
                 }
 
@@ -223,28 +226,25 @@ public class UI {
                 if (!newActiveStatus.isEmpty()) {
                     if ("Y".equalsIgnoreCase(newActiveStatus)) {
                         swimmerToEdit.setActiveMember(true);
-                    } else if ("N".equalsIgnoreCase(newActiveStatus)){
+                    } else if ("N".equalsIgnoreCase(newActiveStatus)) {
                         swimmerToEdit.setActiveMember(false);
                     } else {
                         System.out.println("Ugyldigt input. Medlemsskab forbliver uændret.");
                     }
                 }
-
                 System.out.println("Svømmer opdateret:");
                 System.out.println(swimmerToEdit);
-            }
-            else {
+            } else {
                 System.out.println("Fejl: Svømmer ikke fundet.");
             }
-
-
         } catch (Exception e) {
             System.out.println("An error has occurred: " + e.getMessage());
             e.printStackTrace();
 
         }
     }
-    static void updatePayment(ArrayList<Swimmer> list, Scanner scanner){
+
+    static void updatePayment(ArrayList<Swimmer> list, Scanner scanner) {
         try {
             System.out.println("Opdater kontingentbetaling\n");
             System.out.println("Indtast medlemmets navn:");
@@ -258,11 +258,11 @@ public class UI {
                     break;
                 }
             }
-            if (swimmerToEdit!=null){
+            if (swimmerToEdit != null) {
                 System.out.println("Medlem fundet med følgende info:");
                 System.out.println(swimmerToEdit);
                 System.out.println();
-                System.out.println("Medlem skylder følgende: "+swimmerToEdit.getOwedAmount());
+                System.out.println("Medlem skylder følgende: " + swimmerToEdit.getOwedAmount());
                 System.out.println("Indtast beløb for betaling");
                 float paymentAmount = scanner.nextFloat();
                 scanner.nextLine();
@@ -272,15 +272,107 @@ public class UI {
                     System.out.println("Beløb: " + paymentAmount + " opdateret for medlem: " + swimmerToEdit.getName());
                     //beslut hvilken vi ønsker ovenstående!
                     //System.out.println(swimmerToEdit);
-                } else{
+                } else {
                     System.out.println("Beløb er for meget. Medlem skylder: " + swimmerToEdit.getOwedAmount());
-                    }
+                }
             } else {
-            System.out.println("Fejl: Medlem ikke fundet.");
+                System.out.println("Fejl: Medlem ikke fundet.");
             }
         } catch (Exception e) {
+            System.out.println("An error has occurred: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    static void registerCompetitionSwimmer(ArrayList<Swimmer> list, Scanner scanner) {
+        try {
+            System.out.println("Tilmeld svømmer til konkurrence.");
+            System.out.println("Medlemsliste:");
+            for (Swimmer s : list) {
+                System.out.println(list);
+            }
+            System.out.println("Indtast navn på svømmer, du ønsker at redigere:");
+            String searchName = scanner.nextLine();
+            Swimmer swimmerToEdit = null;
+
+            for (Swimmer s : list) {
+                if (s.getName().equals(searchName)) {
+                    swimmerToEdit = s; // Assign the found swimmer to swimmerToEdit.
+                    break;
+                }
+            }
+
+            if (swimmerToEdit != null) {
+                System.out.println("Svømmer stamdata:");
+                System.out.println(swimmerToEdit);
+
+                System.out.println("Vil du indstille " + swimmerToEdit.getName() + " til konkurrence? skriv Ja eller tryk Enter for at bevare den nuværende status:");
+                String competitionChoice = scanner.nextLine();
+                if (!competitionChoice.isEmpty()) {
+                    if ("Ja".equalsIgnoreCase(competitionChoice)) {
+                        swimmerToEdit.setCompetitionSwimmer(true);
+                    } else {
+                        System.out.println("Ugyldigt input. Konkurrence status forbliver uændret.");
+                    }
+                    System.out.println("Svømmer opdateret:");
+                } else {
+                    System.out.println("Fejl: Svømmer ikke fundet.");
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("An error has occurred: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+    static void registerDiscipline(ArrayList<Swimmer> list, Scanner scanner){
+        try {
+            System.out.println("Tilmeld svømmer til disciplin.");
+            System.out.println("Medlemsliste:");
+            for (Swimmer s : list) {
+                System.out.println(list);
+            }
+            System.out.println("Indtast navn på svømmer, du ønsker at tilmelde:");
+            String searchName = scanner.nextLine();
+            Swimmer swimmerToEdit = null;
+
+            for (Swimmer s : list) {
+                if (s.getName().equals(searchName)) {
+                    swimmerToEdit = s; // Assign the found swimmer to swimmerToEdit.
+                    break;
+                }
+            }
+            if (swimmerToEdit != null) {
+                System.out.println("Svømmer stamdata:");
+                System.out.println(swimmerToEdit);
+                System.out.println();
+                System.out.println("Vælg hvilken disciplin, du ønsker at opdatere " + swimmerToEdit.getName() + " for");
+                System.out.println("Tast 1 for Butterfly Recore");
+                System.out.println("Tast 2 for Backstroke Record");
+                System.out.println("Tast 3 for Freestyle Record");
+                String valg = scanner.nextLine();
+                scanner.nextLine();
+                if (valg.equalsIgnoreCase("1")) {
+                    System.out.println("Indtast ny rekord:");
+                    float rekord = scanner.nextFloat();
+                    scanner.nextLine();
+                    swimmerToEdit.setRecord(rekord,0,0);
+                } else if (valg.equalsIgnoreCase("2")) {
+                    float rekord = scanner.nextFloat();
+                    scanner.nextLine();
+                    swimmerToEdit.setRecord(0,rekord,0);
+                } else if (valg.equalsIgnoreCase("3")) {
+                    float rekord = scanner.nextFloat();
+                    scanner.nextLine();
+                    swimmerToEdit.setRecord(0, 0, rekord);
+                } else {
+                    System.out.println("Valg ugyldigt, prøv igen.");
+                }
+
+            }
+
+            } catch (Exception e) {
         System.out.println("An error has occurred: " + e.getMessage());
         e.printStackTrace();
-    }
+        }
     }
 }

@@ -171,6 +171,9 @@ public class Swimmer implements Comparable<Swimmer>{
     public void setActiveMember(boolean activeMember){
         this.isActive=activeMember;
     }
+    public void setCompetitionSwimmer(boolean competitionswimmer){
+        this.competitionSwimmer=competitionswimmer;
+    }
     public float getOwedAmount(){
         return this.owedAmount;
     }
