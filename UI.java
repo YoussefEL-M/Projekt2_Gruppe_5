@@ -13,10 +13,11 @@ public class UI {
         ArrayList<Swimmer> swimmers = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
 
-        int subchoice=0;
         int choice = 0;
         do {
             try {
+                int subchoice1=0;
+                int subchoice2=0;
                 System.out.println();
                 System.out.println("**********************");
                 System.out.println("Svømmeklubben Delfinen");
@@ -44,16 +45,18 @@ public class UI {
 
                 switch (choice) {
                     case 1 -> {
-                        while (subchoice != 4) {
+                        while (subchoice1 != 4) {
                             System.out.println();
+                            System.out.println("Medlemsadministration");
                             System.out.println("1 Opret medlem");
                             System.out.println("2 Opdater stamoplysninger for medlem");
                             System.out.println("3 Generer oversigt over nuværende medlemmer");
                             System.out.println("4 Gå tilbage");
+                            System.out.println();
 
-                            subchoice = scanner.nextInt();
+                            subchoice1 = scanner.nextInt();
                             scanner.nextLine();
-                            switch (subchoice) {
+                            switch (subchoice1) {
                                 case 1 -> {
                                     Swimmer newSwimmer = getSwimmerDetails(scanner);
                                     swimmers.add(newSwimmer);
@@ -72,7 +75,30 @@ public class UI {
                         }
                     }
                     case 2 -> {
+                        while (subchoice2!=5) {
+                            System.out.println();
+                            System.out.println("Trænermenu");
+                            System.out.println("1 Tilføj svømmere til hold");
+                            System.out.println("2 Registrer discipliner");
+                            System.out.println("3 Registrer konkurrencedeltagere");
+                            System.out.println("4 Generer top 5 oversigt");
+                            System.out.println("5 Gå tilbage");
+                            System.out.println();
+                            subchoice2 = scanner.nextInt();
+                            scanner.nextLine();
 
+                            switch(subchoice2){
+                                case 1 -> {
+                                    System.out.println("Tilføj svømmere til hold");
+                                }
+                                case 2 -> {
+
+                                }
+                                case 5 -> {
+                                    System.out.println("Går tilbage til main menu.");
+                                }
+                            }
+                        }
                     }
                 }
             } catch (Exception e) {
