@@ -174,7 +174,7 @@ public class UI {
                 System.out.println(list);
             }
         } catch (Exception e) {
-            System.out.println("An error has occurred: " + e.getMessage());
+            System.out.println("En fejl er opstået: " + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -230,7 +230,7 @@ public class UI {
                 System.out.println("Fejl: Svømmer ikke fundet.");
             }
         } catch (Exception e) {
-            System.out.println("An error has occurred: " + e.getMessage());
+            System.out.println("En fejl er opstået: " + e.getMessage());
             e.printStackTrace();
 
         }
