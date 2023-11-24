@@ -8,6 +8,7 @@ public class Swimmer implements Comparable<Swimmer>{
     public static void main(String[] args) {
 
         //TEST//
+        //TEST//
 
         ArrayList<Swimmer> swimmers = new ArrayList<>();
         swimmers.add(new Swimmer(true, "Swimmer1", LocalDate.of(1990, 1, 1), (short) 0, 25.5f, 30.2f, 20.3f, false, new Trainer("Trainer1")));
