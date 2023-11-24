@@ -2,8 +2,43 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 public class Swimmer implements Comparable<Swimmer>{
+    public static void main(String[] args) {
+
+        //TEST//
+
+        ArrayList<Swimmer> swimmers = new ArrayList<>();
+        swimmers.add(new Swimmer(true, "Swimmer1", LocalDate.of(1990, 1, 1), (short) 0, 25.5f, 30.2f, 20.3f, false, new Trainer("Trainer1")));
+        swimmers.add(new Swimmer(true, "Swimmer2", LocalDate.of(1995, 5, 5), (short) 0, 22.3f, 28.1f, 18.7f, true, new Trainer("Trainer2")));
+        swimmers.add(new Swimmer(true, "Swimmer3", LocalDate.of(1955, 10, 10), (short) 0, 24.0f, 29.8f, 19.5f, false, new Trainer("Trainer3")));
+
+        // Print den unsortet liste
+        System.out.println("Ikke sortet Swimmers:");
+        for (Swimmer swimmer : swimmers) {
+            System.out.println(swimmer);
+        }
+
+        // Sorter listen
+        Collections.sort(swimmers);
+
+        // Print den sortet liste
+        System.out.println("\nSorteret Swimmers:");
+        for (Swimmer swimmer : swimmers) {
+            System.out.println(swimmer);
+        }
+        // Regner hvor meget Swimmers skal betale
+        for (Swimmer swimmer : swimmers) {
+            swimmer.calculateYearlyCharge();
+        }
+
+        // Printer liste
+        System.out.println("\nOpdateret Swimmers:");
+        for (Swimmer swimmer : swimmers) {
+            System.out.println(swimmer);
+        }
+    }
     private static short noOfSwimmers = 0;
     private short indexNo;
     private boolean isActive;
@@ -56,9 +91,9 @@ public class Swimmer implements Comparable<Swimmer>{
     void registerPayment(float amount){
         if (amount <= owedAmount) {
             owedAmount -= amount;
-            System.out.println("Payment registered. Remaining amount: " + owedAmount);
+            System.out.println("Betaling registreret. Resterende beløb: " + owedAmount);
         } else {
-            System.out.println("Invalid payment amount. The owed amount is: " + owedAmount);
+            System.out.println("Ugyldig beløb. Det skyldte beløb er: " + owedAmount);
         }
     }
 
@@ -82,12 +117,40 @@ public class Swimmer implements Comparable<Swimmer>{
 
     // Metode til at sammenligne svommeres rekorder
     public int compareTo(Swimmer swimmer){
-        // Regn total rekorden ud for hver svommer
-        float totalRecordsSwimmer = this.butterflyRecord + this.backstrokeRecord + this.freestyleRecord;
-        float totalRecordsSwimmer2 = swimmer.butterflyRecord + swimmer.backstrokeRecord + swimmer.freestyleRecord;
+        // Compare Butterfly rekorder
+        int butterflyComparison = Float.compare(this.butterflyRecord, swimmer.butterflyRecord);
+        if (butterflyComparison != 0) {
+            return butterflyComparison;
+        }
 
-        // Sammenlign deres rekorder
-        return  Float.compare(totalRecordsSwimmer, totalRecordsSwimmer2);
+        // Compare Backstroke rekorder
+        int backstrokeComparison = Float.compare(this.backstrokeRecord, swimmer.backstrokeRecord);
+        if (backstrokeComparison != 0) {
+            return backstrokeComparison;
+        }
+
+        // Compare Freestyle recorder
+        return Float.compare(this.freestyleRecord, swimmer.freestyleRecord);
+    }
+    public void calculateYearlyCharge() {
+        int baseCharge;
+
+        if (age < 18) {
+            baseCharge = 1000;
+        } else if (age <= 60) {
+            baseCharge = 1600;
+        } else {
+            // Hvis du er over 60
+            baseCharge = (int) (0.75 * 1600);
+        }
+
+        // Juster pris hvis du ikke er aktiv
+        int yearlyCharge = isActive ? baseCharge : 500;
+
+        // Tilføj priserne til owedAmount
+        addCharge((short) yearlyCharge);
+
+        System.out.println("Årlig kontingent for " + name + ": " + yearlyCharge);
     }
 
     // Metode til at modtage navn på enkelt svømmer i liste.
