@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -25,23 +26,9 @@ public class UI {
                 System.out.println("**********************");
                 System.out.println();
                 System.out.println("1. Medlemsadministration");
-                System.out.println("1.1 Opret medlem");
-                System.out.println("1.2 Opdater stamoplysninger for medlem");
-                System.out.println("1.3 Generer oversigt over nuværende medlemmer");
-                System.out.println();
                 System.out.println("2. Trænermenu");
-                System.out.println("2.1 Tilføj svømmere til hold");
-                System.out.println("2.2 Registrer disciplin rekorder");
-                System.out.println("2.3 Registrer konkurrencedeltagere");
-                System.out.println("2.4 Generer top 5 oversigt");
-                System.out.println();
                 System.out.println("3. Kasserermenu");
-                System.out.println("3.1 Vis medlemmer i restance");
-                System.out.println("3.2 Opdater kontigentbetaling");
-                System.out.println();
                 System.out.println("4. Backup funktion");
-                System.out.println("4.1 Gem medlemmer i systemet");
-                System.out.println();
                 System.out.println("5. Afslut program\n");
                 System.out.print("Indtast venligst et tal mellem 1-4 \n");
                 choice = scanner.nextInt();
@@ -139,24 +126,23 @@ public class UI {
                     }
                 }
             } catch (Exception e) {
-                System.out.println("An error has occurred " + e.getMessage());
+                System.out.println("En fejl er opstået " + e.getMessage());
                 scanner.nextLine();
             }
         } while (choice != 5);
         scanner.close();
     }
-
     private static Swimmer createSwimmer(Scanner scanner) {
         while (true) {
             try {
                 System.out.println("Du har valgt Opret medlem");
                 System.out.println("Indtast navn:");
                 String name = scanner.nextLine();
-                System.out.println("Indtast fødselsdato:");
+                System.out.println("Indtast fødselsdato i format YYYY-MM-DD:");
                 LocalDate birthdate = LocalDate.parse(scanner.nextLine());
                 System.out.println("Er det et aktivt medlem? Indtast Y/N");
                 String valg = scanner.nextLine();
-                boolean activeMember = false;
+                boolean activeMember;
                 short owedAmount = 0;
                 float butterflyRecord = 0, backstrokeRecord = 0, freestyleRecord = 0;
                 boolean competitionSwimmer = false;
@@ -174,9 +160,9 @@ public class UI {
                     System.out.println("Valg ugyldigt, prøv igen.");
                 }
             } catch (IllegalArgumentException e) {
-                System.out.println("An error has occured! " + e.getMessage());
-            } catch (Exception e) {
-                System.out.println("An error has occured! " + e.getMessage());
+                System.out.println("En fejl er opstået! " + e.getMessage());
+            } catch (DateTimeParseException e) {
+                System.out.println("Ugyldig dato format, skriv i formatet YYYY-MM-DD " + e.getMessage());
             }
         }
     }
@@ -274,7 +260,7 @@ public class UI {
                 scanner.nextLine();
                 if (paymentAmount <= swimmerToEdit.getOwedAmount()) {
                     swimmerToEdit.registerPayment(paymentAmount);
-                    System.out.println("Payment registered. Remaining amount: " + swimmerToEdit.getOwedAmount());
+                    System.out.println("Betaling registreret. Resterende beløb: " + swimmerToEdit.getOwedAmount());
                     System.out.println("Beløb: " + paymentAmount + " opdateret for medlem: " + swimmerToEdit.getName());
                     //beslut hvilken vi ønsker ovenstående!
                     //System.out.println(swimmerToEdit);
@@ -285,7 +271,7 @@ public class UI {
                 System.out.println("Fejl: Medlem ikke fundet.");
             }
         } catch (Exception e) {
-            System.out.println("An error has occurred: " + e.getMessage());
+            System.out.println("En fejl er opstået: " + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -326,7 +312,7 @@ public class UI {
                 }
             }
         } catch (Exception e) {
-            System.out.println("An error has occurred: " + e.getMessage());
+            System.out.println("En fejl er opstået: " + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -375,7 +361,7 @@ public class UI {
             }
 
             } catch (Exception e) {
-        System.out.println("An error has occurred: " + e.getMessage());
+        System.out.println("En fejl er opstået: " + e.getMessage());
         e.printStackTrace();
         }
     }
