@@ -7,11 +7,12 @@ import java.util.Scanner;
 
 public class UI {
     public static void main(String[] args) throws IOException {
-        menu();
+        ArrayList<Swimmer> swimmers = new ArrayList<>();
+        Trainer sharedTrainer = new Trainer("Ingen træner");
+        menu(swimmers,sharedTrainer);
     }
 
-    public static void menu() {
-        ArrayList<Swimmer> swimmers = new ArrayList<>();
+    public static void menu(ArrayList<Swimmer> swimmers, Trainer sharedTrainer) {
         Scanner scanner = new Scanner(System.in);
 
         int choice = 0;
@@ -49,7 +50,7 @@ public class UI {
                             scanner.nextLine();
                             switch (subchoice1) {
                                 case 1 -> {
-                                    Swimmer newSwimmer = createSwimmer(scanner);
+                                    Swimmer newSwimmer = createSwimmer(scanner,sharedTrainer);
                                     swimmers.add(newSwimmer);
                                 }
                                 case 2 -> {
@@ -132,7 +133,7 @@ public class UI {
         } while (choice != 5);
         scanner.close();
     }
-    private static Swimmer createSwimmer(Scanner scanner) {
+    private static Swimmer createSwimmer(Scanner scanner, Trainer sharedTrainer) {
         while (true) {
             try {
                 System.out.println("Du har valgt Opret medlem");
@@ -146,16 +147,15 @@ public class UI {
                 short owedAmount = 0;
                 float butterflyRecord = 0, backstrokeRecord = 0, freestyleRecord = 0;
                 boolean competitionSwimmer = false;
-                Trainer trainer = null;
 
                 if (valg.equalsIgnoreCase("y")) {
                     activeMember = true;
                     System.out.println("Ny svømmer oprettet.");
-                    return new Swimmer(activeMember, name, birthdate, owedAmount, butterflyRecord, backstrokeRecord, freestyleRecord, competitionSwimmer, trainer);
+                    return new Swimmer(activeMember, name, birthdate, owedAmount, butterflyRecord, backstrokeRecord, freestyleRecord, competitionSwimmer, sharedTrainer);
                 } else if (valg.equalsIgnoreCase("n")) {
                     activeMember = false;
                     System.out.println("Ny svømmer oprettet.");
-                    return new Swimmer(activeMember, name, birthdate, owedAmount, butterflyRecord, backstrokeRecord, freestyleRecord, competitionSwimmer, trainer);
+                    return new Swimmer(activeMember, name, birthdate, owedAmount, butterflyRecord, backstrokeRecord, freestyleRecord, competitionSwimmer, sharedTrainer);
                 } else {
                     System.out.println("Valg ugyldigt, prøv igen.");
                 }
