@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
@@ -185,6 +186,13 @@ public class Swimmer implements Comparable<Swimmer>{
     }
     public float getFreestyleRecord(){
         return this.freestyleRecord;
+    }
+    public void resetIndexNos(ArrayList<Swimmer> list){
+        Swimmer.noOfSwimmers=0;
+        for(Swimmer s:list){
+            s.indexNo=noOfSwimmers;
+            noOfSwimmers++;
+        }
     }
 }
 
