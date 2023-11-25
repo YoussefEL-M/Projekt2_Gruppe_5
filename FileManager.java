@@ -24,9 +24,9 @@ public class FileManager {
                 float breaststroke = Float.parseFloat(bits[5]);
                 float freestyle = Float.parseFloat(bits[6]);
                 boolean competition = Boolean.parseBoolean(bits[7]);
-                Trainer trainer = new Trainer(bits[8]); //Trainers skal nok indlæses separat, men det her er fint for nu.
+                short trainerIndex = Short.parseShort(bits[8]);
 
-                list.add(new Swimmer(active,name,birthday,amount,butterfly,breaststroke,freestyle,competition, trainer));
+                list.add(new Swimmer(active,name,birthday,amount,butterfly,breaststroke,freestyle,competition, trainerIndex));
 
                 line = in.readLine();
             }
