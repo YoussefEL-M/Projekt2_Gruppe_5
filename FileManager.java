@@ -54,5 +54,43 @@ public class FileManager {
             E.printStackTrace();
         }
     }
-    //public static ArrayList<Trainer> getTrainers(){}
+    public static ArrayList<Trainer> getTrainers(){
+        ArrayList<Trainer> list = new ArrayList<>();
+
+        try{
+            FileReader file = new FileReader("Trainers.txt");
+            BufferedReader in = new BufferedReader(file);
+            String line = in.readLine();
+
+            while(line!=null){
+                String[] bits = line.split(",");
+                String name = bits[0];
+
+                list.add(new Trainer(name));
+                line = in.readLine();
+            }
+            in.close();
+            file.close();
+        }catch(IOException E){
+            System.out.println("Error: unable to read trainer data.");
+            E.printStackTrace();
+        }
+        return list;
+    }
+    public static void saveTrainers(ArrayList<Trainer> list){
+        try {
+            FileWriter file = new FileWriter("Members.txt");
+            PrintWriter out = new PrintWriter(file);
+
+            for (Trainer t : list) {
+                out.println(t.getName());
+            }
+
+            out.close();
+            file.close();
+        }catch(IOException E){
+            System.out.println("Error: unable to save trainer data.");
+            E.printStackTrace();
+        }
+    }
 }
