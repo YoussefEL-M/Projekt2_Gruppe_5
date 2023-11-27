@@ -12,9 +12,9 @@ public class Swimmer implements Comparable<Swimmer>{
         //TEST//
 
         ArrayList<Swimmer> swimmers = new ArrayList<>();
-        swimmers.add(new Swimmer(true, "Swimmer1", LocalDate.of(1990, 1, 1), (short) 0, 25.5f, 30.2f, 20.3f, false, (short)0));
-        swimmers.add(new Swimmer(true, "Swimmer2", LocalDate.of(1995, 5, 5), (short) 0, 22.3f, 28.1f, 18.7f, true, (short)0));
-        swimmers.add(new Swimmer(true, "Swimmer3", LocalDate.of(1955, 10, 10), (short) 0, 24.0f, 29.8f, 19.5f, false, (short)0));
+        //swimmers.add(new Swimmer(true, "Swimmer1", LocalDate.of(1990, 1, 1), (short) 0, 25.5f, 30.2f, 20.3f, false, (short)0));
+        //swimmers.add(new Swimmer(true, "Swimmer2", LocalDate.of(1995, 5, 5), (short) 0, 22.3f, 28.1f, 18.7f, true, (short)0));
+        //swimmers.add(new Swimmer(true, "Swimmer3", LocalDate.of(1955, 10, 10), (short) 0, 24.0f, 29.8f, 19.5f, false, (short)0));
 
         // Print den unsortet liste
         System.out.println("Ikke sortet Swimmers:");
@@ -55,9 +55,12 @@ public class Swimmer implements Comparable<Swimmer>{
     Trainer trainer = null;
     short trainerIndex;
     private boolean competitionSwimmer;
+    byte butterflyPlacement=0;
+    byte backstrokePlacement = 0;
+    byte freestylePlacement= 0;
 
     // Konstruktor til at oprette en Swimmer-objekt
-    Swimmer( boolean isActive, String name, LocalDate birthday, short owedAmount,float butterflyRecord, float backstrokeRecord, float freestyleRecord, boolean competitionSwimmer, short trainerIndex){
+    Swimmer( boolean isActive, String name, LocalDate birthday, short owedAmount,float butterflyRecord, float backstrokeRecord, float freestyleRecord, boolean competitionSwimmer, short trainerIndex, byte butterflyPlacement, byte backstrokePlacement, byte freestylePlacement){
         indexNo=noOfSwimmers;
         noOfSwimmers++;
         this.name = name;
@@ -71,6 +74,9 @@ public class Swimmer implements Comparable<Swimmer>{
         this.freestyleRecord=freestyleRecord;
         this.trainerIndex=trainerIndex;
         this.competitionSwimmer=competitionSwimmer;
+        this.butterflyPlacement=butterflyPlacement;
+        this.backstrokePlacement=backstrokePlacement;
+        this.freestylePlacement=freestylePlacement;
     }
 
     // Metode til at returnere leaselig tekst

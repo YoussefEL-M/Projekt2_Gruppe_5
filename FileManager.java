@@ -9,7 +9,7 @@ public class FileManager {
         ArrayList<Trainer> list = getTrainers();
         ArrayList<Swimmer> alist = getMembers();
 
-        alist.add(new Swimmer(true,"Mie",LocalDate.parse("2001-03-14"), (short) 0,10f,10f,10f,true, (short) 0));
+       // alist.add(new Swimmer(true,"Mie",LocalDate.parse("2001-03-14"), (short) 0,10f,10f,10f,true, (short) 0));
         alist.get(0).trainer=list.get(alist.get(0).trainerIndex);
         saveMembers(alist);
     }
@@ -31,8 +31,11 @@ public class FileManager {
                 float freestyle = Float.parseFloat(bits[6]);
                 boolean competition = Boolean.parseBoolean(bits[7]);
                 short trainerIndex = Short.parseShort(bits[8]);
+                byte butterflyPlacement=Byte.parseByte(bits[9]);
+                byte backstrokePlacement = Byte.parseByte(bits[10]);
+                byte freestylePlacement= Byte.parseByte(bits[11]);
 
-                list.add(new Swimmer(active,name,birthday,amount,butterfly,breaststroke,freestyle,competition, trainerIndex));
+                list.add(new Swimmer(active,name,birthday,amount,butterfly,breaststroke,freestyle,competition, trainerIndex, butterflyPlacement, backstrokePlacement, freestylePlacement));
 
                 line = in.readLine();
             }
