@@ -158,11 +158,11 @@ public class UI {
                 if (valg.equalsIgnoreCase("y")) {
                     activeMember = true;
                     System.out.println("Ny svømmer oprettet.");
-                    return new Swimmer(activeMember, name, birthdate, owedAmount, butterflyRecord, backstrokeRecord, freestyleRecord, competitionSwimmer, (short) -1, (byte) 0, (byte) 0, (byte) 0);
+                    return new Swimmer(activeMember, name, birthdate, owedAmount, butterflyRecord, backstrokeRecord, freestyleRecord, competitionSwimmer, (short) -1);
                 } else if (valg.equalsIgnoreCase("n")) {
                     activeMember = false;
                     System.out.println("Ny svømmer oprettet.");
-                    return new Swimmer(activeMember, name, birthdate, owedAmount, butterflyRecord, backstrokeRecord, freestyleRecord, competitionSwimmer, (short) -1, (byte) 0, (byte) 0, (byte) 0);
+                    return new Swimmer(activeMember, name, birthdate, owedAmount, butterflyRecord, backstrokeRecord, freestyleRecord, competitionSwimmer, (short) -1);
                 } else {
                     System.out.println("Valg ugyldigt, prøv igen.");
                 }
@@ -178,7 +178,7 @@ public class UI {
         try {
             System.out.println("Medlemsliste:");
             for (Swimmer s : list) {
-                System.out.println(s);
+                System.out.println(list);
             }
         } catch (Exception e) {
             System.out.println("En fejl er opstået: " + e.getMessage());
@@ -190,7 +190,7 @@ public class UI {
         try {
             System.out.println("Medlemsliste:");
             for (Swimmer s : list) {
-                System.out.println(s);
+                System.out.println(list);
             }
             System.out.println("Indtast navn på svømmer, du ønsker at redigere");
             String searchName = scanner.nextLine();
@@ -329,7 +329,9 @@ public class UI {
         try {
             System.out.println("Tilmeld svømmer til disciplin.");
             System.out.println("Medlemsliste:");
-            System.out.println(list);
+            for (Swimmer s : list) {
+                System.out.println(list);
+            }
             System.out.println("Indtast navn på svømmer, du ønsker at tilmelde:");
             String searchName = scanner.nextLine();
             Swimmer swimmerToEdit = null;
@@ -341,7 +343,6 @@ public class UI {
                 }
             }
             if (swimmerToEdit != null) {
-                LocalDate today = LocalDate.now();
                 System.out.println("Svømmer stamdata:");
                 System.out.println(swimmerToEdit);
                 System.out.println();
