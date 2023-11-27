@@ -81,7 +81,7 @@ public class Swimmer implements Comparable<Swimmer>{
 
     // Metode til at returnere leaselig tekst
     public String toString(){
-        return name+", "+age+", "+birthday+", "+senior+", "+(isActive? "Active" : "Inactive")+"\nButterfly rekord: "+butterflyRecord+"\nBackStroke rekord: "+backstrokeRecord+"\nFreeStyle rekord: "+freestyleRecord;
+        return name+", "+age+", "+birthday+", "+senior+", "+(isActive? "Active" : "Inactive")+"\nButterfly rekord: "+butterflyRecord+" Placering: "+butterflyPlacement+"\nBackStroke rekord: "+backstrokeRecord+" Placering: "+backstrokePlacement+"\nFreeStyle rekord: "+freestyleRecord+" Placering: "+freestylePlacement;
     }
     public String fileOutput(){
         return isActive+","+name+","+birthday+","+owedAmount+","+butterflyRecord+","+backstrokeRecord+","+freestyleRecord+","+competitionSwimmer+","+trainerIndex;
@@ -111,6 +111,11 @@ public class Swimmer implements Comparable<Swimmer>{
         this.butterflyRecord = butterflyRecord;
         this.backstrokeRecord = backstrokeRecord;
         this.freestyleRecord = freestlyeRecord;
+    }
+    void setPlacement(byte butterflyPlacement, byte backstrokePlacement, byte freestylePlacement){
+        this.butterflyPlacement = butterflyPlacement;
+        this.backstrokePlacement = backstrokePlacement;
+        this.freestylePlacement = freestylePlacement;
     }
 
     // Metode til at hente en rekord for en given svomme disciplin
@@ -193,6 +198,16 @@ public class Swimmer implements Comparable<Swimmer>{
     public float getFreestyleRecord(){
         return this.freestyleRecord;
     }
+    public byte getButterflyPlacement(){
+        return this.butterflyPlacement;
+    }
+    public byte getBackstrokePlacement() {
+        return backstrokePlacement;
+    }
+    public byte getFreestylePlacement() {
+        return freestylePlacement;
+    }
+
     public void resetIndexNos(ArrayList<Swimmer> list){
         Swimmer.noOfSwimmers=0;
         for(Swimmer s:list){

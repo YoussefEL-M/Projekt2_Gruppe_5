@@ -344,7 +344,7 @@ public class UI {
                 }
             }
             if (swimmerToEdit != null) {
-                LocalDate today = LocalDate.now();
+                //LocalDate today = LocalDate.now(); skal det bruges?
                 System.out.println("Svømmer stamdata:");
                 System.out.println(swimmerToEdit);
                 System.out.println();
@@ -354,18 +354,33 @@ public class UI {
                 System.out.println("Tast 3 for Freestyle Record");
                 String valg = scanner.nextLine();
                 if (valg.equalsIgnoreCase("1")) {
-                    System.out.println("Indtast ny rekord:");
-                    float rekord = scanner.nextFloat();
+                    System.out.println("Indtast tid i sekunder:");                    float rekord = scanner.nextFloat();
+                    scanner.nextLine();
+                    System.out.println("Indtast placering:");
+                    byte placement = scanner.nextByte();
                     scanner.nextLine();
                     swimmerToEdit.setRecord(rekord,swimmerToEdit.getBackstrokeRecord(), swimmerToEdit.getFreestyleRecord());
+                    swimmerToEdit.setPlacement(placement,swimmerToEdit.getBackstrokePlacement(), swimmerToEdit.getFreestylePlacement());
                 } else if (valg.equalsIgnoreCase("2")) {
+                    System.out.println("Indtast tid i sekunder:");
                     float rekord = scanner.nextFloat();
+                    scanner.nextLine();
+                    System.out.println("Indtast placering:");
+                    byte placement = scanner.nextByte();
                     scanner.nextLine();
                     swimmerToEdit.setRecord(swimmerToEdit.getButterflyRecord(),rekord,swimmerToEdit.getFreestyleRecord());
+                    swimmerToEdit.setPlacement(swimmerToEdit.getButterflyPlacement(), placement, swimmerToEdit.getFreestylePlacement());
+
                 } else if (valg.equalsIgnoreCase("3")) {
+                    System.out.println("Indtast tid i sekunder:");
                     float rekord = scanner.nextFloat();
                     scanner.nextLine();
+                    System.out.println("Indtast placering:");
+                    byte placement = scanner.nextByte();
+                    scanner.nextLine();
                     swimmerToEdit.setRecord(swimmerToEdit.getButterflyRecord(), swimmerToEdit.getBackstrokeRecord(), rekord);
+                    swimmerToEdit.setPlacement(swimmerToEdit.getButterflyPlacement(),swimmerToEdit.getBackstrokePlacement(), placement);
+
                 } else {
                     System.out.println("Valg ugyldigt, prøv igen.");
                 }
