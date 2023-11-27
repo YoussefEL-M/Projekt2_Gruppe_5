@@ -38,7 +38,7 @@ public class UI {
 
                 switch (choice) {
                     case 1 -> {
-                        while (subchoice1 != 4) {
+                        while (subchoice1 != 5) {
                             System.out.println();
                             System.out.println("Medlemsadministration");
                             System.out.println("1 Opret medlem");
@@ -58,9 +58,12 @@ public class UI {
                                     editSwimmer(swimmers, scanner);
                                 }
                                 case 3 -> {
-                                    showSwimmers(swimmers);
+                                    removeSwimmer(swimmers, scanner);
                                 }
                                 case 4 -> {
+                                    showSwimmers(swimmers);
+                                }
+                                case 5 -> {
                                     System.out.println("Går tilbage til main menu.");
                                 }
                                 default -> System.out.println("Fejl: Forkert input. Prøv igen.");
@@ -280,6 +283,8 @@ public class UI {
         }
     }
 
+
+
     static void registerCompetitionSwimmer(ArrayList<Swimmer> list, Scanner scanner) {
         try {
             System.out.println("Tilmeld svømmer til konkurrence.");
@@ -367,6 +372,35 @@ public class UI {
             } catch (Exception e) {
         System.out.println("En fejl er opstået: " + e.getMessage());
         e.printStackTrace();
+        }
+    }
+    static void removeSwimmer(ArrayList<Swimmer> list, Scanner scanner) {
+        try {
+            System.out.println("Fjern medlem");
+            System.out.println("Medlemsliste:");
+            for (Swimmer s : list) {
+                System.out.println(s.getName());
+            }
+            System.out.println("Indtast navn på svømmer");
+            String searchName = scanner.nextLine();
+            Swimmer swimmerToRemove = null;
+
+            for(Swimmer s : list) {
+                if (s.getName().equalsIgnoreCase(searchName)) {
+                    swimmerToRemove = s;
+                    s.resetIndexNos(list);
+                    break;
+                }
+            }
+            if (swimmerToRemove !=null) {
+                list.remove(swimmerToRemove);
+                System.out.println("Medlem fjernet: " +swimmerToRemove.getName());
+            }else {
+                System.out.println("Fejl, svømmer blev ikke fundet. ");
+            }
+        } catch (Exception e) {
+            System.out.println("En fejl er opstået: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 }

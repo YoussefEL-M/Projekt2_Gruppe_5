@@ -194,5 +194,6 @@ public class Swimmer implements Comparable<Swimmer>{
             noOfSwimmers++;
         }
     }
+
 }
 
