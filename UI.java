@@ -158,11 +158,11 @@ public class UI {
                 if (valg.equalsIgnoreCase("y")) {
                     activeMember = true;
                     System.out.println("Ny svømmer oprettet.");
-                    return new Swimmer(activeMember, name, birthdate, owedAmount, butterflyRecord, backstrokeRecord, freestyleRecord, competitionSwimmer, (short) -1);
+                    return new Swimmer(activeMember, name, birthdate, owedAmount, butterflyRecord, backstrokeRecord, freestyleRecord, competitionSwimmer, (short) -1, (byte) 0, (byte) 0, (byte) 0);
                 } else if (valg.equalsIgnoreCase("n")) {
                     activeMember = false;
                     System.out.println("Ny svømmer oprettet.");
-                    return new Swimmer(activeMember, name, birthdate, owedAmount, butterflyRecord, backstrokeRecord, freestyleRecord, competitionSwimmer, (short) -1);
+                    return new Swimmer(activeMember, name, birthdate, owedAmount, butterflyRecord, backstrokeRecord, freestyleRecord, competitionSwimmer, (short) -1, (byte) 0, (byte) 0, (byte) 0);
                 } else {
                     System.out.println("Valg ugyldigt, prøv igen.");
                 }
@@ -343,6 +343,7 @@ public class UI {
                 }
             }
             if (swimmerToEdit != null) {
+                LocalDate today = LocalDate.now();
                 System.out.println("Svømmer stamdata:");
                 System.out.println(swimmerToEdit);
                 System.out.println();
