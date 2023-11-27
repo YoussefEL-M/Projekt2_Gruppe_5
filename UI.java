@@ -112,7 +112,10 @@ public class UI {
                             scanner.nextLine();
                             switch (subchoice3) {
                                 case 1 -> {
-                                    // print liste af medlemmer i restance.
+                                    for(Swimmer s: swimmers){
+                                        if(s.getOwedAmount()>0)
+                                            System.out.println(s);
+                                    }
                                 }
                                 case 2 -> {
                                     updatePayment(swimmers, scanner);
