@@ -6,6 +6,12 @@ import static java.lang.System.exit;
 
 public class FileManager {
     public static void main(String[] randyDandyO){ //For testing
+        ArrayList<Trainer> list = getTrainers();
+        ArrayList<Swimmer> alist = getMembers();
+
+        alist.add(new Swimmer(true,"Mie",LocalDate.parse("2001-03-14"), (short) 0,10f,10f,10f,true, (short) 0));
+        alist.get(0).trainer=list.get(alist.get(0).trainerIndex);
+        saveMembers(alist);
     }
     public static ArrayList<Swimmer> getMembers(){
         ArrayList<Swimmer> list = new ArrayList<>();
