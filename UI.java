@@ -8,6 +8,7 @@ import java.util.Scanner;
 public class UI {
     public static void main(String[] args) throws IOException {
         ArrayList<Swimmer> swimmers = new ArrayList<>();
+        ArrayList<Trainer> trainers = new ArrayList<>();
         Trainer sharedTrainer = new Trainer("Ingen træner");
         menu(swimmers,sharedTrainer);
     }
@@ -151,11 +152,11 @@ public class UI {
                 if (valg.equalsIgnoreCase("y")) {
                     activeMember = true;
                     System.out.println("Ny svømmer oprettet.");
-                    return new Swimmer(activeMember, name, birthdate, owedAmount, butterflyRecord, backstrokeRecord, freestyleRecord, competitionSwimmer, sharedTrainer);
+                    return new Swimmer(activeMember, name, birthdate, owedAmount, butterflyRecord, backstrokeRecord, freestyleRecord, competitionSwimmer, (short) -1);
                 } else if (valg.equalsIgnoreCase("n")) {
                     activeMember = false;
                     System.out.println("Ny svømmer oprettet.");
-                    return new Swimmer(activeMember, name, birthdate, owedAmount, butterflyRecord, backstrokeRecord, freestyleRecord, competitionSwimmer, sharedTrainer);
+                    return new Swimmer(activeMember, name, birthdate, owedAmount, butterflyRecord, backstrokeRecord, freestyleRecord, competitionSwimmer, (short) -1);
                 } else {
                     System.out.println("Valg ugyldigt, prøv igen.");
                 }
