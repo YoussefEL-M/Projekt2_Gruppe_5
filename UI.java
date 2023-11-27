@@ -43,8 +43,9 @@ public class UI {
                             System.out.println("Medlemsadministration");
                             System.out.println("1 Opret medlem");
                             System.out.println("2 Opdater stamoplysninger for medlem");
-                            System.out.println("3 Generer oversigt over nuværende medlemmer");
-                            System.out.println("4 Gå tilbage");
+                            System.out.println("3 Fjern medlem");
+                            System.out.println("4 Generer oversigt over nuværende medlemmer");
+                            System.out.println("5 Gå tilbage");
                             System.out.println();
 
                             subchoice1 = scanner.nextInt();
