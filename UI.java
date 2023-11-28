@@ -9,8 +9,8 @@ import java.util.Scanner;
 
 public class UI {
     public static void main(String[] args) throws IOException {
-        ArrayList<Swimmer> swimmers = new ArrayList<>();
-        ArrayList<Trainer> trainers = new ArrayList<>();
+        ArrayList<Swimmer> swimmers = FileManager.getMembers();
+        ArrayList<Trainer> trainers = FileManager.getTrainers();
         Trainer sharedTrainer = new Trainer("Ingen træner");
         menu(swimmers,sharedTrainer);
     }
