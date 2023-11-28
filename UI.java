@@ -54,7 +54,7 @@ public class UI {
                             scanner.nextLine();
                             switch (subchoice1) {
                                 case 1 -> {
-                                    Swimmer newSwimmer = createSwimmer(scanner,sharedTrainer);
+                                    Swimmer newSwimmer = createSwimmer(scanner);
                                     swimmers.add(newSwimmer);
                                 }
                                 case 2 -> {
@@ -65,6 +65,7 @@ public class UI {
                                 }
                                 case 4 -> {
                                     showSwimmers(swimmers);
+                                    calculateYearlyCharge(swimmers);
                                 }
                                 case 5 -> {
                                     System.out.println("Går tilbage til main menu.");
@@ -83,9 +84,9 @@ public class UI {
                             System.out.println("4 Generer top 5 oversigt");
                             System.out.println("5 Gå tilbage");
                             System.out.println();
+
                             subchoice2 = scanner.nextInt();
                             scanner.nextLine();
-
                             switch (subchoice2) {
                                 case 1 -> {
                                     System.out.println("Tilføj svømmere til hold");
@@ -143,7 +144,7 @@ public class UI {
         } while (choice != 5);
         scanner.close();
     }
-    private static Swimmer createSwimmer(Scanner scanner, Trainer sharedTrainer) {
+    private static Swimmer createSwimmer(Scanner scanner) {
         while (true) {
             try {
                 System.out.println("Du har valgt Opret medlem");
@@ -181,11 +182,16 @@ public class UI {
         try {
             System.out.println("Medlemsliste:");
             for (Swimmer s : list) {
-                System.out.println(list);
+                System.out.println(s);
             }
         } catch (Exception e) {
             System.out.println("En fejl er opstået: " + e.getMessage());
             e.printStackTrace();
+        }
+    }
+    static void calculateYearlyCharge(ArrayList<Swimmer> swimmers) {
+        for (Swimmer swimmer : swimmers) {
+            swimmer.calculateYearlyCharge();
         }
     }
 
@@ -193,7 +199,7 @@ public class UI {
         try {
             System.out.println("Medlemsliste:");
             for (Swimmer s : list) {
-                System.out.println(list);
+                System.out.println(s);
             }
             System.out.println("Indtast navn på svømmer, du ønsker at redigere");
             String searchName = scanner.nextLine();
@@ -293,7 +299,7 @@ public class UI {
             System.out.println("Tilmeld svømmer til konkurrence.");
             System.out.println("Medlemsliste:");
             for (Swimmer s : list) {
-                System.out.println(list);
+                System.out.println(s);
             }
             System.out.println("Indtast navn på svømmer, du ønsker at redigere:");
             String searchName = scanner.nextLine();
@@ -333,7 +339,7 @@ public class UI {
             System.out.println("Tilmeld svømmer til disciplin.");
             System.out.println("Medlemsliste:");
             for (Swimmer s : list) {
-                System.out.println(list);
+                System.out.println(s);
             }
             System.out.println("Indtast navn på svømmer, du ønsker at tilmelde:");
             String searchName = scanner.nextLine();

@@ -7,41 +7,6 @@ import java.util.Comparator;
 import java.util.List;
 
 public class Swimmer implements Comparable<Swimmer>{
-    public static void main(String[] args) {
-
-        //TEST//
-        //TEST//
-
-        ArrayList<Swimmer> swimmers = new ArrayList<>();
-        //swimmers.add(new Swimmer(true, "Swimmer1", LocalDate.of(1990, 1, 1), (short) 0, 25.5f, 30.2f, 20.3f, false, (short)0));
-        //swimmers.add(new Swimmer(true, "Swimmer2", LocalDate.of(1995, 5, 5), (short) 0, 22.3f, 28.1f, 18.7f, true, (short)0));
-        //swimmers.add(new Swimmer(true, "Swimmer3", LocalDate.of(1955, 10, 10), (short) 0, 24.0f, 29.8f, 19.5f, false, (short)0));
-
-        // Print den unsortet liste
-        System.out.println("Ikke sortet Swimmers:");
-        for (Swimmer swimmer : swimmers) {
-            System.out.println(swimmer);
-        }
-
-        // Sorter listen
-        Collections.sort(swimmers);
-
-        // Print den sortet liste
-        System.out.println("\nSorteret Swimmers:");
-        for (Swimmer swimmer : swimmers) {
-            System.out.println(swimmer);
-        }
-        // Regner hvor meget Swimmers skal betale
-        for (Swimmer swimmer : swimmers) {
-            swimmer.calculateYearlyCharge();
-        }
-
-        // Printer liste
-        System.out.println("\nOpdateret Swimmers:");
-        for (Swimmer swimmer : swimmers) {
-            System.out.println(swimmer);
-        }
-    }
     private static short noOfSwimmers = 0;
     private short indexNo;
     private boolean isActive;
@@ -59,6 +24,7 @@ public class Swimmer implements Comparable<Swimmer>{
     byte butterflyPlacement=0;
     byte backstrokePlacement = 0;
     byte freestylePlacement= 0;
+    private LocalDate lastChargeDate;
 
     // Konstruktor til at oprette en Swimmer-objekt
     Swimmer( boolean isActive, String name, LocalDate birthday, short owedAmount,float butterflyRecord, float backstrokeRecord, float freestyleRecord, boolean competitionSwimmer, short trainerIndex, byte butterflyPlacement, byte backstrokePlacement, byte freestylePlacement){
@@ -82,7 +48,7 @@ public class Swimmer implements Comparable<Swimmer>{
 
     // Metode til at returnere leaselig tekst
     public String toString(){
-        return name+", "+age+", "+birthday+", "+senior+", "+(isActive? "Active" : "Inactive")+"\nButterfly rekord: "+butterflyRecord+" Placering: "+butterflyPlacement+"\nBackStroke rekord: "+backstrokeRecord+" Placering: "+backstrokePlacement+"\nFreeStyle rekord: "+freestyleRecord+" Placering: "+freestylePlacement;
+        return name+", "+age+", "+birthday+", "+senior+", "+(isActive? "Active" : "Inactive")+", skylder: "+owedAmount+"\nButterfly rekord: "+butterflyRecord+" Placering: "+butterflyPlacement+"\nBackStroke rekord: "+backstrokeRecord+" Placering: "+backstrokePlacement+"\nFreeStyle rekord: "+freestyleRecord+" Placering: "+freestylePlacement;
     }
     public String fileOutput(){
         return isActive+","+name+","+birthday+","+owedAmount+","+butterflyRecord+","+backstrokeRecord+","+freestyleRecord+","+competitionSwimmer+","+trainerIndex;
@@ -147,6 +113,10 @@ public class Swimmer implements Comparable<Swimmer>{
         // Compare Freestyle recorder
         return Float.compare(this.freestyleRecord, swimmer.freestyleRecord);
     }
+    private boolean hasYearPassed(LocalDate lastChargeDate) {
+        LocalDate currentDate = LocalDate.now();
+        return Period.between(lastChargeDate, currentDate).getYears() >= 1;
+    }
     public void calculateYearlyCharge() {
         int baseCharge;
 
@@ -159,13 +129,22 @@ public class Swimmer implements Comparable<Swimmer>{
             baseCharge = (int) (0.75 * 1600);
         }
 
-        // Juster pris hvis du ikke er aktiv
+        // Juster pris i forhold til aktiv eller passiv
         int yearlyCharge = isActive ? baseCharge : 500;
 
-        // Tilføj priserne til owedAmount
-        addCharge((short) yearlyCharge);
+        // Tjek om der er gået et år efter sidste betalin
+        if (lastChargeDate == null || hasYearPassed(lastChargeDate)) {
 
-        System.out.println("Årlig kontingent for " + name + ": " + yearlyCharge);
+            // Tilføj beløb til owed amount
+            addCharge((short) yearlyCharge);
+
+            // Opdater lastChargeDate til at være efter betaling
+            lastChargeDate = LocalDate.now();
+
+            System.out.println("Årlig kontingent tilføjet til " + name + ": " + yearlyCharge);
+        } else {
+            System.out.println( name+", har betalt indenfor et år. Sidst betalt: "+lastChargeDate);
+        }
     }
 
     // Metode til at modtage navn på enkelt svømmer i liste.
@@ -216,7 +195,6 @@ public class Swimmer implements Comparable<Swimmer>{
             noOfSwimmers++;
         }
     }
-
 }
 
 class BackstrokeSort implements Comparator<Swimmer> {
