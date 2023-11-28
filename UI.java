@@ -3,6 +3,8 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class UI {
@@ -91,7 +93,7 @@ public class UI {
                                     registerCompetitionSwimmer(swimmers,scanner);
                                 }
                                 case 4 -> {
-                                // mangler liste.
+                                    displayTopFive(swimmers,scanner);
                                 }
                                 case 5 -> {
                                     System.out.println("Går tilbage til main menu.");
@@ -367,6 +369,55 @@ public class UI {
             } catch (Exception e) {
         System.out.println("En fejl er opstået: " + e.getMessage());
         e.printStackTrace();
+        }
+    }
+    static void displayTopFive(ArrayList<Swimmer> list, Scanner sc){
+        try{
+            ArrayList<Swimmer> sortList = new ArrayList<>();
+            System.out.println();
+            System.out.println("Vælg venligst disciplin:");
+            System.out.println("1. Rygcrawl");
+            System.out.println("2. Butterfly");
+            System.out.println("3. Crawl");
+
+            int choice = sc.nextInt();
+            sc.nextLine();
+
+            switch(choice){
+                case 1 -> {
+                    for(Swimmer s: list){
+                        if(s.getBackstrokeRecord()!=0)
+                            sortList.add(s);
+                    }
+                    sortList.sort(new BackstrokeSort());
+                    for(int i = 0;i<=4;i++){
+                        System.out.println(sortList.get(i));
+                    }
+                }
+                case 2 -> {
+                    for(Swimmer s: list){
+                        if(s.getButterflyRecord()!=0)
+                            sortList.add(s);
+                    }
+                    sortList.sort(new BackstrokeSort());
+                    for(int i = 0;i<=4;i++){
+                        System.out.println(sortList.get(i));
+                    }
+                }
+                case 3 -> {
+                    for(Swimmer s: list){
+                        if(s.getFreestyleRecord()!=0)
+                            sortList.add(s);
+                    }
+                    sortList.sort(new BackstrokeSort());
+                    for(int i = 0;i<=4;i++){
+                        System.out.println(sortList.get(i));
+                    }
+                }
+                default -> System.out.println("Ugyldigt input.");
+            }
+        }catch(InputMismatchException E){
+            System.out.println("Inputfejl: prøv igen.");
         }
     }
 }
