@@ -2,8 +2,6 @@ import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import static java.lang.System.exit;
-
 public class FileManager {
     public static void main(String[] randyDandyO){ //For testing
         ArrayList<Trainer> list = getTrainers();
