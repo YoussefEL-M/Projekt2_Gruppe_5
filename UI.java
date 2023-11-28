@@ -182,7 +182,7 @@ public class UI {
         try {
             System.out.println("Medlemsliste:");
             for (Swimmer s : list) {
-                System.out.println(list);
+                System.out.println(s);
             }
         } catch (Exception e) {
             System.out.println("En fejl er opstået: " + e.getMessage());
@@ -199,7 +199,7 @@ public class UI {
         try {
             System.out.println("Medlemsliste:");
             for (Swimmer s : list) {
-                System.out.println(list);
+                System.out.println(s);
             }
             System.out.println("Indtast navn på svømmer, du ønsker at redigere");
             String searchName = scanner.nextLine();
@@ -299,7 +299,7 @@ public class UI {
             System.out.println("Tilmeld svømmer til konkurrence.");
             System.out.println("Medlemsliste:");
             for (Swimmer s : list) {
-                System.out.println(list);
+                System.out.println(s);
             }
             System.out.println("Indtast navn på svømmer, du ønsker at redigere:");
             String searchName = scanner.nextLine();
@@ -339,7 +339,7 @@ public class UI {
             System.out.println("Tilmeld svømmer til disciplin.");
             System.out.println("Medlemsliste:");
             for (Swimmer s : list) {
-                System.out.println(list);
+                System.out.println(s);
             }
             System.out.println("Indtast navn på svømmer, du ønsker at tilmelde:");
             String searchName = scanner.nextLine();
