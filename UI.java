@@ -1,21 +1,17 @@
-import java.io.File;
-import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class UI {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         ArrayList<Swimmer> swimmers = FileManager.getMembers();
         ArrayList<Trainer> trainers = FileManager.getTrainers();
-        Trainer sharedTrainer = new Trainer("Ingen træner");
-        menu(swimmers,sharedTrainer);
+        menu(swimmers);
     }
 
-    public static void menu(ArrayList<Swimmer> swimmers, Trainer sharedTrainer) {
+    public static void menu(ArrayList<Swimmer> swimmers) {
         Scanner scanner = new Scanner(System.in);
 
         int choice = 0;
@@ -57,19 +53,19 @@ public class UI {
                                     Swimmer newSwimmer = createSwimmer(scanner);
                                     swimmers.add(newSwimmer);
                                 }
-                                case 2 -> {
+                                case 2 ->
                                     editSwimmer(swimmers, scanner);
-                                }
-                                case 3 -> {
+
+                                case 3 ->
                                     removeSwimmer(swimmers, scanner);
-                                }
+
                                 case 4 -> {
                                     showSwimmers(swimmers);
                                     calculateYearlyCharge(swimmers);
                                 }
-                                case 5 -> {
+                                case 5 ->
                                     System.out.println("Går tilbage til main menu.");
-                                }
+
                                 default -> System.out.println("Fejl: Forkert input. Prøv igen.");
                             }
                         }
@@ -88,21 +84,21 @@ public class UI {
                             subchoice2 = scanner.nextInt();
                             scanner.nextLine();
                             switch (subchoice2) {
-                                case 1 -> {
+                                case 1 ->
                                     System.out.println("Tilføj svømmere til hold");
-                                }
-                                case 2 -> {
+
+                                case 2 ->
                                     registerDiscipline(swimmers,scanner);
-                                }
-                                case 3 -> {
+
+                                case 3 ->
                                     registerCompetitionSwimmer(swimmers,scanner);
-                                }
-                                case 4 -> {
+
+                                case 4 ->
                                     displayTopFive(swimmers,scanner);
-                                }
-                                case 5 -> {
+
+                                case 5 ->
                                     System.out.println("Går tilbage til main menu.");
-                                }
+
                                 default -> System.out.println("Fejl: Forkert input. Prøv igen.");
                             }
                         }
@@ -125,9 +121,9 @@ public class UI {
                                             System.out.println(s);
                                     }
                                 }
-                                case 2 -> {
+                                case 2 ->
                                     updatePayment(swimmers, scanner);
-                                }
+
                                 default -> System.out.println("Fejl: Forkert input. Prøv igen.");
                             }
                         }
