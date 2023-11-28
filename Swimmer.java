@@ -13,9 +13,9 @@ public class Swimmer implements Comparable<Swimmer>{
         //TEST//
 
         ArrayList<Swimmer> swimmers = new ArrayList<>();
-        swimmers.add(new Swimmer(true, "Swimmer1", LocalDate.of(1990, 1, 1), (short) 0, 25.5f, 30.2f, 20.3f, false, (short)0));
-        swimmers.add(new Swimmer(true, "Swimmer2", LocalDate.of(1995, 5, 5), (short) 0, 22.3f, 28.1f, 18.7f, true, (short)0));
-        swimmers.add(new Swimmer(true, "Swimmer3", LocalDate.of(1955, 10, 10), (short) 0, 24.0f, 29.8f, 19.5f, false, (short)0));
+        //swimmers.add(new Swimmer(true, "Swimmer1", LocalDate.of(1990, 1, 1), (short) 0, 25.5f, 30.2f, 20.3f, false, (short)0));
+        //swimmers.add(new Swimmer(true, "Swimmer2", LocalDate.of(1995, 5, 5), (short) 0, 22.3f, 28.1f, 18.7f, true, (short)0));
+        //swimmers.add(new Swimmer(true, "Swimmer3", LocalDate.of(1955, 10, 10), (short) 0, 24.0f, 29.8f, 19.5f, false, (short)0));
 
         // Print den unsortet liste
         System.out.println("Ikke sortet Swimmers:");
@@ -56,9 +56,12 @@ public class Swimmer implements Comparable<Swimmer>{
     Trainer trainer = null;
     short trainerIndex;
     private boolean competitionSwimmer;
+    byte butterflyPlacement=0;
+    byte backstrokePlacement = 0;
+    byte freestylePlacement= 0;
 
     // Konstruktor til at oprette en Swimmer-objekt
-    Swimmer( boolean isActive, String name, LocalDate birthday, short owedAmount,float butterflyRecord, float backstrokeRecord, float freestyleRecord, boolean competitionSwimmer, short trainerIndex){
+    Swimmer( boolean isActive, String name, LocalDate birthday, short owedAmount,float butterflyRecord, float backstrokeRecord, float freestyleRecord, boolean competitionSwimmer, short trainerIndex, byte butterflyPlacement, byte backstrokePlacement, byte freestylePlacement){
         indexNo=noOfSwimmers;
         noOfSwimmers++;
         this.name = name;
@@ -72,11 +75,14 @@ public class Swimmer implements Comparable<Swimmer>{
         this.freestyleRecord=freestyleRecord;
         this.trainerIndex=trainerIndex;
         this.competitionSwimmer=competitionSwimmer;
+        this.butterflyPlacement=butterflyPlacement;
+        this.backstrokePlacement=backstrokePlacement;
+        this.freestylePlacement=freestylePlacement;
     }
 
     // Metode til at returnere leaselig tekst
     public String toString(){
-        return name+", "+age+", "+birthday+", "+senior+", "+(isActive? "Active" : "Inactive")+"\nButterfly rekord: "+butterflyRecord+"\nBackStroke rekord: "+backstrokeRecord+"\nFreeStyle rekord: "+freestyleRecord;
+        return name+", "+age+", "+birthday+", "+senior+", "+(isActive? "Active" : "Inactive")+"\nButterfly rekord: "+butterflyRecord+" Placering: "+butterflyPlacement+"\nBackStroke rekord: "+backstrokeRecord+" Placering: "+backstrokePlacement+"\nFreeStyle rekord: "+freestyleRecord+" Placering: "+freestylePlacement;
     }
     public String fileOutput(){
         return isActive+","+name+","+birthday+","+owedAmount+","+butterflyRecord+","+backstrokeRecord+","+freestyleRecord+","+competitionSwimmer+","+trainerIndex;
@@ -106,6 +112,11 @@ public class Swimmer implements Comparable<Swimmer>{
         this.butterflyRecord = butterflyRecord;
         this.backstrokeRecord = backstrokeRecord;
         this.freestyleRecord = freestlyeRecord;
+    }
+    void setPlacement(byte butterflyPlacement, byte backstrokePlacement, byte freestylePlacement){
+        this.butterflyPlacement = butterflyPlacement;
+        this.backstrokePlacement = backstrokePlacement;
+        this.freestylePlacement = freestylePlacement;
     }
 
     // Metode til at hente en rekord for en given svomme disciplin
@@ -188,6 +199,16 @@ public class Swimmer implements Comparable<Swimmer>{
     public float getFreestyleRecord(){
         return this.freestyleRecord;
     }
+    public byte getButterflyPlacement(){
+        return this.butterflyPlacement;
+    }
+    public byte getBackstrokePlacement() {
+        return backstrokePlacement;
+    }
+    public byte getFreestylePlacement() {
+        return freestylePlacement;
+    }
+
     public void resetIndexNos(ArrayList<Swimmer> list){
         Swimmer.noOfSwimmers=0;
         for(Swimmer s:list){
@@ -195,6 +216,7 @@ public class Swimmer implements Comparable<Swimmer>{
             noOfSwimmers++;
         }
     }
+
 }
 
 class BackstrokeSort implements Comparator<Swimmer> {

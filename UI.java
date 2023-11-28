@@ -40,13 +40,14 @@ public class UI {
 
                 switch (choice) {
                     case 1 -> {
-                        while (subchoice1 != 4) {
+                        while (subchoice1 != 5) {
                             System.out.println();
                             System.out.println("Medlemsadministration");
                             System.out.println("1 Opret medlem");
                             System.out.println("2 Opdater stamoplysninger for medlem");
-                            System.out.println("3 Generer oversigt over nuværende medlemmer");
-                            System.out.println("4 Gå tilbage");
+                            System.out.println("3 Fjern medlem");
+                            System.out.println("4 Generer oversigt over nuværende medlemmer");
+                            System.out.println("5 Gå tilbage");
                             System.out.println();
 
                             subchoice1 = scanner.nextInt();
@@ -60,9 +61,12 @@ public class UI {
                                     editSwimmer(swimmers, scanner);
                                 }
                                 case 3 -> {
-                                    showSwimmers(swimmers);
+                                    removeSwimmer(swimmers, scanner);
                                 }
                                 case 4 -> {
+                                    showSwimmers(swimmers);
+                                }
+                                case 5 -> {
                                     System.out.println("Går tilbage til main menu.");
                                 }
                                 default -> System.out.println("Fejl: Forkert input. Prøv igen.");
@@ -157,11 +161,11 @@ public class UI {
                 if (valg.equalsIgnoreCase("y")) {
                     activeMember = true;
                     System.out.println("Ny svømmer oprettet.");
-                    return new Swimmer(activeMember, name, birthdate, owedAmount, butterflyRecord, backstrokeRecord, freestyleRecord, competitionSwimmer, (short) -1);
+                    return new Swimmer(activeMember, name, birthdate, owedAmount, butterflyRecord, backstrokeRecord, freestyleRecord, competitionSwimmer, (short) -1, (byte) 0, (byte) 0, (byte) 0);
                 } else if (valg.equalsIgnoreCase("n")) {
                     activeMember = false;
                     System.out.println("Ny svømmer oprettet.");
-                    return new Swimmer(activeMember, name, birthdate, owedAmount, butterflyRecord, backstrokeRecord, freestyleRecord, competitionSwimmer, (short) -1);
+                    return new Swimmer(activeMember, name, birthdate, owedAmount, butterflyRecord, backstrokeRecord, freestyleRecord, competitionSwimmer, (short) -1, (byte) 0, (byte) 0, (byte) 0);
                 } else {
                     System.out.println("Valg ugyldigt, prøv igen.");
                 }
@@ -282,6 +286,8 @@ public class UI {
         }
     }
 
+
+
     static void registerCompetitionSwimmer(ArrayList<Swimmer> list, Scanner scanner) {
         try {
             System.out.println("Tilmeld svømmer til konkurrence.");
@@ -340,6 +346,7 @@ public class UI {
                 }
             }
             if (swimmerToEdit != null) {
+                //LocalDate today = LocalDate.now(); skal det bruges?
                 System.out.println("Svømmer stamdata:");
                 System.out.println(swimmerToEdit);
                 System.out.println();
@@ -349,18 +356,33 @@ public class UI {
                 System.out.println("Tast 3 for Freestyle Record");
                 String valg = scanner.nextLine();
                 if (valg.equalsIgnoreCase("1")) {
-                    System.out.println("Indtast ny rekord:");
-                    float rekord = scanner.nextFloat();
+                    System.out.println("Indtast tid i sekunder:");                    float rekord = scanner.nextFloat();
+                    scanner.nextLine();
+                    System.out.println("Indtast placering:");
+                    byte placement = scanner.nextByte();
                     scanner.nextLine();
                     swimmerToEdit.setRecord(rekord,swimmerToEdit.getBackstrokeRecord(), swimmerToEdit.getFreestyleRecord());
+                    swimmerToEdit.setPlacement(placement,swimmerToEdit.getBackstrokePlacement(), swimmerToEdit.getFreestylePlacement());
                 } else if (valg.equalsIgnoreCase("2")) {
+                    System.out.println("Indtast tid i sekunder:");
                     float rekord = scanner.nextFloat();
+                    scanner.nextLine();
+                    System.out.println("Indtast placering:");
+                    byte placement = scanner.nextByte();
                     scanner.nextLine();
                     swimmerToEdit.setRecord(swimmerToEdit.getButterflyRecord(),rekord,swimmerToEdit.getFreestyleRecord());
+                    swimmerToEdit.setPlacement(swimmerToEdit.getButterflyPlacement(), placement, swimmerToEdit.getFreestylePlacement());
+
                 } else if (valg.equalsIgnoreCase("3")) {
+                    System.out.println("Indtast tid i sekunder:");
                     float rekord = scanner.nextFloat();
                     scanner.nextLine();
+                    System.out.println("Indtast placering:");
+                    byte placement = scanner.nextByte();
+                    scanner.nextLine();
                     swimmerToEdit.setRecord(swimmerToEdit.getButterflyRecord(), swimmerToEdit.getBackstrokeRecord(), rekord);
+                    swimmerToEdit.setPlacement(swimmerToEdit.getButterflyPlacement(),swimmerToEdit.getBackstrokePlacement(), placement);
+
                 } else {
                     System.out.println("Valg ugyldigt, prøv igen.");
                 }
@@ -369,6 +391,35 @@ public class UI {
             } catch (Exception e) {
         System.out.println("En fejl er opstået: " + e.getMessage());
         e.printStackTrace();
+        }
+    }
+    static void removeSwimmer(ArrayList<Swimmer> list, Scanner scanner) {
+        try {
+            System.out.println("Fjern medlem");
+            System.out.println("Medlemsliste:");
+            for (Swimmer s : list) {
+                System.out.println(s.getName());
+            }
+            System.out.println("Indtast navn på svømmer");
+            String searchName = scanner.nextLine();
+            Swimmer swimmerToRemove = null;
+
+            for(Swimmer s : list) {
+                if (s.getName().equalsIgnoreCase(searchName)) {
+                    swimmerToRemove = s;
+                    s.resetIndexNos(list);
+                    break;
+                }
+            }
+            if (swimmerToRemove !=null) {
+                list.remove(swimmerToRemove);
+                System.out.println("Medlem fjernet: " +swimmerToRemove.getName());
+            }else {
+                System.out.println("Fejl, svømmer blev ikke fundet. ");
+            }
+        } catch (Exception e) {
+            System.out.println("En fejl er opstået: " + e.getMessage());
+            e.printStackTrace();
         }
     }
     static void displayTopFive(ArrayList<Swimmer> list, Scanner sc){
