@@ -3,6 +3,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class Swimmer implements Comparable<Swimmer>{
@@ -196,3 +197,24 @@ public class Swimmer implements Comparable<Swimmer>{
     }
 }
 
+class BackstrokeSort implements Comparator<Swimmer> {
+    public int compare(Swimmer a, Swimmer b){
+        Float fa = a.getBackstrokeRecord();
+        Float fb = b.getBackstrokeRecord();
+        return fa.compareTo(fb);
+    }
+}
+class ButterflySort implements Comparator<Swimmer> {
+    public int compare(Swimmer a, Swimmer b){
+        Float fa = a.getButterflyRecord();
+        Float fb = b.getButterflyRecord();
+        return fa.compareTo(fb);
+    }
+}
+class FreestyleSort implements Comparator<Swimmer> {
+    public int compare(Swimmer a, Swimmer b){
+        Float fa = a.getFreestyleRecord();
+        Float fb = b.getFreestyleRecord();
+        return fa.compareTo(fb);
+    }
+}
