@@ -24,11 +24,11 @@ public class Club {
                 if (valg.equalsIgnoreCase("y")) {
                     activeMember = true;
                     System.out.println("Ny svømmer oprettet.");
-                    return new Swimmer(activeMember, name, birthdate, owedAmount, butterflyRecord, backstrokeRecord, freestyleRecord, competitionSwimmer, (short) -1, (byte) 0, (byte) 0, (byte) 0);
+                    return new Swimmer(activeMember, name, birthdate, owedAmount, competitionSwimmer, (short) -1);
                 } else if (valg.equalsIgnoreCase("n")) {
                     activeMember = false;
                     System.out.println("Ny svømmer oprettet.");
-                    return new Swimmer(activeMember, name, birthdate, owedAmount, butterflyRecord, backstrokeRecord, freestyleRecord, competitionSwimmer, (short) -1, (byte) 0, (byte) 0, (byte) 0);
+                    return new Swimmer(activeMember, name, birthdate, owedAmount, competitionSwimmer, (short) -1);
                 } else {
                     System.out.println("Valg ugyldigt, prøv igen.");
                 }
