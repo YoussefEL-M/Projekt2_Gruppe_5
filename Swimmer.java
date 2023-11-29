@@ -1,17 +1,14 @@
-import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
 
 public class Swimmer{
     private static short noOfSwimmers = 0;
     private short indexNo;
     private boolean isActive;
     private String name;
-    private int age;
+    final private int age;
     private boolean senior;
     private short owedAmount;
     private LocalDate birthday;
@@ -37,7 +34,7 @@ public class Swimmer{
 
     // Metode til at returnere leaselig tekst
     public String toString(){
-        return name+", "+age+", "+birthday+", "+senior+", "+(isActive? "Active" : "Inactive")+", skylder: "+owedAmount+"\nButterfly rekord: "+results.getButterflyRecord()+" Placering: "+results.getButterflyPlacement()+"\nBackStroke rekord: "+results.getBackstrokeRecord()+" Placering: "+results.getBackstrokePlacement()+"\nFreeStyle rekord: "+results.getFreestyleRecord()+" Placering: "+results.getFreestylePlacement();
+        return name+", "+age+", "+birthday+", "+(senior? "Senior" : "Junior")+", "+(isActive? "Active" : "Inactive")+", skylder: "+owedAmount+"\nButterfly rekord: "+results.getButterflyRecord()+" Placering: "+results.getButterflyPlacement()+"\nBackStroke rekord: "+results.getBackstrokeRecord()+" Placering: "+results.getBackstrokePlacement()+"\nFreeStyle rekord: "+results.getFreestyleRecord()+" Placering: "+results.getFreestylePlacement();
     }
     public String fileOutput(){
         return isActive+","+name+","+birthday+","+owedAmount+","+results.getButterflyRecord()+","+results.getBackstrokeRecord()+","+results.getFreestyleRecord()+","+competitionSwimmer+","+trainerIndex;
@@ -55,7 +52,7 @@ public class Swimmer{
     // Metode til at registrere en betaling og opdatere det skyldige belob
     void registerPayment(float amount){
         if (amount <= owedAmount) {
-            owedAmount -= amount;
+            owedAmount -= (short) amount;
             System.out.println("Betaling registreret. Resterende beløb: " + owedAmount);
         } else {
             System.out.println("Ugyldig beløb. Det skyldte beløb er: " + owedAmount);
