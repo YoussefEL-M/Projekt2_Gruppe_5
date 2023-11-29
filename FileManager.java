@@ -30,8 +30,10 @@ public class FileManager {
                 boolean competition = Boolean.parseBoolean(bits[7]);
                 short trainerIndex = Short.parseShort(bits[8]);
 
-                while(!line.equals(";")){
+                ArrayList<SwimMeet> meetList = new ArrayList<>();
 
+                while(!line.equals(";")){
+                    String[] bits2 = line.split(",");
                 }
 
                 list.add(new Swimmer(active,name,birthday,amount,butterfly,breaststroke,freestyle,competition, trainerIndex,));
