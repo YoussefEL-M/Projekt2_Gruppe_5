@@ -29,27 +29,55 @@ public class Results {
         return freestylePlacement;
     }
     Results(ArrayList<SwimMeet> list){
+        this.list=list;
+        ArrayList<Float> sortListA = new ArrayList<>();
+        ArrayList<Float> sortListB = new ArrayList<>();
+        ArrayList<Float> sortListC = new ArrayList<>();
 
+        //Uddeler tiderne efter disciplin og sorterer dem.
+
+        for(SwimMeet sm: list){
+            switch(sm.discipline){
+                case Butterfly -> sortListA.add(sm.time);
+                case Backstroke -> sortListB.add(sm.time);
+                case Freestyle -> sortListC.add(sm.time);
+            }
+        }
+        sortListA.sort(null);
+        sortListB.sort(null);
+        sortListC.sort(null);
+
+        butterflyRecord=sortListA.get(0);
+        backstrokeRecord=sortListB.get(0);
+        freestyleRecord=sortListC.get(0);
+
+        ArrayList<Byte> sortListD = new ArrayList<>();
+        ArrayList<Byte> sortListE = new ArrayList<>();
+        ArrayList<Byte> sortListF = new ArrayList<>();
+
+        for(SwimMeet sm: list){
+            switch(sm.discipline){
+                case Butterfly -> sortListD.add(sm.placement);
+                case Backstroke -> sortListE.add(sm.placement);
+                case Freestyle -> sortListF.add(sm.placement);
+            }
+        }
+
+        sortListD.sort(null);
+        sortListE.sort(null);
+        sortListF.sort(null);
+
+        butterflyPlacement=sortListD.get(0);
+        backstrokePlacement=sortListE.get(0);
+        freestylePlacement=sortListF.get(0);
     }
+    void updateRecords(){}
 }
 enum Discipline{Butterfly,Backstroke,Freestyle}
-class SwimMeet implements Comparable<SwimMeet>{
+class SwimMeet implements{
     String meetName;
     LocalDate date;
     Discipline discipline;
     float time;
     byte placement;
-    public int compareTo(SwimMeet s){
-        Float a = this.time;
-        Float b = s.time;
-        return a.compareTo(b);
-    }
-}
-
-class placementComparison implements Comparator<SwimMeet>{
-    public int compare(SwimMeet a, SwimMeet b){
-        Byte ba = a.placement;
-        Byte bb = b.placement;
-        return ba.compareTo(bb);
-    }
 }

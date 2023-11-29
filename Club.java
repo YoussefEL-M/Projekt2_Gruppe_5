@@ -318,7 +318,7 @@ public class Club {
                         if(s.getButterflyRecord()!=0)
                             sortList.add(s);
                     }
-                    sortList.sort(new BackstrokeSort());
+                    sortList.sort(new ButterflySort());
                     for(int i = 0;i<=4;i++){
                         System.out.println(sortList.get(i));
                     }
@@ -328,7 +328,7 @@ public class Club {
                         if(s.getFreestyleRecord()!=0)
                             sortList.add(s);
                     }
-                    sortList.sort(new BackstrokeSort());
+                    sortList.sort(new FreestyleSort());
                     for(int i = 0;i<=4;i++){
                         System.out.println(sortList.get(i));
                     }

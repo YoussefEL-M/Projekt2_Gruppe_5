@@ -29,11 +29,12 @@ public class FileManager {
                 float freestyle = Float.parseFloat(bits[6]);
                 boolean competition = Boolean.parseBoolean(bits[7]);
                 short trainerIndex = Short.parseShort(bits[8]);
-                byte butterflyPlacement=Byte.parseByte(bits[9]);
-                byte backstrokePlacement = Byte.parseByte(bits[10]);
-                byte freestylePlacement= Byte.parseByte(bits[11]);
 
-                list.add(new Swimmer(active,name,birthday,amount,butterfly,breaststroke,freestyle,competition, trainerIndex, butterflyPlacement, backstrokePlacement, freestylePlacement));
+                while(!line.equals(";")){
+
+                }
+
+                list.add(new Swimmer(active,name,birthday,amount,butterfly,breaststroke,freestyle,competition, trainerIndex,));
 
                 line = in.readLine();
             }
