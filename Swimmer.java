@@ -6,7 +6,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class Swimmer implements Comparable<Swimmer>{
+public class Swimmer{
     private static short noOfSwimmers = 0;
     private short indexNo;
     private boolean isActive;
@@ -14,20 +14,15 @@ public class Swimmer implements Comparable<Swimmer>{
     private int age;
     private boolean senior;
     private short owedAmount;
-    private float butterflyRecord;
-    private float backstrokeRecord;
-    private float freestyleRecord;
     private LocalDate birthday;
     Trainer trainer = null;
     short trainerIndex;
     private boolean competitionSwimmer;
-    byte butterflyPlacement=0;
-    byte backstrokePlacement = 0;
-    byte freestylePlacement= 0;
     private LocalDate lastChargeDate;
+    Results results;
 
     // Konstruktor til at oprette en Swimmer-objekt
-    Swimmer( boolean isActive, String name, LocalDate birthday, short owedAmount,float butterflyRecord, float backstrokeRecord, float freestyleRecord, boolean competitionSwimmer, short trainerIndex, byte butterflyPlacement, byte backstrokePlacement, byte freestylePlacement){
+    Swimmer( boolean isActive, String name, LocalDate birthday, short owedAmount, boolean competitionSwimmer, short trainerIndex){
         indexNo=noOfSwimmers;
         noOfSwimmers++;
         this.name = name;
@@ -36,22 +31,16 @@ public class Swimmer implements Comparable<Swimmer>{
         this.senior=(this.age >= 18);
         this.isActive = isActive;
         this.owedAmount=owedAmount;
-        this.butterflyRecord=butterflyRecord;
-        this.backstrokeRecord=backstrokeRecord;
-        this.freestyleRecord=freestyleRecord;
         this.trainerIndex=trainerIndex;
         this.competitionSwimmer=competitionSwimmer;
-        this.butterflyPlacement=butterflyPlacement;
-        this.backstrokePlacement=backstrokePlacement;
-        this.freestylePlacement=freestylePlacement;
     }
 
     // Metode til at returnere leaselig tekst
     public String toString(){
-        return name+", "+age+", "+birthday+", "+senior+", "+(isActive? "Active" : "Inactive")+", skylder: "+owedAmount+"\nButterfly rekord: "+butterflyRecord+" Placering: "+butterflyPlacement+"\nBackStroke rekord: "+backstrokeRecord+" Placering: "+backstrokePlacement+"\nFreeStyle rekord: "+freestyleRecord+" Placering: "+freestylePlacement;
+        return name+", "+age+", "+birthday+", "+senior+", "+(isActive? "Active" : "Inactive")+", skylder: "+owedAmount+"\nButterfly rekord: "+results.getButterflyRecord()+" Placering: "+results.getButterflyPlacement()+"\nBackStroke rekord: "+results.getBackstrokeRecord()+" Placering: "+results.getBackstrokePlacement()+"\nFreeStyle rekord: "+results.getFreestyleRecord()+" Placering: "+results.getFreestylePlacement();
     }
     public String fileOutput(){
-        return isActive+","+name+","+birthday+","+owedAmount+","+butterflyRecord+","+backstrokeRecord+","+freestyleRecord+","+competitionSwimmer+","+trainerIndex;
+        return isActive+","+name+","+birthday+","+owedAmount+","+results.getButterflyRecord()+","+results.getBackstrokeRecord()+","+results.getFreestyleRecord()+","+competitionSwimmer+","+trainerIndex;
     }
     private int calculateAge(LocalDate birthday) {
         LocalDate currentDate = LocalDate.now();
@@ -74,32 +63,32 @@ public class Swimmer implements Comparable<Swimmer>{
     }
 
     // Metode til at angive rekorder for de forskellige svomme discipliner
-    void setRecord(float butterflyRecord, float backstrokeRecord, float freestlyeRecord){
-        this.butterflyRecord = butterflyRecord;
+/*    void setRecord(float ButterflyRecord, float backstrokeRecord, float freestyleRecord){
+        this.ButterflyRecord = results.getButterflyRecord();
         this.backstrokeRecord = backstrokeRecord;
         this.freestyleRecord = freestlyeRecord;
     }
-    void setPlacement(byte butterflyPlacement, byte backstrokePlacement, byte freestylePlacement){
-        this.butterflyPlacement = butterflyPlacement;
+    void setPlacement(byte results.getButterflyPlacement(), byte backstrokePlacement, byte freestylePlacement){
+        this.results.getButterflyPlacement() = results.getButterflyPlacement();
         this.backstrokePlacement = backstrokePlacement;
         this.freestylePlacement = freestylePlacement;
     }
-
+*/
     // Metode til at hente en rekord for en given svomme disciplin
     float getRecord(String discipline){
         return switch (discipline.toLowerCase()) {
-            case "butterfly" -> butterflyRecord;
-            case "backstroke" -> backstrokeRecord;
-            case "freestyle" -> freestyleRecord;
+            case "butterfly" -> results.getButterflyRecord();
+            case "backstroke" -> results.getBackstrokeRecord();
+            case "freestyle" -> results.getFreestyleRecord();
             default ->
                     throw new IllegalArgumentException("Ugyldig disciplin: " + discipline + ". Gyldige discipliner: butterfly, backstroke, freestyle");
         };
     }
 
     // Metode til at sammenligne svommeres rekorder
-    public int compareTo(Swimmer swimmer){
+ /*   public int compareTo(Swimmer swimmer){
         // Compare Butterfly rekorder
-        int butterflyComparison = Float.compare(this.butterflyRecord, swimmer.butterflyRecord);
+        int butterflyComparison = Float.compare(this.results.getButterflyRecord(), swimmer.results.getButterflyRecord());
         if (butterflyComparison != 0) {
             return butterflyComparison;
         }
@@ -112,7 +101,7 @@ public class Swimmer implements Comparable<Swimmer>{
 
         // Compare Freestyle recorder
         return Float.compare(this.freestyleRecord, swimmer.freestyleRecord);
-    }
+    }*/
     private boolean hasYearPassed(LocalDate lastChargeDate) {
         LocalDate currentDate = LocalDate.now();
         return Period.between(lastChargeDate, currentDate).getYears() >= 1;
@@ -170,22 +159,22 @@ public class Swimmer implements Comparable<Swimmer>{
         return this.owedAmount;
     }
     public float getButterflyRecord(){
-        return this.butterflyRecord;
+        return this.results.getButterflyRecord();
     }
     public float getBackstrokeRecord(){
-        return this.backstrokeRecord;
+        return this.results.getBackstrokeRecord();
     }
     public float getFreestyleRecord(){
-        return this.freestyleRecord;
+        return this.results.getFreestyleRecord();
     }
     public byte getButterflyPlacement(){
-        return this.butterflyPlacement;
+        return this.results.getButterflyPlacement();
     }
     public byte getBackstrokePlacement() {
-        return backstrokePlacement;
+        return this.results.getBackstrokePlacement();
     }
     public byte getFreestylePlacement() {
-        return freestylePlacement;
+        return this.results.getFreestylePlacement();
     }
 
     public void resetIndexNos(ArrayList<Swimmer> list){
@@ -206,8 +195,8 @@ class BackstrokeSort implements Comparator<Swimmer> {
 }
 class ButterflySort implements Comparator<Swimmer> {
     public int compare(Swimmer a, Swimmer b){
-        Float fa = a.getButterflyRecord();
-        Float fb = b.getButterflyRecord();
+        Float fa = a.results.getButterflyRecord();
+        Float fb = b.results.getButterflyRecord();
         return fa.compareTo(fb);
     }
 }
