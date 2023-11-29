@@ -74,10 +74,17 @@ public class Results {
     void updateRecords(){}
 }
 enum Discipline{Butterfly,Backstroke,Freestyle}
-class SwimMeet implements{
+class SwimMeet{
     String meetName;
     LocalDate date;
     Discipline discipline;
     float time;
     byte placement;
+    SwimMeet(String meetName,LocalDate date,Discipline discipline,float time, byte placement){
+        this.meetName=meetName;
+        this.date=date;
+        this.discipline=discipline;
+        this.time=time;
+        this.placement=placement;
+    }
 }
