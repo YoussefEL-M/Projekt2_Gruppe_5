@@ -9,6 +9,9 @@ public class FileManager {
 
        // alist.add(new Swimmer(true,"Mie",LocalDate.parse("2001-03-14"), (short) 0,10f,10f,10f,true, (short) 0));
         alist.get(0).trainer=list.get(alist.get(0).trainerIndex);
+
+        System.out.println(alist.get(0));
+
         saveMembers(alist);
     }
     public static ArrayList<Swimmer> getMembers(){
@@ -28,6 +31,7 @@ public class FileManager {
                 short trainerIndex = Short.parseShort(bits[5]);
 
                 ArrayList<SwimMeet> meetList = new ArrayList<>();
+                line = in.readLine();
 
                 while(!line.equals(";")){
                     String[] bits2 = line.split(",");
@@ -38,9 +42,10 @@ public class FileManager {
                     byte placement = Byte.parseByte(bits2[4]);
 
                     meetList.add(new SwimMeet(meetName,date,discipline,time,placement));
+                    line=in.readLine();
                 }
 
-                list.add(new Swimmer(active,name,birthday,amount,competition, trainerIndex,new Results(meetList)));
+                list.add(new Swimmer(active,name,birthday,amount,competition,trainerIndex,new Results(meetList)));
 
                 line = in.readLine();
             }

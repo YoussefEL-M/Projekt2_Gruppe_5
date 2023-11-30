@@ -47,9 +47,9 @@ public class Results {
         sortListB.sort(null);
         sortListC.sort(null);
 
-        butterflyRecord=sortListA.get(0);
-        backstrokeRecord=sortListB.get(0);
-        freestyleRecord=sortListC.get(0);
+        if(!sortListA.isEmpty())butterflyRecord=sortListA.get(0);
+        if(!sortListB.isEmpty())backstrokeRecord=sortListB.get(0);
+        if(!sortListC.isEmpty())freestyleRecord=sortListC.get(0);
 
         ArrayList<Byte> sortListD = new ArrayList<>();
         ArrayList<Byte> sortListE = new ArrayList<>();
@@ -67,9 +67,9 @@ public class Results {
         sortListE.sort(null);
         sortListF.sort(null);
 
-        butterflyPlacement=sortListD.get(0);
-        backstrokePlacement=sortListE.get(0);
-        freestylePlacement=sortListF.get(0);
+        if(!sortListD.isEmpty())butterflyPlacement=sortListD.get(0);
+        if(!sortListE.isEmpty())backstrokePlacement=sortListE.get(0);
+        if(!sortListF.isEmpty())freestylePlacement=sortListF.get(0);
     }
     void updateRecords(){}
 }

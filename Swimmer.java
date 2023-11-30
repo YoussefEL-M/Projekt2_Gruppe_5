@@ -35,7 +35,7 @@ public class Swimmer{
 
     // Metode til at returnere leaselig tekst
     public String toString(){
-        return name+", "+age+", "+birthday+", "+(senior? "Senior" : "Junior")+", "+(isActive? "Active" : "Inactive")+", skylder: "+owedAmount+"\nButterfly rekord: "+results.getButterflyRecord()+" Placering: "+results.getButterflyPlacement()+"\nBackStroke rekord: "+results.getBackstrokeRecord()+" Placering: "+results.getBackstrokePlacement()+"\nFreeStyle rekord: "+results.getFreestyleRecord()+" Placering: "+results.getFreestylePlacement();
+        return name+", "+age+", "+birthday+", "+(senior? "Senior" : "Junior")+", "+(isActive? "Aktiv" : "Ikke Aktiv")+", Skylder: "+owedAmount+" kr., "+(trainerIndex==-1? "Ingen Træner" : "Træner: "+trainer.getName())+"\nButterfly rekord: "+results.getButterflyRecord()+" Placering: "+results.getButterflyPlacement()+"\nBackStroke rekord: "+results.getBackstrokeRecord()+" Placering: "+results.getBackstrokePlacement()+"\nFreeStyle rekord: "+results.getFreestyleRecord()+" Placering: "+results.getFreestylePlacement();
     }
     public String fileOutput(){
         return isActive+","+name+","+birthday+","+owedAmount+","+competitionSwimmer+","+trainerIndex;
