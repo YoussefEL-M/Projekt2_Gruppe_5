@@ -19,7 +19,7 @@ public class Swimmer{
     Results results;
 
     // Konstruktor til at oprette en Swimmer-objekt
-    Swimmer( boolean isActive, String name, LocalDate birthday, short owedAmount, boolean competitionSwimmer, short trainerIndex){
+    Swimmer(boolean isActive, String name, LocalDate birthday, short owedAmount, boolean competitionSwimmer, short trainerIndex,Results results){
         indexNo=noOfSwimmers;
         noOfSwimmers++;
         this.name = name;
@@ -30,6 +30,7 @@ public class Swimmer{
         this.owedAmount=owedAmount;
         this.trainerIndex=trainerIndex;
         this.competitionSwimmer=competitionSwimmer;
+        this.results=results;
     }
 
     // Metode til at returnere leaselig tekst
@@ -37,7 +38,7 @@ public class Swimmer{
         return name+", "+age+", "+birthday+", "+(senior? "Senior" : "Junior")+", "+(isActive? "Active" : "Inactive")+", skylder: "+owedAmount+"\nButterfly rekord: "+results.getButterflyRecord()+" Placering: "+results.getButterflyPlacement()+"\nBackStroke rekord: "+results.getBackstrokeRecord()+" Placering: "+results.getBackstrokePlacement()+"\nFreeStyle rekord: "+results.getFreestyleRecord()+" Placering: "+results.getFreestylePlacement();
     }
     public String fileOutput(){
-        return isActive+","+name+","+birthday+","+owedAmount+","+results.getButterflyRecord()+","+results.getBackstrokeRecord()+","+results.getFreestyleRecord()+","+competitionSwimmer+","+trainerIndex;
+        return isActive+","+name+","+birthday+","+owedAmount+","+competitionSwimmer+","+trainerIndex;
     }
     private int calculateAge(LocalDate birthday) {
         LocalDate currentDate = LocalDate.now();

@@ -24,19 +24,23 @@ public class FileManager {
                 String name = bits[1];
                 LocalDate birthday = LocalDate.parse(bits[2]);
                 short amount = Short.parseShort(bits[3]);
-                float butterfly = Float.parseFloat(bits[4]);
-                float breaststroke = Float.parseFloat(bits[5]);
-                float freestyle = Float.parseFloat(bits[6]);
-                boolean competition = Boolean.parseBoolean(bits[7]);
-                short trainerIndex = Short.parseShort(bits[8]);
+                boolean competition = Boolean.parseBoolean(bits[4]);
+                short trainerIndex = Short.parseShort(bits[5]);
 
                 ArrayList<SwimMeet> meetList = new ArrayList<>();
 
                 while(!line.equals(";")){
                     String[] bits2 = line.split(",");
+                    String meetName = bits2[0];
+                    LocalDate date = LocalDate.parse(bits2[1]);
+                    Discipline discipline = Discipline.valueOf(bits2[2]);
+                    float time = Float.parseFloat(bits2[3]);
+                    byte placement = Byte.parseByte(bits2[4]);
+
+                    meetList.add(new SwimMeet(meetName,date,discipline,time,placement));
                 }
 
-                list.add(new Swimmer(active,name,birthday,amount,butterfly,breaststroke,freestyle,competition, trainerIndex,));
+                list.add(new Swimmer(active,name,birthday,amount,competition, trainerIndex,new Results(meetList)));
 
                 line = in.readLine();
             }
@@ -55,6 +59,10 @@ public class FileManager {
 
             for (Swimmer s : list) {
                 out.println(s.fileOutput());
+                for(SwimMeet sm: s.results.list) {
+                    out.println(sm.meetName+","+sm.date+","+sm.discipline+","+sm.time+","+sm.placement);
+                }
+                out.println(";");
             }
 
             out.close();
