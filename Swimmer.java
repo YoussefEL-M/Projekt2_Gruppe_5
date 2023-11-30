@@ -12,11 +12,13 @@ public class Swimmer{
     private boolean senior;
     private short owedAmount;
     private LocalDate birthday;
-    Trainer trainer = null;
+    Trainer trainer ;
     short trainerIndex;
     private boolean competitionSwimmer;
     private LocalDate lastChargeDate;
     Results results;
+    String trainerInfo = (trainer == null) ? "Ingen Træner" : "Træner: " + trainer.getName();
+
 
     // Konstruktor til at oprette en Swimmer-objekt
     Swimmer(boolean isActive, String name, LocalDate birthday, short owedAmount, boolean competitionSwimmer, short trainerIndex,Results results){
@@ -35,7 +37,7 @@ public class Swimmer{
 
     // Metode til at returnere leaselig tekst
     public String toString(){
-        return name+", "+age+", "+birthday+", "+(senior? "Senior" : "Junior")+", "+(isActive? "Aktiv" : "Ikke Aktiv")+", Skylder: "+owedAmount+" kr., "+(trainerIndex==-1? "Ingen Træner" : "Træner: "+trainer.getName())+"\nButterfly rekord: "+results.getButterflyRecord()+" Placering: "+results.getButterflyPlacement()+"\nBackStroke rekord: "+results.getBackstrokeRecord()+" Placering: "+results.getBackstrokePlacement()+"\nFreeStyle rekord: "+results.getFreestyleRecord()+" Placering: "+results.getFreestylePlacement();
+        return name+", "+age+", "+birthday+", "+(senior? "Senior" : "Junior")+", "+(isActive? "Aktiv" : "Ikke Aktiv")+", Skylder: "+owedAmount+" kr., "+trainerInfo+"\nButterfly rekord: "+results.getButterflyRecord()+" Placering: "+results.getButterflyPlacement()+"\nBackStroke rekord: "+results.getBackstrokeRecord()+" Placering: "+results.getBackstrokePlacement()+"\nFreeStyle rekord: "+results.getFreestyleRecord()+" Placering: "+results.getFreestylePlacement();
     }
     public String fileOutput(){
         return isActive+","+name+","+birthday+","+owedAmount+","+competitionSwimmer+","+trainerIndex;
@@ -59,47 +61,6 @@ public class Swimmer{
             System.out.println("Ugyldig beløb. Det skyldte beløb er: " + owedAmount);
         }
     }
-
-    // Metode til at angive rekorder for de forskellige svomme discipliner
-/*    void setRecord(float ButterflyRecord, float backstrokeRecord, float freestyleRecord){
-        this.ButterflyRecord = results.getButterflyRecord();
-        this.backstrokeRecord = backstrokeRecord;
-        this.freestyleRecord = freestlyeRecord;
-    }
-    void setPlacement(byte results.getButterflyPlacement(), byte backstrokePlacement, byte freestylePlacement){
-        this.results.getButterflyPlacement() = results.getButterflyPlacement();
-        this.backstrokePlacement = backstrokePlacement;
-        this.freestylePlacement = freestylePlacement;
-    }
-*/
-    // Metode til at hente en rekord for en given svomme disciplin
-    float getRecord(String discipline){
-        return switch (discipline.toLowerCase()) {
-            case "butterfly" -> results.getButterflyRecord();
-            case "backstroke" -> results.getBackstrokeRecord();
-            case "freestyle" -> results.getFreestyleRecord();
-            default ->
-                    throw new IllegalArgumentException("Ugyldig disciplin: " + discipline + ". Gyldige discipliner: butterfly, backstroke, freestyle");
-        };
-    }
-
-    // Metode til at sammenligne svommeres rekorder
- /*   public int compareTo(Swimmer swimmer){
-        // Compare Butterfly rekorder
-        int butterflyComparison = Float.compare(this.results.getButterflyRecord(), swimmer.results.getButterflyRecord());
-        if (butterflyComparison != 0) {
-            return butterflyComparison;
-        }
-
-        // Compare Backstroke rekorder
-        int backstrokeComparison = Float.compare(this.backstrokeRecord, swimmer.backstrokeRecord);
-        if (backstrokeComparison != 0) {
-            return backstrokeComparison;
-        }
-
-        // Compare Freestyle recorder
-        return Float.compare(this.freestyleRecord, swimmer.freestyleRecord);
-    }*/
     private boolean hasYearPassed(LocalDate lastChargeDate) {
         LocalDate currentDate = LocalDate.now();
         return Period.between(lastChargeDate, currentDate).getYears() >= 1;

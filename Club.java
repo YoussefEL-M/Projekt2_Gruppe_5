@@ -2,6 +2,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 public class Club {
@@ -18,17 +19,23 @@ public class Club {
                 String valg = scanner.nextLine();
                 boolean activeMember;
                 short owedAmount = 0;
-                float butterflyRecord = 0, backstrokeRecord = 0, freestyleRecord = 0;
                 boolean competitionSwimmer = false;
 
                 if (valg.equalsIgnoreCase("y")) {
                     activeMember = true;
                     System.out.println("Ny svømmer oprettet.");
-                    return new Swimmer(activeMember, name, birthdate, owedAmount, competitionSwimmer, (short) -1);
+
+                    SwimMeet s1 = new SwimMeet("Default Meet", LocalDate.now(), Discipline.Butterfly, 0.0f, (byte) 0);
+
+                    return new Swimmer(activeMember, name, birthdate, owedAmount, competitionSwimmer, (short) -1, new Results(new ArrayList<>(List.of(s1))));
                 } else if (valg.equalsIgnoreCase("n")) {
                     activeMember = false;
+
+                    //Laver et default swimmeet objekt for svømmer
+                    SwimMeet s1 = new SwimMeet("Default Meet", LocalDate.now(), Discipline.Butterfly, 0.0f, (byte) 0);
+
                     System.out.println("Ny svømmer oprettet.");
-                    return new Swimmer(activeMember, name, birthdate, owedAmount, competitionSwimmer, (short) -1);
+                    return new Swimmer(activeMember, name, birthdate, owedAmount, competitionSwimmer, (short) -1,new Results(new ArrayList<>(List.of(s1))));
                 } else {
                     System.out.println("Valg ugyldigt, prøv igen.");
                 }
@@ -102,6 +109,17 @@ public class Club {
                         System.out.println("Ugyldigt input. Medlemsskab forbliver uændret.");
                     }
                 }
+                System.out.println("Vil du opdatere rekorder? Indtast Y/N eller tryk Enter for at bevare det nuværende:");
+                String choice = scanner.nextLine();
+
+                if ("Y".equalsIgnoreCase(choice)) {
+                    swimmerToEdit.results.updateRecords(scanner);
+                    System.out.println("Rekorder opdateret:");
+                    System.out.println(swimmerToEdit);
+                } else {
+                    System.out.println("Rekorder forbliver uændret.");
+                }
+
                 System.out.println("Svømmer opdateret:");
                 System.out.println(swimmerToEdit);
             } else {
@@ -153,8 +171,6 @@ public class Club {
             e.printStackTrace();
         }
     }
-
-
 
     static void registerCompetitionSwimmer(ArrayList<Swimmer> list, Scanner scanner) {
         try {
@@ -229,8 +245,8 @@ public class Club {
                     System.out.println("Indtast placering:");
                     byte placement = scanner.nextByte();
                     scanner.nextLine();
-                    swimmerToEdit.setRecord(rekord,swimmerToEdit.getBackstrokeRecord(), swimmerToEdit.getFreestyleRecord());
-                    swimmerToEdit.setPlacement(placement,swimmerToEdit.getBackstrokePlacement(), swimmerToEdit.getFreestylePlacement());
+                  //  swimmerToEdit.setRecord(rekord,swimmerToEdit.getBackstrokeRecord(), swimmerToEdit.getFreestyleRecord());
+                  //  swimmerToEdit.setPlacement(placement,swimmerToEdit.getBackstrokePlacement(), swimmerToEdit.getFreestylePlacement());
                 } else if (valg.equalsIgnoreCase("2")) {
                     System.out.println("Indtast tid i sekunder:");
                     float rekord = scanner.nextFloat();
@@ -238,8 +254,8 @@ public class Club {
                     System.out.println("Indtast placering:");
                     byte placement = scanner.nextByte();
                     scanner.nextLine();
-                    swimmerToEdit.setRecord(swimmerToEdit.getButterflyRecord(),rekord,swimmerToEdit.getFreestyleRecord());
-                    swimmerToEdit.setPlacement(swimmerToEdit.getButterflyPlacement(), placement, swimmerToEdit.getFreestylePlacement());
+                  //  swimmerToEdit.setRecord(swimmerToEdit.getButterflyRecord(),rekord,swimmerToEdit.getFreestyleRecord());
+                  //  swimmerToEdit.setPlacement(swimmerToEdit.getButterflyPlacement(), placement, swimmerToEdit.getFreestylePlacement());
 
                 } else if (valg.equalsIgnoreCase("3")) {
                     System.out.println("Indtast tid i sekunder:");
@@ -248,8 +264,8 @@ public class Club {
                     System.out.println("Indtast placering:");
                     byte placement = scanner.nextByte();
                     scanner.nextLine();
-                    swimmerToEdit.setRecord(swimmerToEdit.getButterflyRecord(), swimmerToEdit.getBackstrokeRecord(), rekord);
-                    swimmerToEdit.setPlacement(swimmerToEdit.getButterflyPlacement(),swimmerToEdit.getBackstrokePlacement(), placement);
+                  //  swimmerToEdit.setRecord(swimmerToEdit.getButterflyRecord(), swimmerToEdit.getBackstrokeRecord(), rekord);
+                  //  swimmerToEdit.setPlacement(swimmerToEdit.getButterflyPlacement(),swimmerToEdit.getBackstrokePlacement(), placement);
 
                 } else {
                     System.out.println("Valg ugyldigt, prøv igen.");
