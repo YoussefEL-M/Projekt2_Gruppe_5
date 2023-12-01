@@ -6,6 +6,7 @@ public class UI {
         ArrayList<Swimmer> swimmers = FileManager.getMembers();
         ArrayList<Trainer> trainers = FileManager.getTrainers();
         Trainer.assignTrainers(trainers,swimmers);
+        Club.calculateYearlyCharge(swimmers);
         menu(swimmers,trainers);
     }
     public static void menu(ArrayList<Swimmer> swimmers,ArrayList<Trainer> trainers) {
@@ -58,7 +59,6 @@ public class UI {
 
                                 case 4 -> {
                                     Club.showSwimmers(swimmers);
-                                    Club.calculateYearlyCharge(swimmers);
                                 }
                                 case 5 ->
                                         System.out.println("Går tilbage til main menu.");
