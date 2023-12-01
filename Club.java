@@ -76,9 +76,9 @@ public class Club {
                     System.out.println(s);
             }
             System.out.println("Indtast indekstal på svømmer, du ønsker at redigere");
-            int indexNo = scanner.nextInt();
+
+            Swimmer swimmerToEdit = list.get(scanner.nextInt());
             scanner.nextLine();
-            Swimmer swimmerToEdit = list.get(indexNo);
 
             if (swimmerToEdit != null) {
                 System.out.println("Svømmer stamdata:");
@@ -278,23 +278,23 @@ public class Club {
     static void removeSwimmer(ArrayList<Swimmer> list, Scanner scanner) {
         try {
             System.out.println("Fjern medlem");
+            System.out.println();
+            System.out.println("Søg efter medlem eller tryk enter for at vise alle medlemmer.");
+            String searchTerm = scanner.nextLine();
+
             System.out.println("Medlemsliste:");
             for (Swimmer s : list) {
-                System.out.println(s.getName());
+                if(s.getName().toLowerCase().contains(searchTerm.toLowerCase()))
+                    System.out.println(s);
             }
-            System.out.println("Indtast navn på svømmer");
-            String searchName = scanner.nextLine();
-            Swimmer swimmerToRemove = null;
+            System.out.println();
+            System.out.println("Indtast indekstal på det medlem, du ønsker at fjerne.");
+            Swimmer swimmerToRemove = list.get(scanner.nextInt());
+            scanner.nextLine();
 
-            for(Swimmer s : list) {
-                if (s.getName().equalsIgnoreCase(searchName)) {
-                    swimmerToRemove = s;
-                    s.resetIndexNos(list);
-                    break;
-                }
-            }
             if (swimmerToRemove !=null) {
                 list.remove(swimmerToRemove);
+                Swimmer.resetIndexNos(list);
                 System.out.println("Medlem fjernet: " +swimmerToRemove.getName());
             }else {
                 System.out.println("Fejl, svømmer blev ikke fundet. ");

@@ -136,7 +136,7 @@ public class Swimmer{
         return this.results.getFreestylePlacement();
     }
 
-    public void resetIndexNos(ArrayList<Swimmer> list){
+    public static void resetIndexNos(ArrayList<Swimmer> list){
         Swimmer.noOfSwimmers=0;
         for(Swimmer s:list){
             s.indexNo=noOfSwimmers;
