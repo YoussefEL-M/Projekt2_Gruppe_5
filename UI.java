@@ -71,10 +71,9 @@ public class UI {
                             System.out.println();
                             System.out.println("Trænermenu");
                             System.out.println("1 Tilføj svømmere til hold");
-                            System.out.println("2 Registrer disciplin rekorder");
-                            System.out.println("3 Registrer konkurrencedeltagere");
-                            System.out.println("4 Generer top 5 oversigt");
-                            System.out.println("5 Gå tilbage");
+                            System.out.println("2 Registrer konkurrencedeltagere");
+                            System.out.println("3 Generer top 5 oversigt");
+                            System.out.println("4 Gå tilbage");
                             System.out.println();
 
                             subchoice2 = scanner.nextInt();
@@ -84,15 +83,12 @@ public class UI {
                                         System.out.println("Tilføj svømmere til hold");
 
                                 case 2 ->
-                                        Club.registerDiscipline(swimmers,scanner);
-
-                                case 3 ->
                                         Club.registerCompetitionSwimmer(swimmers,scanner);
 
-                                case 4 ->
+                                case 3 ->
                                         Club.displayTopFive(swimmers,scanner);
 
-                                case 5 ->
+                                case 4 ->
                                         System.out.println("Går tilbage til main menu.");
 
                                 default -> System.out.println("Fejl: Forkert input. Prøv igen.");
