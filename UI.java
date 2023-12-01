@@ -5,9 +5,10 @@ public class UI {
     public static void main(String[] args) {
         ArrayList<Swimmer> swimmers = FileManager.getMembers();
         ArrayList<Trainer> trainers = FileManager.getTrainers();
-        menu(swimmers);
+        Trainer.assignTrainers(trainers,swimmers);
+        menu(swimmers,trainers);
     }
-    public static void menu(ArrayList<Swimmer> swimmers) {
+    public static void menu(ArrayList<Swimmer> swimmers,ArrayList<Trainer> trainers) {
         Scanner scanner = new Scanner(System.in);
 
         int choice = 0;
