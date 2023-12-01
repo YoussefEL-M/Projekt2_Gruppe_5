@@ -102,7 +102,7 @@ public class FileManager {
     }
     public static void saveTrainers(ArrayList<Trainer> list){
         try {
-            FileWriter file = new FileWriter("Members.txt");
+            FileWriter file = new FileWriter("Trainers.txt");
             PrintWriter out = new PrintWriter(file);
 
             for (Trainer t : list) {
