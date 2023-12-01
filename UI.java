@@ -5,9 +5,11 @@ public class UI {
     public static void main(String[] args) {
         ArrayList<Swimmer> swimmers = FileManager.getMembers();
         ArrayList<Trainer> trainers = FileManager.getTrainers();
-        menu(swimmers);
+        Trainer.assignTrainers(trainers,swimmers);
+        Club.calculateYearlyCharge(swimmers);
+        menu(swimmers,trainers);
     }
-    public static void menu(ArrayList<Swimmer> swimmers) {
+    public static void menu(ArrayList<Swimmer> swimmers,ArrayList<Trainer> trainers) {
         Scanner scanner = new Scanner(System.in);
 
         int choice = 0;
@@ -57,7 +59,6 @@ public class UI {
 
                                 case 4 -> {
                                     Club.showSwimmers(swimmers);
-                                    Club.calculateYearlyCharge(swimmers);
                                 }
                                 case 5 ->
                                         System.out.println("Går tilbage til main menu.");

@@ -12,7 +12,7 @@ public class Swimmer{
     private boolean senior;
     private short owedAmount;
     private LocalDate birthday;
-    Trainer trainer ;
+    Trainer trainer;
     short trainerIndex;
     private boolean competitionSwimmer;
     private LocalDate lastChargeDate;
@@ -37,7 +37,7 @@ public class Swimmer{
 
     // Metode til at returnere leaselig tekst
     public String toString(){
-        return name+", "+age+", "+birthday+", "+(senior? "Senior" : "Junior")+", "+(isActive? "Aktiv" : "Ikke Aktiv")+", Skylder: "+owedAmount+" kr., "+trainerInfo+"\nButterfly rekord: "+results.getButterflyRecord()+" Placering: "+results.getButterflyPlacement()+"\nBackStroke rekord: "+results.getBackstrokeRecord()+" Placering: "+results.getBackstrokePlacement()+"\nFreeStyle rekord: "+results.getFreestyleRecord()+" Placering: "+results.getFreestylePlacement();
+        return indexNo+". "+name+", "+age+", "+birthday+", "+(senior? "Senior" : "Junior")+", "+(isActive? "Aktiv" : "Ikke Aktiv")+", Skylder: "+owedAmount+" kr., "+trainerInfo+"\nButterfly rekord: "+results.getButterflyRecord()+" Placering: "+results.getButterflyPlacement()+"\nBackStroke rekord: "+results.getBackstrokeRecord()+" Placering: "+results.getBackstrokePlacement()+"\nFreeStyle rekord: "+results.getFreestyleRecord()+" Placering: "+results.getFreestylePlacement();
     }
     public String fileOutput(){
         return isActive+","+name+","+birthday+","+owedAmount+","+competitionSwimmer+","+trainerIndex;
@@ -136,7 +136,7 @@ public class Swimmer{
         return this.results.getFreestylePlacement();
     }
 
-    public void resetIndexNos(ArrayList<Swimmer> list){
+    public static void resetIndexNos(ArrayList<Swimmer> list){
         Swimmer.noOfSwimmers=0;
         for(Swimmer s:list){
             s.indexNo=noOfSwimmers;
