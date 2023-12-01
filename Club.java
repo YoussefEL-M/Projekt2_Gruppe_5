@@ -153,8 +153,12 @@ public class Club {
                         String newActiveStatus = scanner.nextLine();
                         if (!newActiveStatus.isEmpty()) {
                             if ("Y".equalsIgnoreCase(newActiveStatus)) {
+                                System.out.println("Du har valgt aktivt medlemskab.");
+                                System.out.println("Ændring foretaget.");
                                 swimmerToEdit.setActiveMember(true);
                             } else if ("N".equalsIgnoreCase(newActiveStatus)) {
+                                System.out.println("Du har valgt inaktivt medlemskab.");
+                                System.out.println("Ændring foretaget.");
                                 swimmerToEdit.setActiveMember(false);
                             } else {
                                 System.out.println("Ugyldigt input. Medlemsskab forbliver uændret.");
