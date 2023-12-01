@@ -9,7 +9,7 @@ public class Swimmer{
     private boolean isActive;
     private String name;
     final private int age;
-    private boolean senior;
+    private final boolean senior;
     private short owedAmount;
     private LocalDate birthday;
     Trainer trainer;
@@ -17,7 +17,7 @@ public class Swimmer{
     private boolean competitionSwimmer;
     private LocalDate lastChargeDate;
     Results results;
-    String trainerInfo = (trainer == null) ? "Ingen Træner" : "Træner: " + trainer.getName();
+    String trainerInfo = "Ingen Træner";
 
 
     // Konstruktor til at oprette en Swimmer-objekt
@@ -125,15 +125,6 @@ public class Swimmer{
     }
     public float getFreestyleRecord(){
         return this.results.getFreestyleRecord();
-    }
-    public byte getButterflyPlacement(){
-        return this.results.getButterflyPlacement();
-    }
-    public byte getBackstrokePlacement() {
-        return this.results.getBackstrokePlacement();
-    }
-    public byte getFreestylePlacement() {
-        return this.results.getFreestylePlacement();
     }
 
     public static void resetIndexNos(ArrayList<Swimmer> list){

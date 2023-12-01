@@ -57,9 +57,9 @@ public class UI {
                                 case 3 ->
                                         Club.removeSwimmer(swimmers, scanner);
 
-                                case 4 -> {
+                                case 4 ->
                                     Club.showSwimmers(swimmers);
-                                }
+
                                 case 5 ->
                                         System.out.println("Går tilbage til main menu.");
 
