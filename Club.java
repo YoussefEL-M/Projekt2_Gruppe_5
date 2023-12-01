@@ -98,11 +98,12 @@ public class Club {
                     if (swimmerToEdit != null) {
                         System.out.println("Svømmer stamdata:");
                         System.out.println(swimmerToEdit);
-
+                        System.out.println();
                         System.out.println("Du vil ændre navn.");
                         System.out.println("Indtast nyt navn og tryk Enter");
                         String newName = scanner.nextLine();
                         swimmerToEdit.setName(newName);
+                        System.out.println("Navneændring er foretaget.");
                     }
                 }
                 case 2 -> {
@@ -123,10 +124,12 @@ public class Club {
                     if (swimmerToEdit != null) {
                         System.out.println("Svømmer stamdata:");
                         System.out.println(swimmerToEdit);
+                        System.out.println();
                         System.out.println("Du vil ændre fødselsdato.");
                         System.out.println("Indtast nyt datoformat (YYYY-MM-DD) og tryk Enter");
                         String newBirthdate = scanner.nextLine();
                         swimmerToEdit.setBirthdate(LocalDate.parse(newBirthdate));
+                        System.out.println("Fødselsdagsændring er foretaget.");
                     }
                 }
                 case 3 -> {
@@ -147,6 +150,7 @@ public class Club {
                     if (swimmerToEdit != null) {
                         System.out.println("Svømmer stamdata:");
                         System.out.println(swimmerToEdit);
+                        System.out.println();
                         System.out.println("Du vil ændre aktivt medlemskab");
                         System.out.println("Indtast Y/N og tryk Enter");
                         System.out.println();
@@ -186,6 +190,7 @@ public class Club {
                             System.out.println("Svømmer stamdata:");
                             System.out.println(swimmerToEdit);
                             System.out.println("Du vil opdatere rekorder.");
+                            System.out.println();
                             swimmerToEdit.results.updateRecords(scanner);
                             System.out.println("Rekorder opdateret:");
                             System.out.println(swimmerToEdit);
