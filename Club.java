@@ -35,7 +35,7 @@ public class Club {
                     SwimMeet s1 = new SwimMeet("Default Meet", LocalDate.now(), Discipline.Butterfly, 0.0f, (byte) 0);
 
                     System.out.println("Ny svømmer oprettet.");
-                    return new Swimmer(activeMember, name, birthdate, owedAmount, competitionSwimmer, (short) -1,new Results(new ArrayList<>(List.of(s1))));
+                    return new Swimmer(activeMember, name, birthdate, owedAmount, competitionSwimmer, (short) -1, new Results(new ArrayList<>(List.of(s1))));
                 } else {
                     System.out.println("Valg ugyldigt, prøv igen.");
                 }
@@ -58,6 +58,7 @@ public class Club {
             e.printStackTrace();
         }
     }
+
     static void calculateYearlyCharge(ArrayList<Swimmer> swimmers) {
         for (Swimmer swimmer : swimmers) {
             swimmer.calculateYearlyCharge();
@@ -66,67 +67,146 @@ public class Club {
 
     static void editSwimmer(ArrayList<Swimmer> list, Scanner scanner) {
         try {
+
             System.out.println();
-            System.out.println("Søg efter medlem eller tryk enter for at vise alle medlemmer.");
-            String searchTerm = scanner.nextLine();
+            System.out.println("Vælg venligst hvad du ønsker at redigere:");
+            System.out.println("1. Navn");
+            System.out.println("2. Fødselsdato");
+            System.out.println("3. Medlemsskabstatus");
+            System.out.println("4. Opdater rekorder");
+            System.out.println();
 
-            System.out.println("Medlemsliste:");
-            for (Swimmer s : list) {
-                if(s.getName().toLowerCase().contains(searchTerm.toLowerCase()))
-                    System.out.println(s);
-            }
-            System.out.println("Indtast indekstal på svømmer, du ønsker at redigere");
-
-            Swimmer swimmerToEdit = list.get(scanner.nextInt());
+            int choice = scanner.nextInt();
             scanner.nextLine();
 
-            if (swimmerToEdit != null) {
-                System.out.println("Svømmer stamdata:");
-                System.out.println(swimmerToEdit);
+            switch (choice) {
+                case 1 -> {
+                    System.out.println();
+                    System.out.println("Søg efter medlem eller tryk enter for at vise alle medlemmer.");
+                    String searchTerm = scanner.nextLine();
 
-                System.out.println("Vil du ændre navn? Indtast nyt navn eller tryk Enter for at bevare det nuværende:");
-                String newName = scanner.nextLine();
-                if (!newName.isEmpty()) {
-                    swimmerToEdit.setName(newName);
-                }
+                    System.out.println("Medlemsliste:");
+                    for (Swimmer s : list) {
+                        if (s.getName().toLowerCase().contains(searchTerm.toLowerCase()))
+                            System.out.println(s);
+                    }
+                    System.out.println("Indtast indekstal på svømmer, du ønsker at redigere");
 
-                System.out.println("Vil du ændre fødselsdato? Indtast nyt datoformat (YYYY-MM-DD) eller tryk Enter for at bevare det nuværende:");
-                String newBirthdate = scanner.nextLine();
-                if (!newBirthdate.isEmpty()) {
-                    swimmerToEdit.setBirthdate(LocalDate.parse(newBirthdate));
-                }
+                    Swimmer swimmerToEdit = list.get(scanner.nextInt());
+                    scanner.nextLine();
 
-                System.out.println("Vil du ændre aktivt medlemskab? Indtast Y/N eller tryk Enter for at bevare det nuværende:");
-                String newActiveStatus = scanner.nextLine();
-                if (!newActiveStatus.isEmpty()) {
-                    if ("Y".equalsIgnoreCase(newActiveStatus)) {
-                        swimmerToEdit.setActiveMember(true);
-                    } else if ("N".equalsIgnoreCase(newActiveStatus)) {
-                        swimmerToEdit.setActiveMember(false);
-                    } else {
-                        System.out.println("Ugyldigt input. Medlemsskab forbliver uændret.");
+                    if (swimmerToEdit != null) {
+                        System.out.println("Svømmer stamdata:");
+                        System.out.println(swimmerToEdit);
+                        System.out.println();
+                        System.out.println("Du vil ændre navn.");
+                        System.out.println("Indtast nyt navn og tryk Enter");
+                        String newName = scanner.nextLine();
+                        swimmerToEdit.setName(newName);
+                        System.out.println("Navneændring er foretaget.");
                     }
                 }
-                System.out.println("Vil du opdatere rekorder? Indtast Y/N eller tryk Enter for at bevare det nuværende:");
-                String choice = scanner.nextLine();
+                case 2 -> {
+                    System.out.println();
+                    System.out.println("Søg efter medlem eller tryk enter for at vise alle medlemmer.");
+                    String searchTerm = scanner.nextLine();
 
-                if ("Y".equalsIgnoreCase(choice)) {
-                    swimmerToEdit.results.updateRecords(scanner);
-                    System.out.println("Rekorder opdateret:");
-                    System.out.println(swimmerToEdit);
-                } else {
-                    System.out.println("Rekorder forbliver uændret.");
+                    System.out.println("Medlemsliste:");
+                    for (Swimmer s : list) {
+                        if (s.getName().toLowerCase().contains(searchTerm.toLowerCase()))
+                            System.out.println(s);
+                    }
+                    System.out.println("Indtast indekstal på svømmer, du ønsker at redigere");
+
+                    Swimmer swimmerToEdit = list.get(scanner.nextInt());
+                    scanner.nextLine();
+
+                    if (swimmerToEdit != null) {
+                        System.out.println("Svømmer stamdata:");
+                        System.out.println(swimmerToEdit);
+                        System.out.println();
+                        System.out.println("Du vil ændre fødselsdato.");
+                        System.out.println("Indtast nyt datoformat (YYYY-MM-DD) og tryk Enter");
+                        String newBirthdate = scanner.nextLine();
+                        swimmerToEdit.setBirthdate(LocalDate.parse(newBirthdate));
+                        System.out.println("Fødselsdagsændring er foretaget.");
+                    }
                 }
+                case 3 -> {
+                    System.out.println();
+                    System.out.println("Søg efter medlem eller tryk enter for at vise alle medlemmer.");
+                    String searchTerm = scanner.nextLine();
 
-                System.out.println("Svømmer opdateret:");
-                System.out.println(swimmerToEdit);
-            } else {
-                System.out.println("Fejl: Svømmer ikke fundet.");
+                    System.out.println("Medlemsliste:");
+                    for (Swimmer s : list) {
+                        if (s.getName().toLowerCase().contains(searchTerm.toLowerCase()))
+                            System.out.println(s);
+                    }
+                    System.out.println("Indtast indekstal på svømmer, du ønsker at redigere");
+
+                    Swimmer swimmerToEdit = list.get(scanner.nextInt());
+                    scanner.nextLine();
+
+                    if (swimmerToEdit != null) {
+                        System.out.println("Svømmer stamdata:");
+                        System.out.println(swimmerToEdit);
+                        System.out.println();
+                        System.out.println("Du vil ændre aktivt medlemskab");
+                        System.out.println("Indtast Y/N og tryk Enter");
+                        System.out.println();
+                        String newActiveStatus = scanner.nextLine();
+                        if (!newActiveStatus.isEmpty()) {
+                            if ("Y".equalsIgnoreCase(newActiveStatus)) {
+                                System.out.println("Du har valgt aktivt medlemskab.");
+                                System.out.println("Ændring foretaget.");
+                                swimmerToEdit.setActiveMember(true);
+                            } else if ("N".equalsIgnoreCase(newActiveStatus)) {
+                                System.out.println("Du har valgt inaktivt medlemskab.");
+                                System.out.println("Ændring foretaget.");
+                                swimmerToEdit.setActiveMember(false);
+                            } else {
+                                System.out.println("Ugyldigt input. Medlemsskab forbliver uændret.");
+                            }
+                        }
+                    }
+                }
+                case 4 -> {
+                    try {
+                        System.out.println();
+                        System.out.println("Søg efter medlem eller tryk enter for at vise alle medlemmer.");
+                        String searchTerm = scanner.nextLine();
+
+                        System.out.println("Medlemsliste:");
+                        for (Swimmer s : list) {
+                            if (s.getName().toLowerCase().contains(searchTerm.toLowerCase()))
+                                System.out.println(s);
+                        }
+                        System.out.println("Indtast indekstal på svømmer, du ønsker at redigere");
+
+                        Swimmer swimmerToEdit = list.get(scanner.nextInt());
+                        scanner.nextLine();
+
+                        if (swimmerToEdit != null) {
+                            System.out.println("Svømmer stamdata:");
+                            System.out.println(swimmerToEdit);
+                            System.out.println("Du vil opdatere rekorder.");
+                            System.out.println();
+                            swimmerToEdit.results.updateRecords(scanner);
+                            System.out.println("Rekorder opdateret:");
+                            System.out.println(swimmerToEdit);
+                        } else {
+                            System.out.println("Fejl: Svømmer ikke fundet.");
+                        }
+                    } catch (Exception e) {
+                        System.out.println("En fejl er opstået: " + e.getMessage());
+                        e.printStackTrace();
+                    }
+                }
+                default -> System.out.println("Ugyldigt input.");
             }
         } catch (Exception e) {
             System.out.println("En fejl er opstået: " + e.getMessage());
             e.printStackTrace();
-
         }
     }
 
@@ -157,10 +237,6 @@ public class Club {
                 scanner.nextLine();
                 if (paymentAmount <= swimmerToEdit.getOwedAmount()) {
                     swimmerToEdit.registerPayment(paymentAmount);
-                    System.out.println("Betaling registreret. Resterende beløb: " + swimmerToEdit.getOwedAmount());
-                    System.out.println("Beløb: " + paymentAmount + " opdateret for medlem: " + swimmerToEdit.getName());
-                    //beslut hvilken vi ønsker ovenstående!
-                    //System.out.println(swimmerToEdit);
                 } else {
                     System.out.println("Beløb er for meget. Medlem skylder: " + swimmerToEdit.getOwedAmount());
                 }
@@ -211,71 +287,6 @@ public class Club {
         } catch (Exception e) {
             System.out.println("En fejl er opstået: " + e.getMessage());
             e.printStackTrace();
-        }
-    }
-    static void registerDiscipline(ArrayList<Swimmer> list, Scanner scanner){
-        try {
-            System.out.println("Tilmeld svømmer til disciplin.");
-            System.out.println("Medlemsliste:");
-            for (Swimmer s : list) {
-                System.out.println(s);
-            }
-            System.out.println("Indtast navn på svømmer, du ønsker at tilmelde:");
-            String searchName = scanner.nextLine();
-            Swimmer swimmerToEdit = null;
-
-            for (Swimmer s : list) {
-                if (s.getName().equalsIgnoreCase(searchName)) {
-                    swimmerToEdit = s; // Assign the found swimmer to swimmerToEdit.
-                    break;
-                }
-            }
-            if (swimmerToEdit != null) {
-                //LocalDate today = LocalDate.now(); skal det bruges?
-                System.out.println("Svømmer stamdata:");
-                System.out.println(swimmerToEdit);
-                System.out.println();
-                System.out.println("Vælg hvilken disciplin, du ønsker at opdatere " + swimmerToEdit.getName() + " for");
-                System.out.println("Tast 1 for Butterfly Record");
-                System.out.println("Tast 2 for Backstroke Record");
-                System.out.println("Tast 3 for Freestyle Record");
-                String valg = scanner.nextLine();
-                if (valg.equalsIgnoreCase("1")) {
-                    System.out.println("Indtast tid i sekunder:");                    float rekord = scanner.nextFloat();
-                    scanner.nextLine();
-                    System.out.println("Indtast placering:");
-                    byte placement = scanner.nextByte();
-                    scanner.nextLine();
-                  //  swimmerToEdit.setRecord(rekord,swimmerToEdit.getBackstrokeRecord(), swimmerToEdit.getFreestyleRecord());
-                  //  swimmerToEdit.setPlacement(placement,swimmerToEdit.getBackstrokePlacement(), swimmerToEdit.getFreestylePlacement());
-                } else if (valg.equalsIgnoreCase("2")) {
-                    System.out.println("Indtast tid i sekunder:");
-                    float rekord = scanner.nextFloat();
-                    scanner.nextLine();
-                    System.out.println("Indtast placering:");
-                    byte placement = scanner.nextByte();
-                    scanner.nextLine();
-                  //  swimmerToEdit.setRecord(swimmerToEdit.getButterflyRecord(),rekord,swimmerToEdit.getFreestyleRecord());
-                  //  swimmerToEdit.setPlacement(swimmerToEdit.getButterflyPlacement(), placement, swimmerToEdit.getFreestylePlacement());
-
-                } else if (valg.equalsIgnoreCase("3")) {
-                    System.out.println("Indtast tid i sekunder:");
-                    float rekord = scanner.nextFloat();
-                    scanner.nextLine();
-                    System.out.println("Indtast placering:");
-                    byte placement = scanner.nextByte();
-                    scanner.nextLine();
-                  //  swimmerToEdit.setRecord(swimmerToEdit.getButterflyRecord(), swimmerToEdit.getBackstrokeRecord(), rekord);
-                  //  swimmerToEdit.setPlacement(swimmerToEdit.getButterflyPlacement(),swimmerToEdit.getBackstrokePlacement(), placement);
-
-                } else {
-                    System.out.println("Valg ugyldigt, prøv igen.");
-                }
-            }
-
-            } catch (Exception e) {
-        System.out.println("En fejl er opstået: " + e.getMessage());
-        e.printStackTrace();
         }
     }
     static void removeSwimmer(ArrayList<Swimmer> list, Scanner scanner) {

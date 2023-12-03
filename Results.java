@@ -1,6 +1,5 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -78,11 +77,11 @@ public class Results {
         boolean isValidInput = false;
         while (!isValidInput) {
             try {
-                System.out.println("Enter new time for " + discipline + " (in seconds):");
+                System.out.println("Skriv tid for " + discipline + " (i sekunder):");
                 float newTime = scanner.nextFloat();
                 scanner.nextLine();
 
-                System.out.println("Enter new placement for " + discipline + ":");
+                System.out.println("Skriv placering for " + discipline + ":");
                 byte newPlacement = scanner.nextByte();
                 scanner.nextLine();
 
@@ -100,11 +99,11 @@ public class Results {
                         freestylePlacement = newPlacement;
                         break;
                     default:
-                        System.out.println("Invalid discipline.");
+                        System.out.println("Ugyldig disciplin.");
                         continue;
                 }
 
-                System.out.println("Records updated successfully.");
+                System.out.println("Rekorder opdateret");
                 isValidInput = true;
             } catch (InputMismatchException e) {
                 System.out.println("Ugyldig input. Skriv tid i sekunder");
@@ -137,7 +136,7 @@ public class Results {
                 updateRecord("Freestyle", scanner);
                 break;
             default:
-                System.out.println("Invalid choice. Please enter a number between 1 and 3.");
+                System.out.println("Ugyldig valg. Vælg et tal mellem 1 og 3.");
         }
     }
 }
