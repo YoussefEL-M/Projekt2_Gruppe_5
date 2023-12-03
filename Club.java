@@ -27,7 +27,7 @@ public class Club {
 
                     SwimMeet s1 = new SwimMeet("Default Meet", LocalDate.now(), Discipline.Butterfly, 0.0f, (byte) 0);
 
-                    return new Swimmer(activeMember, name, birthdate, owedAmount, competitionSwimmer, (short) -1, new Results(new ArrayList<>(List.of(s1))));
+                    return new Swimmer(activeMember, name, birthdate, owedAmount, competitionSwimmer, (short) -1, new Results(new ArrayList<>(List.of(s1))),null);
                 } else if (valg.equalsIgnoreCase("n")) {
                     activeMember = false;
 
@@ -35,7 +35,7 @@ public class Club {
                     SwimMeet s1 = new SwimMeet("Default Meet", LocalDate.now(), Discipline.Butterfly, 0.0f, (byte) 0);
 
                     System.out.println("Ny svømmer oprettet.");
-                    return new Swimmer(activeMember, name, birthdate, owedAmount, competitionSwimmer, (short) -1, new Results(new ArrayList<>(List.of(s1))));
+                    return new Swimmer(activeMember, name, birthdate, owedAmount, competitionSwimmer, (short) -1, new Results(new ArrayList<>(List.of(s1))),null);
                 } else {
                     System.out.println("Valg ugyldigt, prøv igen.");
                 }
