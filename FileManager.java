@@ -29,6 +29,7 @@ public class FileManager {
                 short amount = Short.parseShort(bits[3]);
                 boolean competition = Boolean.parseBoolean(bits[4]);
                 short trainerIndex = Short.parseShort(bits[5]);
+                LocalDate lastChargeDate = LocalDate.parse(bits[6]);
 
                 ArrayList<SwimMeet> meetList = new ArrayList<>();
                 line = in.readLine();
@@ -45,7 +46,7 @@ public class FileManager {
                     line=in.readLine();
                 }
 
-                list.add(new Swimmer(active,name,birthday,amount,competition,trainerIndex,new Results(meetList)));
+                list.add(new Swimmer(active,name,birthday,amount,competition,trainerIndex,new Results(meetList),lastChargeDate));
 
                 line = in.readLine();
             }
