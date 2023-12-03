@@ -132,5 +132,7 @@ public class UI {
             }
         } while (choice != 5);
         scanner.close();
+        FileManager.saveTrainers(trainers);
+        FileManager.saveMembers(swimmers);
     }
 }
