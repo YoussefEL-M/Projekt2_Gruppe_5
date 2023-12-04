@@ -76,25 +76,22 @@ public class UI {
                         while (subchoice2 != 5) {
                             System.out.println();
                             System.out.println("Trænermenu");
-                            System.out.println("1 Tilføj svømmere til hold");
-                            System.out.println("2 Registrer konkurrencedeltagere");
-                            System.out.println("3 Generer top 5 oversigt");
-                            System.out.println("4 Gå tilbage");
+                            System.out.println("1 Registrer konkurrencedeltagere");
+                            System.out.println("2 Generer top 5 oversigt");
+                            System.out.println("3 Gå tilbage");
                             System.out.println();
 
                             subchoice2 = scanner.nextInt();
                             scanner.nextLine();
                             switch (subchoice2) {
-                                case 1 ->
-                                        System.out.println("Tilføj svømmere til hold");
 
-                                case 2 ->
+                                case 1 ->
                                         Club.registerCompetitionSwimmer(swimmers,scanner);
 
-                                case 3 ->
+                                case 2 ->
                                         Club.displayTopFive(swimmers,scanner);
 
-                                case 4 ->
+                                case 3 ->
                                         System.out.println("Går tilbage til main menu.");
 
                                 default -> System.out.println("Fejl: Forkert input. Prøv igen.");
@@ -121,6 +118,8 @@ public class UI {
                                 }
                                 case 2 ->
                                         Club.updatePayment(swimmers, scanner);
+
+                                case 3 -> System.out.println("Går tilbage til main menu");
 
                                 default -> System.out.println("Fejl: Forkert input. Prøv igen.");
                             }
