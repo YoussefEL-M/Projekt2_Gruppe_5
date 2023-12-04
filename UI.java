@@ -1,3 +1,6 @@
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -5,6 +8,7 @@ public class UI {
     public static void main(String[] args) {
         ArrayList<Swimmer> swimmers = FileManager.getMembers();
         ArrayList<Trainer> trainers = FileManager.getTrainers();
+        FileManager.getBackups(swimmers,trainers);
         Trainer.assignTrainers(trainers,swimmers);
         Club.calculateYearlyCharge(swimmers);
         menu(swimmers,trainers);
@@ -50,6 +54,7 @@ public class UI {
                                 case 1 -> {
                                     Swimmer newSwimmer = Club.createSwimmer(scanner);
                                     swimmers.add(newSwimmer);
+                                    FileManager.saveBackup(newSwimmer);
                                 }
                                 case 2 ->
                                         Club.editSwimmer(swimmers, scanner);
@@ -58,7 +63,7 @@ public class UI {
                                         Club.removeSwimmer(swimmers, scanner);
 
                                 case 4 ->
-                                    Club.showSwimmers(swimmers);
+                                        Club.showSwimmers(swimmers);
 
                                 case 5 ->
                                         System.out.println("Går tilbage til main menu.");
@@ -134,5 +139,6 @@ public class UI {
         scanner.close();
         FileManager.saveTrainers(trainers);
         FileManager.saveMembers(swimmers);
+        FileManager.clearBackups();
     }
 }

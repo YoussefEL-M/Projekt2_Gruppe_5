@@ -117,4 +117,101 @@ public class FileManager {
             E.printStackTrace();
         }
     }
+    public static void saveBackup(Swimmer s){
+        try {
+            FileWriter file = new FileWriter("Backup.txt",true);
+            BufferedWriter out = new BufferedWriter(file);
+
+            out.write("s,"+s.fileOutput());
+            out.newLine();
+
+            for(SwimMeet sm: s.results.list) {
+                out.write(sm.meetName+","+sm.date+","+sm.discipline+","+sm.time+","+sm.placement);
+                out.newLine();
+            }
+
+            out.write(";");
+            out.newLine();
+
+            out.close();
+            file.close();
+        }catch(IOException E){
+            E.printStackTrace();
+        }
+    }
+    public static void saveBackup (Trainer t){
+        try {
+            FileWriter file = new FileWriter("Backup.txt",true);
+            BufferedWriter out = new BufferedWriter(file);
+
+            out.write("t,"+t.getName());
+            out.newLine();
+
+            out.close();
+            file.close();
+        }catch(IOException E){
+            E.printStackTrace();
+        }
+    }
+    public static void getBackups (ArrayList<Swimmer> swimmerList,ArrayList<Trainer> trainerList){
+        try {
+            FileReader file = new FileReader("Backup.txt");
+            BufferedReader in = new BufferedReader(file);
+            String line = in.readLine();
+
+            while(line!=null){
+                String[] bits = line.split(",");
+                if(bits[0].equals("s")){
+                    boolean active = Boolean.parseBoolean(bits[1]);
+                    String name = bits[2];
+                    LocalDate birthday = LocalDate.parse(bits[3]);
+                    short amount = Short.parseShort(bits[4]);
+                    boolean competition = Boolean.parseBoolean(bits[5]);
+                    short trainerIndex = Short.parseShort(bits[6]);
+                    LocalDate lastChargeDate = LocalDate.parse(bits[7]);
+
+                    ArrayList<SwimMeet> meetList = new ArrayList<>();
+                    line = in.readLine();
+
+                    while(!line.equals(";")){
+                        String[] bits2 = line.split(",");
+                        String meetName = bits2[0];
+                        LocalDate date = LocalDate.parse(bits2[1]);
+                        Discipline discipline = Discipline.valueOf(bits2[2]);
+                        float time = Float.parseFloat(bits2[3]);
+                        byte placement = Byte.parseByte(bits2[4]);
+
+                        meetList.add(new SwimMeet(meetName,date,discipline,time,placement));
+                        line=in.readLine();
+                    }
+
+                    swimmerList.add(new Swimmer(active,name,birthday,amount,competition,trainerIndex,new Results(meetList),lastChargeDate));
+
+                    line = in.readLine();
+                }
+                else if(bits[0].equals("t")){
+                    trainerList.add(new Trainer(bits[1]));
+                    line=in.readLine();
+                }
+                else{
+                    System.out.println("Bruh, how the fuck did you even get this error?");
+                    line=in.readLine();
+                }
+            }
+
+        }catch(IOException E){
+            E.printStackTrace();
+        }
+    }
+    public static void clearBackups(){
+        try {
+            FileWriter file = new FileWriter("Backup.txt");
+            PrintWriter out = new PrintWriter(file);
+            out.println();
+            out.close();
+            file.close();
+        } catch(IOException E){
+            E.printStackTrace();
+        }
+    }
 }
