@@ -2,7 +2,6 @@ import java.util.ArrayList;
 
 public class Trainer {
     String name;
-    // Honestly, I have no idea what else is necessary for the MVP. Probably nothing.
     Trainer(String name){
         this.name=name;
     }
