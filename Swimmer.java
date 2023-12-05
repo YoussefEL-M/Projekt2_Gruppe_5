@@ -12,7 +12,7 @@ public class Swimmer{
     private final boolean senior;
     private short owedAmount;
     private LocalDate birthday;
-    Trainer trainer;
+    private Trainer trainer;
     short trainerIndex;
     private boolean competitionSwimmer;
     private LocalDate lastChargeDate;
@@ -134,6 +134,12 @@ public class Swimmer{
             s.indexNo=noOfSwimmers;
             noOfSwimmers++;
         }
+    }
+    public void setTrainer(Trainer trainer) {
+        this.trainer= trainer;
+    }
+    public void setTrainerIndex(short trainerIndex) {
+        this.trainerIndex = trainerIndex;
     }
 }
 
