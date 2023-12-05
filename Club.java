@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -304,7 +305,7 @@ public class Club {
                 Swimmer.resetIndexNos(list);
                 System.out.println("Medlem fjernet: " +swimmerToRemove.getName());
             }else {
-                System.out.println("Fejl, svømmer blev ikke fundet. ");
+                System.out.println("Fejl, medlem blev ikke fundet. ");
             }
         } catch (Exception e) {
             System.out.println("En fejl er opstået: " + e.getMessage());
@@ -358,6 +359,53 @@ public class Club {
             }
         }catch(InputMismatchException E){
             System.out.println("Inputfejl: prøv igen.");
+        }
+    }
+    static Trainer createTrainer(Scanner sc) {
+        String name = null;
+        try {
+            System.out.println("Indtast venligst navn på ny træner:");
+            name = sc.nextLine();
+        } catch (InputMismatchException E) {
+            System.out.println("Fejl: ugyldigt input.");
+        }
+        return new Trainer(name);
+    }
+    static void removeTrainer(Scanner sc, ArrayList<Trainer> trainerList, ArrayList<Swimmer> swimmerList){
+        try {
+            System.out.println("Fjern træner");
+            System.out.println();
+            System.out.println("Søg efter træner eller tryk enter for at vise alle medlemmer.");
+            String searchTerm = sc.nextLine();
+
+            System.out.println("Trænerliste:");
+            for (Trainer t : trainerList) {
+                if(t.getName().toLowerCase().contains(searchTerm.toLowerCase()))
+                    System.out.println(t);
+            }
+            System.out.println();
+            System.out.println("Indtast indekstal på den træner, du ønsker at fjerne.");
+            int indexToRemove = sc.nextInt();
+            sc.nextLine();
+            Trainer trainerToRemove = trainerList.get(indexToRemove);
+
+            if (trainerToRemove !=null) {
+                trainerList.remove(trainerToRemove);
+
+                for(Swimmer s: swimmerList){
+                    if(s.trainerIndex==indexToRemove)
+                        s.trainerIndex=-1;
+                    else if(s.trainerIndex>indexToRemove)
+                        s.trainerIndex--;
+                }
+
+                System.out.println("Træner fjernet: " +trainerToRemove.getName());
+            }else {
+                System.out.println("Fejl, træner blev ikke fundet. ");
+            }
+        } catch (Exception e) {
+            System.out.println("En fejl er opstået: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 }
