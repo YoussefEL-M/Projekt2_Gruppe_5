@@ -8,7 +8,7 @@ public class FileManager {
         ArrayList<Swimmer> alist = getMembers();
 
        // alist.add(new Swimmer(true,"Mie",LocalDate.parse("2001-03-14"), (short) 0,10f,10f,10f,true, (short) 0));
-        alist.get(0).trainer=list.get(alist.get(0).trainerIndex);
+        alist.get(0).setTrainer(list.get(alist.get(0).trainerIndex));
 
         System.out.println(alist.get(0));
 

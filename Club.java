@@ -20,7 +20,7 @@ public class Club {
                 short owedAmount = 0;
                 boolean competitionSwimmer = false;
 
-                if (valg.equalsIgnoreCase("y")) {
+                if (valg.equalsIgnoreCase("j")) {
                     System.out.println("Ny svømmer oprettet.");
 
                     SwimMeet s1 = new SwimMeet("Default Meet", LocalDate.now(), Discipline.Butterfly, 0.0f, (byte) 0);
@@ -153,7 +153,7 @@ public class Club {
                         System.out.println();
                         String newActiveStatus = scanner.nextLine();
                         if (!newActiveStatus.isEmpty()) {
-                            if ("Y".equalsIgnoreCase(newActiveStatus)) {
+                            if ("J".equalsIgnoreCase(newActiveStatus)) {
                                 System.out.println("Du har valgt aktivt medlemskab.");
                                 System.out.println("Ændring foretaget.");
                                 swimmerToEdit.setActiveMember(true);
@@ -167,39 +167,35 @@ public class Club {
                         }
                     }
                 }
-                case 4 -> {
-                    try {
-                        System.out.println();
-                        System.out.println("Søg efter medlem eller tryk enter for at vise alle medlemmer.");
-                        String searchTerm = scanner.nextLine();
 
-                        System.out.println("Medlemsliste:");
-                        for (Swimmer s : list) {
-                            if (s.getName().toLowerCase().contains(searchTerm.toLowerCase()))
-                                System.out.println(s);
-                        }
-                        System.out.println("Indtast indekstal på svømmer, du ønsker at redigere");
-
-                        Swimmer swimmerToEdit = list.get(scanner.nextInt());
-                        scanner.nextLine();
-
-                        if (swimmerToEdit != null) {
-                            System.out.println("Svømmer stamdata:");
-                            System.out.println(swimmerToEdit);
-                            System.out.println("Du vil opdatere rekorder.");
-                            System.out.println();
-                            swimmerToEdit.results.updateRecords(scanner);
-                            System.out.println("Rekorder opdateret:");
-                            System.out.println(swimmerToEdit);
-                        } else {
-                            System.out.println("Fejl: Svømmer ikke fundet.");
-                        }
-                    } catch (Exception e) {
-                        System.out.println("En fejl er opstået: " + e.getMessage());
-                        e.printStackTrace();
-                    }
-                }
                 default -> System.out.println("Ugyldigt input.");
+            }
+        } catch (Exception e) {
+            System.out.println("En fejl er opstået: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+    static void updateCompetetionRecords(ArrayList<Swimmer> list, Scanner scanner){
+        try {
+
+            System.out.println("Medlemsliste:");
+            for (Swimmer s : list)
+                System.out.println(s);
+            System.out.println("Indtast indekstal på svømmer, du ønsker at redigere");
+
+            Swimmer swimmerToEdit = list.get(scanner.nextInt());
+            scanner.nextLine();
+
+            if (swimmerToEdit != null) {
+                System.out.println("Svømmer stamdata:");
+                System.out.println(swimmerToEdit);
+                System.out.println("Du vil opdatere rekorder.");
+                System.out.println();
+                swimmerToEdit.results.updateRecords(scanner);
+                System.out.println("Rekorder opdateret:");
+                System.out.println(swimmerToEdit);
+            } else {
+                System.out.println("Fejl: Svømmer ikke fundet.");
             }
         } catch (Exception e) {
             System.out.println("En fejl er opstået: " + e.getMessage());

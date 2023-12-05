@@ -5,9 +5,9 @@ public class UI {
     public static void main(String[] args) {
         ArrayList<Swimmer> swimmers = FileManager.getMembers();
         ArrayList<Trainer> trainers = FileManager.getTrainers();
-        menu(swimmers);
+        menu(swimmers,trainers);
     }
-    public static void menu(ArrayList<Swimmer> swimmers) {
+    public static void menu(ArrayList<Swimmer> swimmers, ArrayList<Trainer> trainers) {
         Scanner scanner = new Scanner(System.in);
 
         int choice = 0;
@@ -67,13 +67,13 @@ public class UI {
                         }
                     }
                     case 2 -> {
-                        while (subchoice2 != 5) {
+                        while (subchoice2 != 6) {
                             System.out.println();
                             System.out.println("Trænermenu");
                             System.out.println("1 Tilføj svømmere til hold");
                             System.out.println("2 Tilføj træner til svømmer");
-                            System.out.println("3 Registrer disciplin rekorder");
-                            System.out.println("4 Registrer konkurrencedeltagere");
+                            System.out.println("3 Registrer konkurrencedeltagere");
+                            System.out.println("4 Registrer disciplin rekorder");
                             System.out.println("5 Generer top 5 oversigt");
                             System.out.println("6 Gå tilbage");
                             System.out.println();
@@ -86,16 +86,15 @@ public class UI {
                                 case 2 ->
                                         Trainer.assignTrainers(trainers, swimmers, scanner);
 
-                                case 2 ->
-                                        Club.registerDiscipline(swimmers,scanner);
-
                                 case 3 ->
                                         Club.registerCompetitionSwimmer(swimmers,scanner);
-
                                 case 4 ->
-                                        Club.displayTopFive(swimmers,scanner);
+                                    Club.updateCompetetionRecords(swimmers,scanner);
 
                                 case 5 ->
+                                        Club.displayTopFive(swimmers,scanner);
+
+                                case 6 ->
                                         System.out.println("Går tilbage til main menu.");
 
                                 default -> System.out.println("Fejl: Forkert input. Prøv igen.");
