@@ -13,9 +13,9 @@ public class Club {
                 System.out.println("Du har valgt Opret medlem");
                 System.out.println("Indtast navn:");
                 String name = scanner.nextLine();
-                System.out.println("Indtast fødselsdato i format YYYY-MM-DD:");
+                System.out.println("Indtast fødselsdato i format ÅÅÅÅ-MM-DD:");
                 LocalDate birthdate = LocalDate.parse(scanner.nextLine());
-                System.out.println("Er det et aktivt medlem? Indtast Y/N");
+                System.out.println("Er det et aktivt medlem? Indtast J/N");
                 String valg = scanner.nextLine();
                 short owedAmount = 0;
                 boolean competitionSwimmer = false;
@@ -39,7 +39,7 @@ public class Club {
             } catch (IllegalArgumentException e) {
                 System.out.println("En fejl er opstået! " + e.getMessage());
             } catch (DateTimeParseException e) {
-                System.out.println("Ugyldig dato format, skriv i formatet YYYY-MM-DD " + e.getMessage());
+                System.out.println("Ugyldig dato format, skriv i formatet ÅÅÅÅ-MM-DD " + e.getMessage());
             }
         }
     }
@@ -123,7 +123,7 @@ public class Club {
                         System.out.println(swimmerToEdit);
                         System.out.println();
                         System.out.println("Du vil ændre fødselsdato.");
-                        System.out.println("Indtast nyt datoformat (YYYY-MM-DD) og tryk Enter");
+                        System.out.println("Indtast nyt datoformat (ÅÅÅÅ-MM-DD) og tryk Enter");
                         String newBirthdate = scanner.nextLine();
                         swimmerToEdit.setBirthdate(LocalDate.parse(newBirthdate));
                         System.out.println("Fødselsdagsændring er foretaget.");
@@ -149,7 +149,7 @@ public class Club {
                         System.out.println(swimmerToEdit);
                         System.out.println();
                         System.out.println("Du vil ændre aktivt medlemskab");
-                        System.out.println("Indtast Y/N og tryk Enter");
+                        System.out.println("Indtast J/N og tryk Enter");
                         System.out.println();
                         String newActiveStatus = scanner.nextLine();
                         if (!newActiveStatus.isEmpty()) {
