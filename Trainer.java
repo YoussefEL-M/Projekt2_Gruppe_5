@@ -41,4 +41,11 @@ public class Trainer {
             }
         }
     }
+    public static void assignTrainers(ArrayList<Trainer> trainerList, ArrayList<Swimmer> swimmerList){
+        for(Swimmer s: swimmerList){
+            if(s.trainerIndex>-1){
+                s.setTrainer(trainerList.get(s.trainerIndex));
+            }
+        }
+    }
 }

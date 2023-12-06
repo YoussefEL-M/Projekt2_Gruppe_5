@@ -5,6 +5,9 @@ public class UI {
     public static void main(String[] args) {
         ArrayList<Swimmer> swimmers = FileManager.getMembers();
         ArrayList<Trainer> trainers = FileManager.getTrainers();
+        FileManager.getBackups(swimmers,trainers);
+        Trainer.assignTrainers(trainers,swimmers);
+        Club.calculateYearlyCharge(swimmers);
         menu(swimmers,trainers);
     }
     public static void menu(ArrayList<Swimmer> swimmers, ArrayList<Trainer> trainers) {
@@ -138,5 +141,8 @@ public class UI {
             }
         } while (choice != 5);
         scanner.close();
+        FileManager.saveTrainers(trainers);
+        FileManager.saveMembers(swimmers);
+        FileManager.clearBackups();
     }
 }
