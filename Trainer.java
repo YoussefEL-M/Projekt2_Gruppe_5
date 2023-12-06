@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Trainer {
@@ -12,52 +13,54 @@ public class Trainer {
 
     public static void assignTrainers(ArrayList<Trainer> trainerList, ArrayList<Swimmer> swimmerList, Scanner scanner){
 
-        System.out.println("Tilføj træner til svømmer:");
+        try {
 
-        System.out.println("Søg efter medlem eller tryk enter for at vise alle medlemmer.");
-        String searchTerm = scanner.nextLine();
+            System.out.println("Tilføj træner til svømmer:");
 
-        System.out.println("Medlemsliste:");
-        for (Swimmer s : swimmerList) {
-            if(s.getName().toLowerCase().contains(searchTerm.toLowerCase()))
-                System.out.println(s);
-        }
-        System.out.println();
-        System.out.println("Indtast indekstal på det medlem, du ønsker at tilføje træner for.");
-        Swimmer swimmerToAssign = swimmerList.get(scanner.nextInt());
-        scanner.nextLine();
+            System.out.println("Søg efter medlem eller tryk enter for at vise alle medlemmer.");
+            String searchTerm = scanner.nextLine();
 
-        if (swimmerToAssign !=null) {
+            System.out.println("Medlemsliste:");
+            for (Swimmer s : swimmerList) {
+                if (s.getName().toLowerCase().contains(searchTerm.toLowerCase()))
+                    System.out.println(s);
+            }
+            System.out.println();
+            System.out.println("Vælg det medlem, du ønsker at tilføje træner for.");
+            Swimmer swimmerToAssign = swimmerList.get(scanner.nextInt());
+            scanner.nextLine();
 
-            for(Swimmer s: swimmerList) {
-                System.out.println("Tilføj træner til svømmer: " + s.getName());
-                System.out.println("Available trainers");
+            if (swimmerToAssign != null) {
+
+                System.out.println("Tilføj træner til medlem: " + swimmerToAssign.getName());
+                System.out.println("Tilgængelige trænere:");
 
                 for (int i = 0; i < trainerList.size(); i++) {
-                    System.out.println((i + 1) + "." + trainerList.get(i).getName());
+                    System.out.println((i) + ". " + trainerList.get(i).getName());
                 }
 
-                System.out.println("Vælg træner index for " + s.getName() + " (-1 for ingen træner): ");
+                System.out.println("Vælg træner for " + swimmerToAssign.getName() + " (-1 for ingen træner): ");
                 int trainerIndex = scanner.nextInt();
                 scanner.nextLine();
 
 
-                if (s.trainerIndex >= -1 && trainerIndex < trainerList.size()) {
-                    if (trainerIndex == 1) {
-                        s.setTrainer(null);
-
-                    } else {
-                        s.setTrainer(trainerList.get(s.trainerIndex));
-                    }
-                    s.setTrainerIndex((short) trainerIndex);
-                    System.out.println("Træner med index "+trainerIndex+" tilføjet til medlem: " + swimmerToAssign.getName());
-
+                if (trainerIndex == -1) {
+                    swimmerToAssign.setTrainer(null);
+                    swimmerToAssign.setTrainerIndex((short) trainerIndex);
+                    System.out.println("Træner fjernet fra medlem: " + swimmerToAssign.getName());
+                } else if (trainerIndex + 1 <= trainerList.size()) {
+                    swimmerToAssign.setTrainer(trainerList.get(trainerIndex));
+                    swimmerToAssign.setTrainerIndex((short) trainerIndex);
+                    System.out.println("Træner " + trainerList.get(trainerIndex).getName() + " tilføjet til medlem: " + swimmerToAssign.getName());
                 } else {
-                    System.out.println("Ikke-eksisterende træner index. Ingen ændringer ved " + s.getName());
+                    System.out.println("Ikke-eksisterende træner. Ingen ændringer ved " + swimmerToAssign.getName());
                 }
+
+            } else {
+                System.out.println("Fejl: medlem blev ikke fundet. ");
             }
-        }else {
-            System.out.println("Fejl, medlem blev ikke fundet. ");
+        }catch(InputMismatchException E){
+            System.out.println("Fejl: Ugyldigt input.");
         }
 
     }
