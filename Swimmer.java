@@ -17,7 +17,6 @@ public class Swimmer{
     private boolean competitionSwimmer;
     private LocalDate lastChargeDate;
     Results results;
-    String trainerInfo = "Ingen Træner";
 
 
     // Konstruktor til at oprette en Swimmer-objekt
@@ -38,7 +37,7 @@ public class Swimmer{
 
     // Metode til at returnere leaselig tekst
     public String toString(){
-        return indexNo+". "+name+", "+age+", "+birthday+", "+(senior? "Senior" : "Junior")+", "+(isActive? "Aktiv" : "Ikke Aktiv")+", Skylder: "+owedAmount+" kr., "+trainerInfo+"\nButterfly rekord: "+results.getButterflyRecord()+" Placering: "+results.getButterflyPlacement()+"\nBackStroke rekord: "+results.getBackstrokeRecord()+" Placering: "+results.getBackstrokePlacement()+"\nFreeStyle rekord: "+results.getFreestyleRecord()+" Placering: "+results.getFreestylePlacement()+lastChargeDate;
+        return indexNo+". "+name+", "+age+", "+birthday+", "+(senior? "Senior" : "Junior")+", "+(isActive? "Aktiv" : "Ikke Aktiv")+", Skylder: "+owedAmount+" kr., "+(trainerIndex == -1 ? "Ingen Træner" : "Træner")+"\nRekorderder for øvelse: "+"\nButterfly rekord:"+results.getButterflyPracticeRecord()+"\nBackstroke rekord: "+results.getBackstrokePracticeRecord()+"\nFreestyle rekorder "+results.getFreestylePracticeRecord()+"\nRekorder og placering for konkurrencer"+"\nButterfly rekord: "+results.getButterflyRecord()+" Placering: "+results.getButterflyPlacement()+"\nBackStroke rekord: "+results.getBackstrokeRecord()+" Placering: "+results.getBackstrokePlacement()+"\nFreeStyle rekord: "+results.getFreestyleRecord()+" Placering: "+results.getFreestylePlacement()+lastChargeDate;
     }
     public String fileOutput(){
         return isActive+","+name+","+birthday+","+owedAmount+","+competitionSwimmer+","+trainerIndex+","+lastChargeDate;

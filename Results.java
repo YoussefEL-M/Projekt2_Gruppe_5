@@ -10,6 +10,9 @@ public class Results {
     private float butterflyRecord;
     private float backstrokeRecord;
     private float freestyleRecord;
+    private float backstrokePracticeRecord;
+    private float butterflyPracticeRecord;
+    private float freestylePracticeRecord;
     ArrayList<SwimMeet> list;
     float getButterflyRecord(){
         return butterflyRecord;
@@ -20,6 +23,19 @@ public class Results {
     float getFreestyleRecord(){
         return freestyleRecord;
     }
+
+    float getBackstrokePracticeRecord() {
+        return backstrokePracticeRecord;
+    }
+
+    float getButterflyPracticeRecord() {
+        return butterflyPracticeRecord;
+    }
+
+    float getFreestylePracticeRecord() {
+        return freestylePracticeRecord;
+    }
+
     byte getButterflyPlacement(){
         return butterflyPlacement;
     }
@@ -116,27 +132,93 @@ public class Results {
         }
 
     }
-    void updateRecords(Scanner scanner) {
-        System.out.println("Update Records for Swimmer: ");
-        System.out.println("1. Butterfly");
-        System.out.println("2. Backstroke");
-        System.out.println("3. Freestyle");
-        System.out.println("Enter the number corresponding to the discipline to update:");
+    void updatePracticeRecord(String discipline, Scanner scanner) {
+        boolean isValidInput = false;
+        while (!isValidInput) {
+            try {
+                System.out.println("Skriv tid for " + discipline + " (i sekunder):");
+                float newTime = scanner.nextFloat();
+                scanner.nextLine();
 
-        String choice = scanner.nextLine();
+                switch (discipline.toLowerCase()) {
+                    case "butterfly":
+                        butterflyPracticeRecord = newTime;
+                        break;
+                    case "backstroke":
+                        backstrokePracticeRecord = newTime;
+                        break;
+                    case "freestyle":
+                        freestylePracticeRecord = newTime;
+                        break;
+                    default:
+                        System.out.println("Ugyldig disciplin.");
+                        continue;
+                }
+
+                System.out.println("Rekorder opdateret");
+                isValidInput = true;
+            } catch (InputMismatchException e) {
+                System.out.println("Ugyldig input. Skriv tid i sekunder");
+                scanner.nextLine();
+
+            } catch (NumberFormatException e) {
+                System.out.println("Ugyldig tal format.");
+                scanner.nextLine();
+            }
+        }
+
+    }
+    void updateRecords(Scanner scanner) {
+        System.out.println("Opdater rekorder for svømmere: ");
+        System.out.println("1. Opdater trænings rekorder");
+        System.out.println("2. Opdater konkurrence rekorder og placering");
+        System.out.println("Skriv et nummer på hvad du vil opdatere:");
+
+        int choice = scanner.nextInt();
 
         switch (choice) {
-            case "1":
-                updateRecord("Butterfly", scanner);
-                break;
-            case "2":
-                updateRecord("Backstroke", scanner);
-                break;
-            case "3":
-                updateRecord("Freestyle", scanner);
-                break;
+            case 1:
+                System.out.println("1. Butterfly");
+                System.out.println("2. Backstroke");
+                System.out.println("3. Freestyle");
+                System.out.println("Skriv et nummer på hvad du vil opdatere:");
+
+                scanner.nextLine();
+                int subChoice = scanner.nextInt();
+                switch (subChoice) {
+                    case 1:
+                        updateRecord("Butterfly", scanner);
+                        break;
+                    case 2:
+                        updateRecord("Backstroke", scanner);
+                        break;
+                    case 3:
+                        updateRecord("Freestyle", scanner);
+                        break;
+                    default:
+                        System.out.println("Ugyldig valg. Vælg et tal mellem 1 og 3.");
+                }
+            case 2:
+                System.out.println("1. Butterfly");
+                System.out.println("2. Backstroke");
+                System.out.println("3. Freestyle");
+                System.out.println("Skriv et nummer på hvad du vil opdatere:");
+                int subChoice2 = scanner.nextInt();
+                switch (subChoice2) {
+                    case 1:
+                        updatePracticeRecord("Butterfly", scanner);
+                        break;
+                    case 2:
+                        updatePracticeRecord("Backstroke", scanner);
+                        break;
+                    case 3:
+                        updatePracticeRecord("Freestyle",scanner);
+                        break;
+                    default:
+                        System.out.println("Ugyldig valg. Vælg et tal mellem 1 og 3.");
+                }
             default:
-                System.out.println("Ugyldig valg. Vælg et tal mellem 1 og 3.");
+                System.out.println("Ugyldig valg. Vælg et tal mellem 1 og 2.");
         }
     }
 }

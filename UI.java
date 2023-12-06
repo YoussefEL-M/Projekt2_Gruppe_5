@@ -29,6 +29,7 @@ public class UI {
                 System.out.print("Indtast venligst et tal mellem 1-4 \n");
                 choice = scanner.nextInt();
                 scanner.nextLine();
+                Club.calculateYearlyCharge(swimmers);
 
                 switch (choice) {
                     case 1 -> {
@@ -57,7 +58,6 @@ public class UI {
 
                                 case 4 -> {
                                     Club.showSwimmers(swimmers);
-                                    Club.calculateYearlyCharge(swimmers);
                                 }
                                 case 5 ->
                                         System.out.println("Går tilbage til main menu.");
@@ -89,7 +89,7 @@ public class UI {
                                 case 3 ->
                                         Club.registerCompetitionSwimmer(swimmers,scanner);
                                 case 4 ->
-                                    Club.updateCompetetionRecords(swimmers,scanner);
+                                        Club.updateCompetetionRecords(swimmers,scanner);
 
                                 case 5 ->
                                         Club.displayTopFive(swimmers,scanner);

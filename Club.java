@@ -71,7 +71,6 @@ public class Club {
             System.out.println("1. Navn");
             System.out.println("2. Fødselsdato");
             System.out.println("3. Medlemsskabstatus");
-            System.out.println("4. Opdater rekorder");
             System.out.println();
 
             int choice = scanner.nextInt();
@@ -171,7 +170,11 @@ public class Club {
 
                 default -> System.out.println("Ugyldigt input.");
             }
-        } catch (Exception e) {
+        } catch (DateTimeParseException e) {
+            System.out.println("Ugyldig dato format, venligst skriv i formattet som beskrevet");
+        }catch (IndexOutOfBoundsException e) {
+            System.out.println("Der er ingen svømmere med det indeks tal");
+        }catch (Exception e) {
             System.out.println("En fejl er opstået: " + e.getMessage());
             e.printStackTrace();
         }
@@ -198,7 +201,9 @@ public class Club {
             } else {
                 System.out.println("Fejl: Svømmer ikke fundet.");
             }
-        } catch (Exception e) {
+        }catch (IndexOutOfBoundsException e) {
+            System.out.println("Der er ingen svømmere med det indeks tal");
+        }catch (Exception e) {
             System.out.println("En fejl er opstået: " + e.getMessage());
             e.printStackTrace();
         }
@@ -237,7 +242,10 @@ public class Club {
             } else {
                 System.out.println("Fejl: Medlem ikke fundet.");
             }
-        } catch (Exception e) {
+        }catch (IndexOutOfBoundsException e){
+            System.out.println("Der er ingen svømmere med det indeks tal");
+        }
+        catch (Exception e) {
             System.out.println("En fejl er opstået: " + e.getMessage());
             e.printStackTrace();
         }
@@ -307,7 +315,9 @@ public class Club {
             }else {
                 System.out.println("Fejl, medlem blev ikke fundet. ");
             }
-        } catch (Exception e) {
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Der er ingen svømmere med det indeks tal");
+        }catch (Exception e) {
             System.out.println("En fejl er opstået: " + e.getMessage());
             e.printStackTrace();
         }
@@ -403,7 +413,10 @@ public class Club {
             }else {
                 System.out.println("Fejl, træner blev ikke fundet. ");
             }
-        } catch (Exception e) {
+        }catch (IndexOutOfBoundsException e){
+            System.out.println("Der er ingen svømmere med det indeks tal");
+        }
+        catch (Exception e) {
             System.out.println("En fejl er opstået: " + e.getMessage());
             e.printStackTrace();
         }
