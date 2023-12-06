@@ -70,34 +70,54 @@ public class UI {
                         }
                     }
                     case 2 -> {
-                        while (subchoice2 != 6) {
+                        while (subchoice2 != 7) {
                             System.out.println();
                             System.out.println("Trænermenu");
                             System.out.println("1 Tilføj svømmere til stævne");
                             System.out.println("2 Tilføj træner til svømmer");
                             System.out.println("3 Registrer konkurrencedeltagere");
                             System.out.println("4 Registrer disciplin rekorder");
-                            System.out.println("5 Generer top 5 oversigt");
-                            System.out.println("6 Gå tilbage");
+                            System.out.println("5 Opret og slet træner");
+                            System.out.println("6 Generer top 5 oversigt");
+                            System.out.println("7 Gå tilbage");
                             System.out.println();
 
                             subchoice2 = scanner.nextInt();
                             scanner.nextLine();
                             switch (subchoice2) {
-                                case 1 ->
-                                        Club.registerCompetition(swimmers, scanner);
-                                case 2 ->
-                                        Trainer.assignTrainers(trainers, swimmers, scanner);
+                                case 1 -> Club.registerCompetition(swimmers, scanner);
+                                case 2 -> Trainer.assignTrainers(trainers, swimmers, scanner);
 
-                                case 3 ->
-                                        Club.registerCompetitionSwimmer(swimmers,scanner);
-                                case 4 ->
-                                        Club.updateCompetetionRecords(swimmers,scanner);
+                                case 3 -> Club.registerCompetitionSwimmer(swimmers, scanner);
+                                case 4 -> Club.updateCompetetionRecords(swimmers, scanner);
+                                case 5 -> {
+                                    try {
+                                        System.out.println();
+                                        System.out.println("Vælg venligst hvad du ønsker at redigere:");
+                                        System.out.println("1. Opret træner");
+                                        System.out.println("2. Slet træner");
+                                        System.out.println("3. Gå tilbage");
+                                        System.out.println();
 
-                                case 5 ->
+                                        int subchoice4 = scanner.nextInt();
+                                        scanner.nextLine();
+                                        switch (subchoice4) {
+                                            case 1 -> Club.createTrainer(scanner);
+                                            case 2 -> Club.removeTrainer(scanner, trainers, swimmers);
+                                            case 3 -> System.out.println("Går tilbage til main menu.");
+
+                                            default -> System.out.println("Fejl: Forkert input. Prøv igen.");
+                                        }
+
+                                } catch(Exception e){
+                                    System.out.println("En fejl er opstået: " + e.getMessage());
+                                    e.printStackTrace();
+                                }
+                            }
+                                case 6 ->
                                         Club.displayTopFive(swimmers,scanner);
 
-                                case 6 ->
+                                case 7 ->
                                         System.out.println("Går tilbage til main menu.");
 
                                 default -> System.out.println("Fejl: Forkert input. Prøv igen.");
