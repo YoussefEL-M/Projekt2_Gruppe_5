@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -13,7 +14,7 @@ public class Results {
     private float backstrokePracticeRecord;
     private float butterflyPracticeRecord;
     private float freestylePracticeRecord;
-    ArrayList<SwimMeet> list;
+    static ArrayList<SwimMeet> list;
     float getButterflyRecord(){
         return butterflyRecord;
     }
@@ -219,6 +220,49 @@ public class Results {
                 }
             default:
                 System.out.println("Ugyldig valg. Vælg et tal mellem 1 og 2.");
+        }
+    }
+    static void addSwimMeet(Scanner scanner) {
+        try {
+            System.out.println("Skriv navnet på konkurrencen:");
+            String meetName = scanner.nextLine();
+
+            System.out.println("Skriv dato for konkurrencen (format: ÅÅÅÅ-MM-DD):");
+            LocalDate date = LocalDate.parse(scanner.nextLine());
+
+            System.out.println("Vælg disciplin (1. Butterfly, 2. Backstroke, 3. Freestyle):");
+            int disciplineChoice = scanner.nextInt();
+            Discipline discipline;
+
+            switch (disciplineChoice) {
+                case 1:
+                    discipline = Discipline.Butterfly;
+                    break;
+                case 2:
+                    discipline = Discipline.Backstroke;
+                    break;
+                case 3:
+                    discipline = Discipline.Freestyle;
+                    break;
+                default:
+                    System.out.println("Ugyldig valg. Vælg et tal mellem 1-3.");
+                    return;
+            }
+
+            System.out.println("Skriv tid for konkurrencen (i sekunder):");
+            float time = scanner.nextFloat();
+
+            System.out.println("Skriv placering for konkurrencen:");
+            byte placement = scanner.nextByte();
+
+            list.add(new SwimMeet(meetName, date, discipline, time, placement));
+
+            System.out.println("Konkurrence tilføjet!");
+        } catch (InputMismatchException e) {
+            System.out.println("Ugyldig input.");
+            scanner.nextLine();
+        }catch (DateTimeParseException e){
+            System.out.println("Ugyldig dato format, venligst skriv som beskrevet");
         }
     }
 }

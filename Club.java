@@ -291,6 +291,14 @@ public class Club {
             e.printStackTrace();
         }
     }
+    public static void registerCompetition(ArrayList<Swimmer> list, Scanner scanner) {
+        System.out.println("Registrer konkurrence:");
+
+        for (Swimmer swimmer : list) {
+            System.out.println("Svømmer: " + swimmer.getName());
+            Results.addSwimMeet(scanner);
+        }
+    }
     static void removeSwimmer(ArrayList<Swimmer> list, Scanner scanner) {
         try {
             System.out.println("Fjern medlem");

@@ -32,7 +32,6 @@ public class UI {
                 System.out.print("Indtast venligst et tal mellem 1-4 \n");
                 choice = scanner.nextInt();
                 scanner.nextLine();
-                Club.calculateYearlyCharge(swimmers);
 
                 switch (choice) {
                     case 1 -> {
@@ -40,9 +39,9 @@ public class UI {
                             System.out.println();
                             System.out.println("Medlemsadministration");
                             System.out.println("1 Opret medlem");
-                            System.out.println("2 Opdater stamoplysninger og rekorder for medlem");
+                            System.out.println("2 Opdater stamoplysninger");
                             System.out.println("3 Fjern medlem");
-                            System.out.println("4 Generer oversigt over nuværende medlemmer");
+                            System.out.println("4 Generer oversigt og kontingent over nuværende medlemmer");
                             System.out.println("5 Gå tilbage");
                             System.out.println();
 
@@ -61,6 +60,7 @@ public class UI {
 
                                 case 4 -> {
                                     Club.showSwimmers(swimmers);
+                                    Club.calculateYearlyCharge(swimmers);
                                 }
                                 case 5 ->
                                         System.out.println("Går tilbage til main menu.");
@@ -73,7 +73,7 @@ public class UI {
                         while (subchoice2 != 6) {
                             System.out.println();
                             System.out.println("Trænermenu");
-                            System.out.println("1 Tilføj svømmere til hold");
+                            System.out.println("1 Tilføj svømmere til stævne");
                             System.out.println("2 Tilføj træner til svømmer");
                             System.out.println("3 Registrer konkurrencedeltagere");
                             System.out.println("4 Registrer disciplin rekorder");
@@ -85,7 +85,7 @@ public class UI {
                             scanner.nextLine();
                             switch (subchoice2) {
                                 case 1 ->
-                                        System.out.println("Tilføj svømmere til hold");
+                                        Club.registerCompetition(swimmers, scanner);
                                 case 2 ->
                                         Trainer.assignTrainers(trainers, swimmers, scanner);
 
