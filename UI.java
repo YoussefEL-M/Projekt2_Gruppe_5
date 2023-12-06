@@ -121,7 +121,8 @@ public class UI {
                                 }
                                 case 2 ->
                                         Club.updatePayment(swimmers, scanner);
-
+                                case 3 ->
+                                        System.out.println("Går tilbage til main menu.");
                                 default -> System.out.println("Fejl: Forkert input. Prøv igen.");
                             }
                         }
