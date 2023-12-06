@@ -102,8 +102,10 @@ public class UI {
                                         int subchoice4 = scanner.nextInt();
                                         scanner.nextLine();
                                         switch (subchoice4) {
-                                            case 1 -> Club.createTrainer(scanner);
-                                            case 2 -> Club.removeTrainer(scanner, trainers, swimmers);
+                                            case 1 -> trainers.add(Club.createTrainer(scanner));
+                                            case 2 -> {Club.removeTrainer(scanner, trainers, swimmers);
+                                                Trainer.assignTrainers(trainers,swimmers);
+                                            }
                                             case 3 -> System.out.println("Går tilbage til main menu.");
 
                                             default -> System.out.println("Fejl: Forkert input. Prøv igen.");
