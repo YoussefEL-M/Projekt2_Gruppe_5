@@ -78,75 +78,66 @@ public class Club {
 
             switch (choice) {
                 case 1 -> {
-                    System.out.println();
-                    System.out.println("Søg efter medlem eller tryk enter for at vise alle medlemmer.");
-                    String searchTerm = scanner.nextLine();
-
                     System.out.println("Medlemsliste:");
-                    for (Swimmer s : list) {
-                        if (s.getName().toLowerCase().contains(searchTerm.toLowerCase()))
-                            System.out.println(s);
-                    }
-                    System.out.println("Indtast indekstal på svømmer, du ønsker at redigere");
 
-                    Swimmer swimmerToEdit = list.get(scanner.nextInt());
+                    for (int i = 0; i < list.size(); i++) {
+                        System.out.println("Indeks: " + i + " - Svømmer: " + list.get(i).getName());
+                    }
+
+                    System.out.println("Indtast indekstal på svømmer, du ønsker at ændre navn på:");
+                    int swimmerIndex = scanner.nextInt();
                     scanner.nextLine();
 
-                    if (swimmerToEdit != null) {
+                    if (swimmerIndex >= 0 && swimmerIndex < list.size()) {
+                        Swimmer selectedSwimmer = list.get(swimmerIndex);
                         System.out.println("Svømmer stamdata:");
-                        System.out.println(swimmerToEdit);
+                        System.out.println(selectedSwimmer);
                         System.out.println();
                         System.out.println("Du vil ændre navn.");
                         System.out.println("Indtast nyt navn og tryk Enter");
                         String newName = scanner.nextLine();
-                        swimmerToEdit.setName(newName);
+                        selectedSwimmer.setName(newName);
                         System.out.println("Navneændring er foretaget.");
                     }
                 }
                 case 2 -> {
-                    System.out.println();
-                    System.out.println("Søg efter medlem eller tryk enter for at vise alle medlemmer.");
-                    String searchTerm = scanner.nextLine();
-
                     System.out.println("Medlemsliste:");
-                    for (Swimmer s : list) {
-                        if (s.getName().toLowerCase().contains(searchTerm.toLowerCase()))
-                            System.out.println(s);
-                    }
-                    System.out.println("Indtast indekstal på svømmer, du ønsker at redigere");
 
-                    Swimmer swimmerToEdit = list.get(scanner.nextInt());
+                    for (int i = 0; i < list.size(); i++) {
+                        System.out.println("Indeks: " + i + " - Svømmer: " + list.get(i).getName()+" fødselsdag: "+list.get(i).getBirthday());
+                    }
+
+                    System.out.println("Indtast indekstal på svømmer, du ønsker at ændre fødselsdag på:");
+                    int swimmerIndex = scanner.nextInt();
                     scanner.nextLine();
 
-                    if (swimmerToEdit != null) {
+                    if (swimmerIndex >= 0 && swimmerIndex < list.size()) {
+                        Swimmer selectedSwimmer = list.get(swimmerIndex);
                         System.out.println("Svømmer stamdata:");
-                        System.out.println(swimmerToEdit);
+                        System.out.println(selectedSwimmer);
                         System.out.println();
                         System.out.println("Du vil ændre fødselsdato.");
                         System.out.println("Indtast nyt datoformat (ÅÅÅÅ-MM-DD) og tryk Enter");
                         String newBirthdate = scanner.nextLine();
-                        swimmerToEdit.setBirthdate(LocalDate.parse(newBirthdate));
+                        selectedSwimmer.setBirthdate(LocalDate.parse(newBirthdate));
                         System.out.println("Fødselsdagsændring er foretaget.");
                     }
                 }
                 case 3 -> {
-                    System.out.println();
-                    System.out.println("Søg efter medlem eller tryk enter for at vise alle medlemmer.");
-                    String searchTerm = scanner.nextLine();
-
                     System.out.println("Medlemsliste:");
-                    for (Swimmer s : list) {
-                        if (s.getName().toLowerCase().contains(searchTerm.toLowerCase()))
-                            System.out.println(s);
-                    }
-                    System.out.println("Indtast indekstal på svømmer, du ønsker at redigere");
 
-                    Swimmer swimmerToEdit = list.get(scanner.nextInt());
+                    for (int i = 0; i < list.size(); i++) {
+                        System.out.println("Indeks: " + i + " - Svømmer: " + list.get(i).getName());
+                    }
+
+                    System.out.println("Indtast indekstal på svømmer, du ønsker at ændre aktivt/passivt medlemskab på:");
+                    int swimmerIndex = scanner.nextInt();
                     scanner.nextLine();
 
-                    if (swimmerToEdit != null) {
+                    if (swimmerIndex >= 0 && swimmerIndex < list.size()) {
+                        Swimmer selectedSwimmer = list.get(swimmerIndex);
                         System.out.println("Svømmer stamdata:");
-                        System.out.println(swimmerToEdit);
+                        System.out.println(selectedSwimmer);
                         System.out.println();
                         System.out.println("Du vil ændre aktivt medlemskab");
                         System.out.println("Indtast J/N og tryk Enter");
@@ -156,11 +147,11 @@ public class Club {
                             if ("J".equalsIgnoreCase(newActiveStatus)) {
                                 System.out.println("Du har valgt aktivt medlemskab.");
                                 System.out.println("Ændring foretaget.");
-                                swimmerToEdit.setActiveMember(true);
+                                selectedSwimmer.setActiveMember(true);
                             } else if ("N".equalsIgnoreCase(newActiveStatus)) {
                                 System.out.println("Du har valgt inaktivt medlemskab.");
                                 System.out.println("Ændring foretaget.");
-                                swimmerToEdit.setActiveMember(false);
+                                selectedSwimmer.setActiveMember(false);
                             } else {
                                 System.out.println("Ugyldigt input. Medlemsskab forbliver uændret.");
                             }
@@ -188,7 +179,7 @@ public class Club {
                 System.out.println("Indeks: " + i + " - Svømmer: " + list.get(i).getName());
             }
 
-            System.out.println("Indtast indekstal på svømmer, du ønsker at tilmelde konkurrence:");
+            System.out.println("Indtast indekstal på svømmer, du ønsker at opdatere rekorder hos:");
             int swimmerIndex = scanner.nextInt();
             scanner.nextLine();
 
@@ -245,32 +236,29 @@ public class Club {
     static void updatePayment(ArrayList<Swimmer> list, Scanner scanner) {
         try {
             System.out.println("Opdater kontingentbetaling\n");
-            System.out.println("Søg efter medlem eller tryk enter for at vise alle medlemmer.");
-            String searchTerm = scanner.nextLine();
-
             System.out.println("Medlemsliste:");
-            for (Swimmer s : list) {
-                if(s.getName().toLowerCase().contains(searchTerm.toLowerCase()))
-                    System.out.println(s);
+
+            for (int i = 0; i < list.size(); i++) {
+                System.out.println("Indeks: " + i + " - Svømmer: " + list.get(i).getName());
             }
-            System.out.println();
-            System.out.println("Indtast indekstal på det medlem, du ønsker at opdatere info for.");
-            Swimmer swimmerToEdit = list.get(scanner.nextInt());
+
+            System.out.println("Indtast indekstal på svømmer, du ønsker at tage imod betaling fra:");
+            int swimmerIndex = scanner.nextInt();
             scanner.nextLine();
 
-
-            if (swimmerToEdit != null) {
+            if (swimmerIndex >= 0 && swimmerIndex < list.size()) {
+                Swimmer selectedSwimmer = list.get(swimmerIndex);
                 System.out.println("Medlem fundet med følgende info:");
-                System.out.println(swimmerToEdit);
+                System.out.println(selectedSwimmer);
                 System.out.println();
-                System.out.println("Medlem skylder følgende: " + swimmerToEdit.getOwedAmount());
+                System.out.println("Medlem skylder følgende: " + selectedSwimmer.getOwedAmount());
                 System.out.println("Indtast beløb for betaling");
                 float paymentAmount = scanner.nextFloat();
                 scanner.nextLine();
-                if (paymentAmount <= swimmerToEdit.getOwedAmount()) {
-                    swimmerToEdit.registerPayment(paymentAmount);
+                if (paymentAmount <= selectedSwimmer.getOwedAmount()) {
+                    selectedSwimmer.registerPayment(paymentAmount);
                 } else {
-                    System.out.println("Beløb er for meget. Medlem skylder: " + swimmerToEdit.getOwedAmount());
+                    System.out.println("Beløb er for meget. Medlem skylder: " + selectedSwimmer.getOwedAmount());
                 }
             } else {
                 System.out.println("Fejl: Medlem ikke fundet.");
@@ -292,7 +280,7 @@ public class Club {
                 System.out.println("Indeks: " + i + " - Svømmer: " + list.get(i).getName());
             }
 
-            System.out.println("Indtast indekstal på svømmer, du ønsker at tilmelde konkurrence:");
+            System.out.println("Indtast indekstal på svømmer, du ønsker at registrere som konkurrencesvømmer:");
             int swimmerIndex = scanner.nextInt();
             scanner.nextLine();
 

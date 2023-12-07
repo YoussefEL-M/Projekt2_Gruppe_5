@@ -108,6 +108,10 @@ public class Swimmer{
     public void setBirthdate(LocalDate newBirthdate){
         this.birthday = newBirthdate;
     }
+
+    public LocalDate getBirthday() {
+        return birthday;
+    }
     // Metode til at redigere aktivt medlemskab på enkelt svømmer i liste.
     public void setActiveMember(boolean activeMember){
         this.isActive=activeMember;
