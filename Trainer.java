@@ -22,18 +22,24 @@ public class Trainer {
     public static void assignTrainers(ArrayList<Trainer> trainerList, ArrayList<Swimmer> swimmerList, Scanner scanner){
 
         try {
-
             System.out.println("Tilføj træner til svømmer:");
-
-            System.out.println("Søg efter medlem eller tryk enter for at vise alle medlemmer.");
-            String searchTerm = scanner.nextLine();
 
             boolean memberFound = false;
 
-            for (Swimmer s : swimmerList) {
-                if (s.getName().toLowerCase().contains(searchTerm.toLowerCase())){
+            System.out.println("Medlemsliste:");
+
+            for (int i = 0; i < trainerList.size(); i++) {
+                System.out.println("Indeks: " + i + " - Træner: " + trainerList.get(i).getName());
+            }
+
+            System.out.println("Indtast indekstal på træner, du ønsker tildele svømmer til:");
+            int swimmerIndex = scanner.nextInt();
+            scanner.nextLine();
+
+            if (swimmerIndex >= 0 && swimmerIndex < trainerList.size()) {
+                Swimmer selectedSwimmer = swimmerList.get(swimmerIndex);{
                     System.out.println("Medlemsliste:");
-                    System.out.println(s);
+                    System.out.println(selectedSwimmer);
                     memberFound = true;
                 }
             }
