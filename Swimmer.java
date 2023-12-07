@@ -154,6 +154,13 @@ class BackstrokeSort implements Comparator<Swimmer> {
         return fa.compareTo(fb);
     }
 }
+class BackstrokePracticeSort implements Comparator<Swimmer> {
+    public int compare(Swimmer a, Swimmer b){
+        Float fa = a.results.getBackstrokePracticeRecord();
+        Float fb = b.results.getBackstrokePracticeRecord();
+        return fa.compareTo(fb);
+    }
+}
 class ButterflySort implements Comparator<Swimmer> {
     public int compare(Swimmer a, Swimmer b){
         Float fa = a.results.getButterflyRecord();
@@ -161,10 +168,25 @@ class ButterflySort implements Comparator<Swimmer> {
         return fa.compareTo(fb);
     }
 }
+
+class ButterflyPracticeSort implements Comparator<Swimmer> {
+    public int compare(Swimmer a, Swimmer b){
+        Float fa = a.results.getButterflyPracticeRecord();
+        Float fb = b.results.getButterflyPracticeRecord();
+        return fa.compareTo(fb);
+    }
+}
 class FreestyleSort implements Comparator<Swimmer> {
     public int compare(Swimmer a, Swimmer b){
         Float fa = a.getFreestyleRecord();
         Float fb = b.getFreestyleRecord();
+        return fa.compareTo(fb);
+    }
+}
+class FreestylePracticeSort implements Comparator<Swimmer> {
+    public int compare(Swimmer a, Swimmer b){
+        Float fa = a.results.getFreestylePracticeRecord();
+        Float fb = b.results.getFreestylePracticeRecord();
         return fa.compareTo(fb);
     }
 }

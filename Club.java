@@ -377,38 +377,86 @@ public class Club {
             int choice = sc.nextInt();
             sc.nextLine();
 
-            switch(choice){
-                case 1 -> {
-                    for(Swimmer s: list){
-                        if(s.getBackstrokeRecord()!=0)
-                            sortList.add(s);
+            System.out.println("Ønskes konkurrencerekorder eller træningsrekorder?");
+            System.out.println("1. Konkurrencerekorder");
+            System.out.println("2. Træningsrekorder");
+
+            int choice2 = sc.nextInt();
+            sc.nextLine();
+
+            if(choice2==1||choice2==2) {
+                switch (choice) {
+                    case 1 -> {
+                        if(choice2==1) {
+                            for (Swimmer s : list) {
+                                if (s.getBackstrokeRecord() != 0)
+                                    sortList.add(s);
+                            }
+                            sortList.sort(new BackstrokeSort());
+                            for (int i = 0; i <= 4; i++) {
+                                System.out.println(sortList.get(i));
+                            }
+                        }
+                        else{
+                            for (Swimmer s : list) {
+                                if (s.results.getBackstrokePracticeRecord() != 0)
+                                    sortList.add(s);
+                            }
+                            sortList.sort(new BackstrokePracticeSort());
+                            for (int i = 0; i <= 4; i++) {
+                                System.out.println(sortList.get(i));
+                            }
+                        }
                     }
-                    sortList.sort(new BackstrokeSort());
-                    for(int i = 0;i<=4;i++){
-                        System.out.println(sortList.get(i));
+                    case 2 -> {
+                        if(choice2==1) {
+                            for (Swimmer s : list) {
+                                if (s.getButterflyRecord() != 0)
+                                    sortList.add(s);
+                            }
+                            sortList.sort(new ButterflySort());
+                            for (int i = 0; i <= 4; i++) {
+                                System.out.println(sortList.get(i));
+                            }
+                        }
+                        else{
+                            for (Swimmer s : list) {
+                                if (s.results.getButterflyPracticeRecord() != 0)
+                                    sortList.add(s);
+                            }
+                            sortList.sort(new ButterflyPracticeSort());
+                            for (int i = 0; i <= 4; i++) {
+                                System.out.println(sortList.get(i));
+                            }
+                        }
                     }
+                    case 3 -> {
+                        if(choice2==1) {
+                            for (Swimmer s : list) {
+                                if (s.getFreestyleRecord() != 0)
+                                    sortList.add(s);
+                            }
+                            sortList.sort(new FreestyleSort());
+                            for (int i = 0; i <= 4; i++) {
+                                System.out.println(sortList.get(i));
+                            }
+                        }
+                        else{
+                            for (Swimmer s : list) {
+                                if (s.results.getFreestylePracticeRecord() != 0)
+                                    sortList.add(s);
+                            }
+                            sortList.sort(new FreestylePracticeSort());
+                            for (int i = 0; i <= 4; i++) {
+                                System.out.println(sortList.get(i));
+                            }
+                        }
+                    }
+                    default -> System.out.println("Fejl: ugyldigt valg af ønsket disciplin.");
                 }
-                case 2 -> {
-                    for(Swimmer s: list){
-                        if(s.getButterflyRecord()!=0)
-                            sortList.add(s);
-                    }
-                    sortList.sort(new ButterflySort());
-                    for(int i = 0;i<=4;i++){
-                        System.out.println(sortList.get(i));
-                    }
-                }
-                case 3 -> {
-                    for(Swimmer s: list){
-                        if(s.getFreestyleRecord()!=0)
-                            sortList.add(s);
-                    }
-                    sortList.sort(new FreestyleSort());
-                    for(int i = 0;i<=4;i++){
-                        System.out.println(sortList.get(i));
-                    }
-                }
-                default -> System.out.println("Ugyldigt input.");
+            }
+            else{
+                System.out.println("Fejl: ugyldigt valg af ønsket rekordtype.");
             }
         }catch(InputMismatchException E){
             System.out.println("Inputfejl: prøv igen.");
