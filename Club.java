@@ -384,6 +384,7 @@ public class Club {
         try {
             System.out.println("Indtast venligst navn på ny træner:");
             name = sc.nextLine();
+            System.out.println("Træner oprettet med navn: "+name);
         } catch (InputMismatchException E) {
             System.out.println("Fejl: ugyldigt input.");
         }

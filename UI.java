@@ -6,7 +6,7 @@ public class UI {
         ArrayList<Swimmer> swimmers = FileManager.getMembers();
         ArrayList<Trainer> trainers = FileManager.getTrainers();
         FileManager.getBackups(swimmers,trainers);
-        Trainer.assignTrainers(trainers,swimmers);
+        //Trainer.assignTrainers(trainers,swimmers);
         Club.calculateYearlyCharge(swimmers);
         menu(swimmers,trainers);
     }
@@ -154,7 +154,8 @@ public class UI {
                     }
                     case 4 -> {
                         FileManager.saveMembers(swimmers);
-                        System.out.println("Medlemmer gemt i systemet.");
+                        FileManager.saveTrainers(trainers);
+                        System.out.println("Medlemmer og trænere er gemt i systemet.");
                     }
                 }
             } catch (Exception e) {
