@@ -263,7 +263,7 @@ public class Club {
 
             for (Swimmer s : list) {
                 if (s.getName().equalsIgnoreCase(searchName)) {
-                    swimmerToEdit = s; // Assign the found swimmer to swimmerToEdit.
+                    swimmerToEdit = s;
                     break;
                 }
             }
@@ -291,11 +291,31 @@ public class Club {
         }
     }
     public static void registerCompetition(ArrayList<Swimmer> list, Scanner scanner) {
-        System.out.println("Registrer konkurrence:");
+        try {
+            System.out.println("Registrer konkurrence:");
+            System.out.println("Medlemsliste:");
 
-        for (Swimmer swimmer : list) {
-            System.out.println("Svømmer: " + swimmer.getName());
-            Results.addSwimMeet(scanner);
+            for (int i = 0; i < list.size(); i++) {
+                System.out.println("Indeks: " + i + " - Svømmer: " + list.get(i).getName());
+            }
+
+            System.out.println("Indtast indekstal på svømmer, du ønsker at tilmelde konkurrence:");
+            int swimmerIndex = scanner.nextInt();
+            scanner.nextLine();
+
+            if (swimmerIndex >= 0 && swimmerIndex < list.size()) {
+                Swimmer selectedSwimmer = list.get(swimmerIndex);
+
+                System.out.println("Du har valgt at registrere konkurrence for: " + selectedSwimmer.getName());
+                Results.addSwimMeet(scanner);
+            } else {
+                System.out.println("Ugyldigt indekstal. Prøv igen.");
+            }
+        } catch (InputMismatchException e) {
+            System.out.println("Forkert input: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("En fejl er opstået: " + e.getMessage());
+            e.printStackTrace();
         }
     }
     static void removeSwimmer(ArrayList<Swimmer> list, Scanner scanner) {
