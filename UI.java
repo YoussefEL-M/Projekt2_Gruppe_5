@@ -131,7 +131,7 @@ public class UI {
                             System.out.println();
                             System.out.println("Kasserermenu");
                             System.out.println("1 Vis medlemmer i restance");
-                            System.out.println("2 Opdater kontigentbetaling");
+                            System.out.println("2 Modtag kontigentbetaling");
                             System.out.println("3 Gå tilbage");
                             System.out.println();
 

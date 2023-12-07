@@ -11,6 +11,14 @@ public class Trainer {
         return name;
     }
 
+    public static Trainer getTrainerByIndex(ArrayList<Trainer> trainerList, int index) {
+        if (index >= 0 && index < trainerList.size()) {
+            return trainerList.get(index);
+        } else {
+            return null;
+        }
+    }
+
     public static void assignTrainers(ArrayList<Trainer> trainerList, ArrayList<Swimmer> swimmerList, Scanner scanner){
 
         try {
