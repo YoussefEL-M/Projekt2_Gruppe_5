@@ -274,7 +274,8 @@ public class Club {
                     } else {
                         System.out.println("Ugyldigt input. Konkurrence status forbliver uændret.");
                     }
-                    System.out.println("Svømmer opdateret:");
+                    System.out.println("Svømmer opdateret:"+selectedSwimmer);
+
                 } else {
                     System.out.println("Fejl: Svømmer ikke fundet.");
                 }
