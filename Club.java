@@ -179,35 +179,42 @@ public class Club {
             e.printStackTrace();
         }
     }
-    static void updateCompetetionRecords(ArrayList<Swimmer> list, Scanner scanner){
+    static void updateCompetetionRecords(ArrayList<Swimmer> list, Scanner scanner) {
         try {
 
             System.out.println("Medlemsliste:");
-            for (Swimmer s : list)
-                System.out.println(s);
-            System.out.println("Indtast indekstal på svømmer, du ønsker at redigere");
 
-            Swimmer swimmerToEdit = list.get(scanner.nextInt());
+            for (int i = 0; i < list.size(); i++) {
+                System.out.println("Indeks: " + i + " - Svømmer: " + list.get(i).getName());
+            }
+
+            System.out.println("Indtast indekstal på svømmer, du ønsker at tilmelde konkurrence:");
+            int swimmerIndex = scanner.nextInt();
             scanner.nextLine();
 
-            if (swimmerToEdit != null) {
-                System.out.println("Svømmer stamdata:");
-                System.out.println(swimmerToEdit);
-                System.out.println("Du vil opdatere rekorder.");
-                System.out.println();
-                swimmerToEdit.results.updateRecords(scanner);
-                System.out.println("Rekorder opdateret:");
-                System.out.println(swimmerToEdit);
-            } else {
-                System.out.println("Fejl: Svømmer ikke fundet.");
+            if (swimmerIndex >= 0 && swimmerIndex < list.size()) {
+                Swimmer selectedSwimmer = list.get(swimmerIndex);
+
+                if (selectedSwimmer != null) {
+                    System.out.println("Svømmer stamdata:");
+                    System.out.println(selectedSwimmer);
+                    System.out.println("Du vil opdatere rekorder.");
+                    System.out.println();
+                    selectedSwimmer.results.updateRecords(scanner);
+                    System.out.println("Rekorder opdateret:");
+                    System.out.println(selectedSwimmer);
+                } else {
+                    System.out.println("Fejl: Svømmer ikke fundet.");
+                }
             }
-        }catch (IndexOutOfBoundsException e) {
+            }catch(IndexOutOfBoundsException e){
             System.out.println("Der er ingen svømmere med det indeks tal");
-        }catch (Exception e) {
+            }catch(Exception e){
             System.out.println("En fejl er opstået: " + e.getMessage());
             e.printStackTrace();
         }
     }
+
 
     static void updatePayment(ArrayList<Swimmer> list, Scanner scanner) {
         try {

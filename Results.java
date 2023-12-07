@@ -171,8 +171,8 @@ public class Results {
     }
     void updateRecords(Scanner scanner) {
         System.out.println("Opdater rekorder for svømmere: ");
-        System.out.println("1. Opdater trænings rekorder");
-        System.out.println("2. Opdater konkurrence rekorder og placering");
+        System.out.println("1. Opdater konkurrence rekorder");
+        System.out.println("2. Opdater trænings rekorder og placering");
         System.out.println("Skriv et nummer på hvad du vil opdatere:");
 
         int choice = scanner.nextInt();
@@ -218,8 +218,6 @@ public class Results {
                     default:
                         System.out.println("Ugyldig valg. Vælg et tal mellem 1 og 3.");
                 }
-            default:
-                System.out.println("Ugyldig valg. Vælg et tal mellem 1 og 2.");
         }
     }
     static void addSwimMeet(Scanner scanner) {
