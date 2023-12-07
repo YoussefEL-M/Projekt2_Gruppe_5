@@ -179,7 +179,7 @@ public class Club {
             e.printStackTrace();
         }
     }
-    static void updateCompetetionRecords(ArrayList<Swimmer> list, Scanner scanner) {
+    static void updateCompetitionRecords(ArrayList<Swimmer> list, Scanner scanner) {
         try {
 
             System.out.println("Medlemsliste:");

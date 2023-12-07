@@ -90,7 +90,7 @@ public class UI {
                                 case 2 -> Trainer.assignTrainers(trainers, swimmers, scanner);
 
                                 case 3 -> Club.registerCompetitionSwimmer(swimmers, scanner);
-                                case 4 -> Club.updateCompetetionRecords(swimmers, scanner);
+                                case 4 -> Club.updateCompetitionRecords(swimmers, scanner);
                                 case 5 -> Club.editTrainer(trainers, swimmers, scanner);
                                 case 6 ->
                                         Club.displayTopFive(swimmers,scanner);
