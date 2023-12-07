@@ -51,6 +51,7 @@ public class UI {
                                 case 1 -> {
                                     Swimmer newSwimmer = Club.createSwimmer(scanner);
                                     swimmers.add(newSwimmer);
+                                    Club.calculateYearlyCharge(swimmers);
                                 }
                                 case 2 ->
                                         Club.editSwimmer(swimmers, scanner);
