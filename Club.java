@@ -445,7 +445,7 @@ public class Club {
             String searchTerm = sc.nextLine();
             for (Trainer t : trainerList) {
                 if(t.getName().toLowerCase().contains(searchTerm.toLowerCase()))
-                    System.out.println("Indeks: "+trainerList.indexOf(t)+" Træner:"+t);
+                    System.out.println("Indeks: "+trainerList.indexOf(t)+" Træner: "+t);
             }
 
             if (searchTerm==null) {
