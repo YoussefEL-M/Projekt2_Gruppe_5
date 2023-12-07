@@ -254,29 +254,23 @@ public class Club {
         try {
             System.out.println("Tilmeld svømmer til konkurrence.");
             System.out.println("Medlemsliste:");
-            for (Swimmer s : list) {
-                System.out.println(s);
-            }
-            System.out.println("Indtast navn på svømmer, du ønsker at redigere:");
-            String searchName = scanner.nextLine();
-            Swimmer swimmerToEdit = null;
 
-            for (Swimmer s : list) {
-                if (s.getName().equalsIgnoreCase(searchName)) {
-                    swimmerToEdit = s;
-                    break;
-                }
+            for (int i = 0; i < list.size(); i++) {
+                System.out.println("Indeks: " + i + " - Svømmer: " + list.get(i).getName());
             }
 
-            if (swimmerToEdit != null) {
-                System.out.println("Svømmer stamdata:");
-                System.out.println(swimmerToEdit);
+            System.out.println("Indtast indekstal på svømmer, du ønsker at tilmelde konkurrence:");
+            int swimmerIndex = scanner.nextInt();
+            scanner.nextLine();
 
-                System.out.println("Vil du indstille " + swimmerToEdit.getName() + " til konkurrence? skriv Ja eller tryk Enter for at bevare den nuværende status:");
+            if (swimmerIndex >= 0 && swimmerIndex < list.size()) {
+                Swimmer selectedSwimmer = list.get(swimmerIndex);
+
+                System.out.println("Vil du indstille " + selectedSwimmer.getName() + " til konkurrence? skriv Ja eller tryk Enter for at bevare den nuværende status:");
                 String competitionChoice = scanner.nextLine();
                 if (!competitionChoice.isEmpty()) {
                     if ("Ja".equalsIgnoreCase(competitionChoice)) {
-                        swimmerToEdit.setCompetitionSwimmer(true);
+                        selectedSwimmer.setCompetitionSwimmer(true);
                     } else {
                         System.out.println("Ugyldigt input. Konkurrence status forbliver uændret.");
                     }
