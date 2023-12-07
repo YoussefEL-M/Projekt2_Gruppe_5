@@ -91,32 +91,7 @@ public class UI {
 
                                 case 3 -> Club.registerCompetitionSwimmer(swimmers, scanner);
                                 case 4 -> Club.updateCompetetionRecords(swimmers, scanner);
-                                case 5 -> {
-                                    try {
-                                        System.out.println();
-                                        System.out.println("Vælg venligst hvad du ønsker at redigere:");
-                                        System.out.println("1. Opret træner");
-                                        System.out.println("2. Slet træner");
-                                        System.out.println("3. Gå tilbage");
-                                        System.out.println();
-
-                                        int subchoice4 = scanner.nextInt();
-                                        scanner.nextLine();
-                                        switch (subchoice4) {
-                                            case 1 -> trainers.add(Club.createTrainer(scanner));
-                                            case 2 -> {Club.removeTrainer(scanner, trainers, swimmers);
-                                                Trainer.assignTrainers(trainers,swimmers);
-                                            }
-                                            case 3 -> System.out.println("Går tilbage til main menu.");
-
-                                            default -> System.out.println("Fejl: Forkert input. Prøv igen.");
-                                        }
-
-                                } catch(Exception e){
-                                    System.out.println("En fejl er opstået: " + e.getMessage());
-                                    e.printStackTrace();
-                                }
-                            }
+                                case 5 -> Club.editTrainer(trainers, swimmers, scanner);
                                 case 6 ->
                                         Club.displayTopFive(swimmers,scanner);
 

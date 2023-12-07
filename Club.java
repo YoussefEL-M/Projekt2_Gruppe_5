@@ -215,6 +215,32 @@ public class Club {
         }
     }
 
+    static void editTrainer(ArrayList<Trainer> trainers, ArrayList<Swimmer> swimmers, Scanner scanner){
+        try {
+            System.out.println();
+            System.out.println("Vælg venligst hvad du ønsker at redigere:");
+            System.out.println("1. Opret træner");
+            System.out.println("2. Slet træner");
+            System.out.println("3. Gå tilbage");
+            System.out.println();
+
+            int subchoice4 = scanner.nextInt();
+            scanner.nextLine();
+            switch (subchoice4) {
+                case 1 -> trainers.add(Club.createTrainer(scanner));
+                case 2 -> {Club.removeTrainer(scanner, trainers, swimmers);
+                    Trainer.assignTrainers(trainers,swimmers);
+                }
+                case 3 -> System.out.println("Går tilbage til main menu.");
+
+                default -> System.out.println("Fejl: Forkert input. Prøv igen.");
+            }
+
+        } catch(Exception e){
+            System.out.println("En fejl er opstået: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
 
     static void updatePayment(ArrayList<Swimmer> list, Scanner scanner) {
         try {
@@ -417,11 +443,16 @@ public class Club {
             System.out.println();
             System.out.println("Søg efter træner eller tryk enter for at vise alle medlemmer.");
             String searchTerm = sc.nextLine();
-
-            System.out.println("Trænerliste:");
             for (Trainer t : trainerList) {
                 if(t.getName().toLowerCase().contains(searchTerm.toLowerCase()))
-                    System.out.println(t);
+                    System.out.println("Indeks: "+trainerList.indexOf(t)+" Træner:"+t);
+            }
+
+            if (searchTerm==null) {
+                System.out.println("Trænerliste:");
+                for (int i = 0; i < trainerList.size(); i++) {
+                    System.out.println("Indeks: " + i + " - Træner: " + trainerList.get(i).getName());
+                }
             }
             System.out.println();
             System.out.println("Indtast indekstal på den træner, du ønsker at fjerne.");
