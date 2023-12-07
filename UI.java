@@ -74,7 +74,7 @@ public class UI {
                             System.out.println();
                             System.out.println("Trænermenu");
                             System.out.println("1 Tilføj svømmere til stævne");
-                            System.out.println("2 Tilføj træner til svømmer");
+                            System.out.println("2 Tilføj eller fjern træner fra svømmer");
                             System.out.println("3 Registrer konkurrencedeltagere");
                             System.out.println("4 Registrer disciplin rekorder");
                             System.out.println("5 Opret og slet træner");

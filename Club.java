@@ -245,9 +245,8 @@ public class Club {
         }catch (IndexOutOfBoundsException e){
             System.out.println("Der er ingen svømmere med det indeks tal");
         }
-        catch (Exception e) {
-            System.out.println("En fejl er opstået: " + e.getMessage());
-            e.printStackTrace();
+        catch (InputMismatchException e) {
+            System.out.println("Forkert input: ");
         }
     }
 
