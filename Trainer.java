@@ -28,10 +28,18 @@ public class Trainer {
             System.out.println("Søg efter medlem eller tryk enter for at vise alle medlemmer.");
             String searchTerm = scanner.nextLine();
 
-            System.out.println("Medlemsliste:");
+            boolean memberFound = false;
+
             for (Swimmer s : swimmerList) {
-                if (s.getName().toLowerCase().contains(searchTerm.toLowerCase()))
+                if (s.getName().toLowerCase().contains(searchTerm.toLowerCase())){
+                    System.out.println("Medlemsliste:");
                     System.out.println(s);
+                    memberFound = true;
+                }
+            }
+            if (!memberFound) {
+                System.out.println("Intet medlem fundet under søgningen");
+                return;
             }
             System.out.println();
             System.out.println("Vælg det medlem, du ønsker at tilføje træner for.");
@@ -67,6 +75,7 @@ public class Trainer {
             } else {
                 System.out.println("Fejl: medlem blev ikke fundet. ");
             }
+
         }catch(InputMismatchException E){
             System.out.println("Fejl: Ugyldigt input.");
         }catch(IndexOutOfBoundsException e){
