@@ -42,7 +42,7 @@ public class Trainer {
                 return;
             }
             System.out.println();
-            System.out.println("Vælg det medlem, du ønsker at tilføje træner for.");
+            System.out.println("Vælg det medlem, du ønsker at tilføje træner for. Indtast index-tallet for medlemmet.");
             Swimmer swimmerToAssign = swimmerList.get(scanner.nextInt());
             scanner.nextLine();
 
