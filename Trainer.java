@@ -71,4 +71,7 @@ public class Trainer {
             }
         }
     }
+    public String toString() {
+        return name;
+    }
 }
