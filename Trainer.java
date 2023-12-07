@@ -69,6 +69,8 @@ public class Trainer {
             }
         }catch(InputMismatchException E){
             System.out.println("Fejl: Ugyldigt input.");
+        }catch(IndexOutOfBoundsException e){
+            System.out.println("Ugyldigt index");
         }
 
     }
