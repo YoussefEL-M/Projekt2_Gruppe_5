@@ -108,7 +108,7 @@ public class Swimmer{
     public void setBirthdate(LocalDate newBirthdate){
         this.birthday = newBirthdate;
     }
-
+    // Metode til at modtage fødselsdag på enkelt svømmer i liste.
     public LocalDate getBirthday() {
         return birthday;
     }
@@ -116,22 +116,27 @@ public class Swimmer{
     public void setActiveMember(boolean activeMember){
         this.isActive=activeMember;
     }
+    // Metode til at redigere konkurrencesvømmer medlemskab på enkelt svømmer i liste.
     public void setCompetitionSwimmer(boolean competitionswimmer){
         this.competitionSwimmer=competitionswimmer;
     }
+    // Metode til at modtage skyldige beløv på enkelt svømmer i liste.
     public float getOwedAmount(){
         return this.owedAmount;
     }
+    // Metode til at modtage butterfly rekord på enkelt svømmer i liste.
     public float getButterflyRecord(){
         return this.results.getButterflyRecord();
     }
+    // Metode til at modtage backstroke rekord på enkelt svømmer i liste.
     public float getBackstrokeRecord(){
         return this.results.getBackstrokeRecord();
     }
+    // Metode til at modtage freestyle rekord på enkelt svømmer i liste.
     public float getFreestyleRecord(){
         return this.results.getFreestyleRecord();
     }
-
+    // Metode til at resette indeks numre i liste. Bruges ved fjernelse af svømmer mfl.
     public static void resetIndexNos(ArrayList<Swimmer> list){
         Swimmer.noOfSwimmers=0;
         for(Swimmer s:list){
@@ -139,14 +144,16 @@ public class Swimmer{
             noOfSwimmers++;
         }
     }
+    // Metode til at tildele træner til enkelt svømmer i liste.
     public void setTrainer(Trainer trainer) {
         this.trainer= trainer;
     }
+    // Metode til at tildele træner indeks.
     public void setTrainerIndex(short trainerIndex) {
         this.trainerIndex = trainerIndex;
     }
 }
-
+// Klasse der bruges til at sammenligne rekorder - bruges i DisplayTopFive.
 class BackstrokeSort implements Comparator<Swimmer> {
     public int compare(Swimmer a, Swimmer b){
         Float fa = a.getBackstrokeRecord();
@@ -154,6 +161,7 @@ class BackstrokeSort implements Comparator<Swimmer> {
         return fa.compareTo(fb);
     }
 }
+// Klasse der bruges til at sammenligne rekorder - bruges i DisplayTopFive.
 class BackstrokePracticeSort implements Comparator<Swimmer> {
     public int compare(Swimmer a, Swimmer b){
         Float fa = a.results.getBackstrokePracticeRecord();
@@ -161,6 +169,7 @@ class BackstrokePracticeSort implements Comparator<Swimmer> {
         return fa.compareTo(fb);
     }
 }
+// Klasse der bruges til at sammenligne rekorder - bruges i DisplayTopFive.
 class ButterflySort implements Comparator<Swimmer> {
     public int compare(Swimmer a, Swimmer b){
         Float fa = a.results.getButterflyRecord();
@@ -168,7 +177,7 @@ class ButterflySort implements Comparator<Swimmer> {
         return fa.compareTo(fb);
     }
 }
-
+// Klasse der bruges til at sammenligne rekorder - bruges i DisplayTopFive.
 class ButterflyPracticeSort implements Comparator<Swimmer> {
     public int compare(Swimmer a, Swimmer b){
         Float fa = a.results.getButterflyPracticeRecord();
@@ -176,6 +185,7 @@ class ButterflyPracticeSort implements Comparator<Swimmer> {
         return fa.compareTo(fb);
     }
 }
+// Klasse der bruges til at sammenligne rekorder - bruges i DisplayTopFive.
 class FreestyleSort implements Comparator<Swimmer> {
     public int compare(Swimmer a, Swimmer b){
         Float fa = a.getFreestyleRecord();
@@ -183,6 +193,7 @@ class FreestyleSort implements Comparator<Swimmer> {
         return fa.compareTo(fb);
     }
 }
+// Klasse der bruges til at sammenligne rekorder - bruges i DisplayTopFive.
 class FreestylePracticeSort implements Comparator<Swimmer> {
     public int compare(Swimmer a, Swimmer b){
         Float fa = a.results.getFreestylePracticeRecord();
