@@ -49,7 +49,7 @@ public class Club {
         try {
             System.out.println("Medlemsliste:");
             for (Swimmer s : list) {
-                System.out.println(s.getName());
+                System.out.println(s.indexNo+". "+s.getName()+", "+(s.senior? "Senior" : "Junior")+", "+(s.isActive? "Aktiv" : "Ikke Aktiv")+", Skylder "+s.getOwedAmount()+" kr.");
             }
         } catch (Exception e) {
             System.out.println("En fejl er opstået: " + e.getMessage());

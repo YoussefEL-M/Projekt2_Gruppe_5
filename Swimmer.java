@@ -6,10 +6,10 @@ import java.util.Comparator;
 public class Swimmer{
     private static short noOfSwimmers = 0;
     short indexNo;
-    private boolean isActive;
+    boolean isActive;
     private String name;
     final private int age;
-    private final boolean senior;
+    final boolean senior;
     private short owedAmount;
     private LocalDate birthday;
     private Trainer trainer;
@@ -38,7 +38,7 @@ public class Swimmer{
     // Metode til at returnere leaselig tekst
     public String toString(){
         String trainerInfo = (trainer == null) ? ", Ingen Træner" : ", Træner: " + trainer.getName();
-        return indexNo+". "+name+", "+age+", "+birthday+", "+(senior? "Senior" : "Junior")+", "+(isActive? "Aktiv" : "Ikke Aktiv")+", Skylder: "+owedAmount+" kr. "+(lastChargeDate != null ? "- Sidste betalingsdato: "+lastChargeDate.toString() : "" )+trainerInfo+"\nRekorder for øvelse: "+"\nButterfly rekord:"+results.getButterflyPracticeRecord()+"\nBackstroke rekord: "+results.getBackstrokePracticeRecord()+"\nFreestyle rekorder "+results.getFreestylePracticeRecord()+"\nRekorder og placering for konkurrencer"+"\nButterfly rekord: "+results.getButterflyRecord()+" Placering: "+results.getButterflyPlacement()+"\nBackStroke rekord: "+results.getBackstrokeRecord()+" Placering: "+results.getBackstrokePlacement()+"\nFreeStyle rekord: "+results.getFreestyleRecord()+" Placering: "+results.getFreestylePlacement();
+        return indexNo+". "+name+", "+age+", "+birthday+", "+(senior? "Senior" : "Junior")+", "+(isActive? "Aktiv" : "Ikke Aktiv")+", Skylder: "+owedAmount+" kr. "+(lastChargeDate != null ? "- Sidste betalingsdato: "+lastChargeDate.toString() : "" )+trainerInfo+"\nRekorder for øvelse: "+"\nButterfly rekord:"+results.getButterflyPracticeRecord()+"\nBackstroke rekord: "+results.getBackstrokePracticeRecord()+"\nFreestyle rekorder "+results.getFreestylePracticeRecord()+"\nRekorder og placering for konkurrencer"+"\nButterfly rekord: "+results.getButterflyRecord()+" Placering: "+results.getButterflyPlacement()+"\nBackstroke rekord: "+results.getBackstrokeRecord()+" Placering: "+results.getBackstrokePlacement()+"\nFreestyle rekord: "+results.getFreestyleRecord()+" Placering: "+results.getFreestylePlacement();
     }
     public String fileOutput(){
         return isActive+","+name+","+birthday+","+owedAmount+","+competitionSwimmer+","+trainerIndex+","+lastChargeDate+","+results.getButterflyPracticeRecord()+","+results.getBackstrokePracticeRecord()+","+results.getFreestylePracticeRecord();

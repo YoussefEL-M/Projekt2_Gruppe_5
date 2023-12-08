@@ -1,4 +1,4 @@
-false,Emi,2001-03-14,0,true,-1,2023-08-13,0.0,0.0,0.0
+false,Emi,2001-03-14,0,true,-1,2023-08-13,0.0,24.6,0.0
 Yamaku Inter-School Meet,2021-05-16,Butterfly,25.32,2
 ;
 true,Nakai Hisao,1958-02-13,600,true,3,2023-12-08,0.0,0.0,28.732
