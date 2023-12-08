@@ -273,7 +273,7 @@ public class Club {
 
     static void registerCompetitionSwimmer(ArrayList<Swimmer> list, Scanner scanner) {
         try {
-            System.out.println("Tilmeld svømmer til konkurrence.");
+            System.out.println("Tilmeld svømmer som konkurrencesvømmer.");
             System.out.println("Medlemsliste:");
 
             for (int i = 0; i < list.size(); i++) {
@@ -338,23 +338,21 @@ public class Club {
         try {
             System.out.println("Fjern medlem");
             System.out.println();
-            System.out.println("Søg efter medlem eller tryk enter for at vise alle medlemmer.");
-            String searchTerm = scanner.nextLine();
-
             System.out.println("Medlemsliste:");
-            for (Swimmer s : list) {
-                if(s.getName().toLowerCase().contains(searchTerm.toLowerCase()))
-                    System.out.println(s);
+
+            for (int i = 0; i < list.size(); i++) {
+                System.out.println("Indeks: " + i + " - Svømmer: " + list.get(i).getName());
             }
-            System.out.println();
-            System.out.println("Indtast indekstal på det medlem, du ønsker at fjerne.");
-            Swimmer swimmerToRemove = list.get(scanner.nextInt());
+
+            System.out.println("Indtast indekstal på svømmer, du ønsker at fjerne:");
+            int swimmerIndex = scanner.nextInt();
             scanner.nextLine();
 
-            if (swimmerToRemove !=null) {
-                list.remove(swimmerToRemove);
+            if (swimmerIndex >= 0 && swimmerIndex < list.size()) {
+                Swimmer selectedSwimmer = list.get(swimmerIndex);
+                list.remove(selectedSwimmer);
                 Swimmer.resetIndexNos(list);
-                System.out.println("Medlem fjernet: " +swimmerToRemove.getName());
+                System.out.println("Medlem fjernet: " +selectedSwimmer.getName());
             }else {
                 System.out.println("Fejl, medlem blev ikke fundet. ");
             }
