@@ -218,7 +218,10 @@ public class Club {
             int subchoice4 = scanner.nextInt();
             scanner.nextLine();
             switch (subchoice4) {
-                case 1 -> trainers.add(Club.createTrainer(scanner));
+                case 1 -> {Trainer newTrainer = Club.createTrainer(scanner);
+                    trainers.add(newTrainer);
+                    FileManager.saveBackup(newTrainer);
+                }
                 case 2 -> {Club.removeTrainer(scanner, trainers, swimmers);
                     Trainer.assignTrainers(trainers,swimmers);
                 }
