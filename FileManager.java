@@ -194,7 +194,7 @@ public class FileManager {
                     line=in.readLine();
                 }
                 else{
-                    System.out.println("Bruh, how the fuck did you even get this error?");
+                    System.out.println(" ");
                     line=in.readLine();
                 }
             }

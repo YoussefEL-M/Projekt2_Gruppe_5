@@ -265,9 +265,9 @@ public class Results {
     }
 }
 
-
 enum Discipline {Butterfly, Backstroke, Freestyle}
 
+//Klasse for stævner
 class SwimMeet {
     String meetName;
     LocalDate date;

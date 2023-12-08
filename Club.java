@@ -1,4 +1,3 @@
-import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -368,16 +367,16 @@ public class Club {
             ArrayList<Swimmer> sortList = new ArrayList<>();
             System.out.println();
             System.out.println("Vælg venligst disciplin:");
-            System.out.println("1. Rygcrawl");
+            System.out.println("1. Backstroke");
             System.out.println("2. Butterfly");
-            System.out.println("3. Crawl");
+            System.out.println("3. Freestyle");
 
             int choice = sc.nextInt();
             sc.nextLine();
 
-            System.out.println("Ønskes konkurrencerekorder eller træningsrekorder?");
-            System.out.println("1. Konkurrencerekorder");
-            System.out.println("2. Træningsrekorder");
+            System.out.println("Ønskes konkurrence rekorder eller træningsrekorder?");
+            System.out.println("1. Konkurrence rekorder");
+            System.out.println("2. Trænings rekorder");
 
             int choice2 = sc.nextInt();
             sc.nextLine();

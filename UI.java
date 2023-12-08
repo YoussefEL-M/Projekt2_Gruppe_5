@@ -6,7 +6,7 @@ public class UI {
         ArrayList<Swimmer> swimmers = FileManager.getMembers();
         ArrayList<Trainer> trainers = FileManager.getTrainers();
         FileManager.getBackups(swimmers,trainers);
-        //Trainer.assignTrainers(trainers,swimmers);
+        Trainer.assignTrainers(trainers,swimmers);
         Club.calculateYearlyCharge(swimmers);
         menu(swimmers,trainers);
     }

@@ -19,6 +19,7 @@ public class Trainer {
         }
     }
 
+    //Tildel træner til svømmer
     public static void assignTrainers(ArrayList<Trainer> trainerList, ArrayList<Swimmer> swimmerList, Scanner scanner){
 
         try {
@@ -48,7 +49,7 @@ public class Trainer {
                 return;
             }
             System.out.println();
-            System.out.println("Vælg det medlem, du ønsker at tilføje træner for. Indtast index-tallet for medlemmet.");
+            System.out.println("Vælg det medlem, du ønsker at tilføje træner for. Indtast indeks-tallet for medlemmet.");
             Swimmer swimmerToAssign = swimmerList.get(scanner.nextInt());
             scanner.nextLine();
 
@@ -85,7 +86,7 @@ public class Trainer {
         }catch(InputMismatchException E){
             System.out.println("Fejl: Ugyldigt input.");
         }catch(IndexOutOfBoundsException e){
-            System.out.println("Ugyldigt index");
+            System.out.println("Ugyldigt indeks");
         }
 
     }
