@@ -27,9 +27,8 @@ public class UI {
                 System.out.println("1. Medlemsadministration");
                 System.out.println("2. Trænermenu");
                 System.out.println("3. Kasserermenu");
-                System.out.println("4. Backup funktion");
-                System.out.println("5. Afslut program\n");
-                System.out.print("Indtast venligst et tal mellem 1-5 \n");
+                System.out.println("4. Afslut program\n");
+                System.out.print("Indtast venligst et tal mellem 1-4 \n");
                 choice = scanner.nextInt();
                 scanner.nextLine();
 
@@ -133,7 +132,7 @@ public class UI {
                 System.out.println("En fejl er opstået " + e.getMessage());
                 scanner.nextLine();
             }
-        } while (choice != 5);
+        } while (choice != 4);
         scanner.close();
         FileManager.saveTrainers(trainers);
         FileManager.saveMembers(swimmers);

@@ -200,7 +200,6 @@ public class FileManager {
                     line=in.readLine();
                 }
                 else{
-                    System.out.println("Fejl under indlæsning fra backupfil.");
                     line=in.readLine();
                 }
             }
