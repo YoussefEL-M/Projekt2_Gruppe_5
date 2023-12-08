@@ -29,7 +29,7 @@ public class UI {
                 System.out.println("3. Kasserermenu");
                 System.out.println("4. Backup funktion");
                 System.out.println("5. Afslut program\n");
-                System.out.print("Indtast venligst et tal mellem 1-4 \n");
+                System.out.print("Indtast venligst et tal mellem 1-5 \n");
                 choice = scanner.nextInt();
                 scanner.nextLine();
 
@@ -37,11 +37,11 @@ public class UI {
                     case 1 -> {
                         while (subchoice1 != 5) {
                             System.out.println();
-                            System.out.println("Medlemsadministration");
+                            System.out.println("Medlemsadministration:");
                             System.out.println("1 Opret medlem");
                             System.out.println("2 Opdater stamoplysninger");
                             System.out.println("3 Fjern medlem");
-                            System.out.println("4 Generer oversigt og kontingent over nuværende medlemmer");
+                            System.out.println("4 Generer oversigt over nuværende medlemmer");
                             System.out.println("5 Gå tilbage");
                             System.out.println();
 
@@ -51,8 +51,8 @@ public class UI {
                                 case 1 -> {
                                     Swimmer newSwimmer = Club.createSwimmer(scanner);
                                     swimmers.add(newSwimmer);
+                                    newSwimmer.calculateYearlyCharge();
                                     FileManager.saveBackup(newSwimmer);
-                                    Club.calculateYearlyCharge(swimmers);
                                 }
                                 case 2 ->
                                         Club.editSwimmer(swimmers, scanner);
@@ -60,10 +60,9 @@ public class UI {
                                 case 3 ->
                                         Club.removeSwimmer(swimmers, scanner);
 
-                                case 4 -> {
+                                case 4 ->
                                     Club.showSwimmers(swimmers);
-                                    Club.calculateYearlyCharge(swimmers);
-                                }
+
                                 case 5 ->
                                         System.out.println("Går tilbage til main menu.");
 
@@ -74,9 +73,9 @@ public class UI {
                     case 2 -> {
                         while (subchoice2 != 7) {
                             System.out.println();
-                            System.out.println("Trænermenu");
-                            System.out.println("1 Tilføj svømmere til stævne");
-                            System.out.println("2 Tilføj eller fjern træner fra svømmer");
+                            System.out.println("Trænermenu:");
+                            System.out.println("1 Registrer konkurrenceresultater for medlem");
+                            System.out.println("2 Tilføj eller fjern træner til/fra medlem");
                             System.out.println("3 Registrer konkurrencedeltagere");
                             System.out.println("4 Registrer disciplin rekorder");
                             System.out.println("5 Opret og slet træner");
@@ -106,7 +105,7 @@ public class UI {
                     case 3 -> {
                         while (subchoice3 != 3) {
                             System.out.println();
-                            System.out.println("Kasserermenu");
+                            System.out.println("Kasserermenu:");
                             System.out.println("1 Vis medlemmer i restance");
                             System.out.println("2 Modtag kontigentbetaling");
                             System.out.println("3 Gå tilbage");

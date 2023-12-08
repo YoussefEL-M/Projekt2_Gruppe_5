@@ -11,76 +11,63 @@ public class Trainer {
         return name;
     }
 
-    public static Trainer getTrainerByIndex(ArrayList<Trainer> trainerList, int index) {
+    //Bruges ikke længere.
+    /*public static Trainer getTrainerByIndex(ArrayList<Trainer> trainerList, int index) {
         if (index >= 0 && index < trainerList.size()) {
             return trainerList.get(index);
         } else {
             return null;
         }
     }
-
+*/
     //Tildel træner til svømmer
     public static void assignTrainers(ArrayList<Trainer> trainerList, ArrayList<Swimmer> swimmerList, Scanner scanner){
 
         try {
-            System.out.println("Tilføj træner til svømmer:");
-
-            boolean memberFound = false;
-
+            Swimmer selectedSwimmer;
+            System.out.println("Tilføj eller fjern træner til/fra medlem:");
+            System.out.println();
+            System.out.println("Søg efter medlem eller tast enter for at vise alle medlemmer.");
+            String searchTerm = scanner.nextLine();
             System.out.println("Medlemsliste:");
+            System.out.println();
 
-            for (int i = 0; i < trainerList.size(); i++) {
-                System.out.println("Indeks: " + i + " - Træner: " + trainerList.get(i).getName());
+            for(Swimmer s:swimmerList){
+                if(s.getName().toLowerCase().contains(searchTerm.toLowerCase()))
+                    System.out.println(s.indexNo+". "+s.getName());
             }
 
-            System.out.println("Indtast indekstal på træner, du ønsker tildele svømmer til:");
+
+            System.out.println("Vælg hvilket medlem, du ønsker at tildele en træner til:");
             int swimmerIndex = scanner.nextInt();
             scanner.nextLine();
 
-            if (swimmerIndex >= 0 && swimmerIndex < trainerList.size()) {
-                Swimmer selectedSwimmer = swimmerList.get(swimmerIndex);{
-                    System.out.println("Medlemsliste:");
-                    System.out.println(selectedSwimmer);
-                    memberFound = true;
-                }
+            if (swimmerIndex >= 0 && swimmerIndex < swimmerList.size()) {
+                selectedSwimmer = swimmerList.get(swimmerIndex);
             }
-            if (!memberFound) {
-                System.out.println("Intet medlem fundet under søgningen");
+            else{
+                System.out.println("Intet medlem fundet med dette indekstal.");
                 return;
             }
             System.out.println();
-            System.out.println("Vælg det medlem, du ønsker at tilføje træner for. Indtast indeks-tallet for medlemmet.");
-            Swimmer swimmerToAssign = swimmerList.get(scanner.nextInt());
+            System.out.println("Trænerliste:");
+            for(Trainer t: trainerList){
+                System.out.println(trainerList.indexOf(t)+". "+t.getName());
+            }
+            System.out.println("Vælg den træner, du ønsker at tildele medlemmet. Tast -1 for ingen træner.");
+            int trainerIndex = scanner.nextInt();
             scanner.nextLine();
 
-            if (swimmerToAssign != null) {
-
-                System.out.println("Tilføj træner til medlem: " + swimmerToAssign.getName());
-                System.out.println("Tilgængelige trænere:");
-
-                for (int i = 0; i < trainerList.size(); i++) {
-                    System.out.println((i) + ". " + trainerList.get(i).getName());
-                }
-
-                System.out.println("Vælg træner for " + swimmerToAssign.getName() + " (-1 for ingen træner): ");
-                int trainerIndex = scanner.nextInt();
-                scanner.nextLine();
-
-
-                if (trainerIndex == -1) {
-                    swimmerToAssign.setTrainer(null);
-                    swimmerToAssign.setTrainerIndex((short) trainerIndex);
-                    System.out.println("Træner fjernet fra medlem: " + swimmerToAssign.getName());
-                } else if (trainerIndex + 1 <= trainerList.size()) {
-                    swimmerToAssign.setTrainer(trainerList.get(trainerIndex));
-                    swimmerToAssign.setTrainerIndex((short) trainerIndex);
-                    System.out.println("Træner " + trainerList.get(trainerIndex).getName() + " tilføjet til medlem: " + swimmerToAssign.getName());
-                } else {
-                    System.out.println("Ikke-eksisterende træner. Ingen ændringer ved " + swimmerToAssign.getName());
-                }
-
+            if (trainerIndex == -1) {
+                selectedSwimmer.setTrainer(null);
+                selectedSwimmer.setTrainerIndex((short) trainerIndex);
+                System.out.println("Træner fjernet fra medlem " + selectedSwimmer.getName());
+            } else if (trainerIndex < trainerList.size()) {
+                selectedSwimmer.setTrainer(trainerList.get(trainerIndex));
+                selectedSwimmer.setTrainerIndex((short) trainerIndex);
+                System.out.println("Træner " + trainerList.get(trainerIndex).getName() + " tilføjet til medlem " + selectedSwimmer.getName());
             } else {
-                System.out.println("Fejl: medlem blev ikke fundet. ");
+                System.out.println("Ikke-eksisterende træner. Ingen ændringer ved " + selectedSwimmer.getName());
             }
 
         }catch(InputMismatchException E){

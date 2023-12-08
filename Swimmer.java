@@ -5,7 +5,7 @@ import java.util.Comparator;
 
 public class Swimmer{
     private static short noOfSwimmers = 0;
-    private short indexNo;
+    short indexNo;
     private boolean isActive;
     private String name;
     final private int age;
@@ -37,8 +37,8 @@ public class Swimmer{
 
     // Metode til at returnere leaselig tekst
     public String toString(){
-        String trainerInfo = (trainerIndex == -1) ? ", Ingen Træner" : ", Træner: " + Trainer.getTrainerByIndex(FileManager.getTrainers(), trainerIndex).getName();
-        return indexNo+". "+name+", "+age+", "+birthday+", "+(senior? "Senior" : "Junior")+", "+(isActive? "Aktiv" : "Ikke Aktiv")+", Skylder: "+owedAmount+" kr. "+(lastChargeDate != null ? "- Sidste betalingsdato: "+lastChargeDate.toString() : "" )+trainerInfo+"\nRekorderder for øvelse: "+"\nButterfly rekord:"+results.getButterflyPracticeRecord()+"\nBackstroke rekord: "+results.getBackstrokePracticeRecord()+"\nFreestyle rekorder "+results.getFreestylePracticeRecord()+"\nRekorder og placering for konkurrencer"+"\nButterfly rekord: "+results.getButterflyRecord()+" Placering: "+results.getButterflyPlacement()+"\nBackStroke rekord: "+results.getBackstrokeRecord()+" Placering: "+results.getBackstrokePlacement()+"\nFreeStyle rekord: "+results.getFreestyleRecord()+" Placering: "+results.getFreestylePlacement();
+        String trainerInfo = (trainer == null) ? ", Ingen Træner" : ", Træner: " + trainer.getName();
+        return indexNo+". "+name+", "+age+", "+birthday+", "+(senior? "Senior" : "Junior")+", "+(isActive? "Aktiv" : "Ikke Aktiv")+", Skylder: "+owedAmount+" kr. "+(lastChargeDate != null ? "- Sidste betalingsdato: "+lastChargeDate.toString() : "" )+trainerInfo+"\nRekorder for øvelse: "+"\nButterfly rekord:"+results.getButterflyPracticeRecord()+"\nBackstroke rekord: "+results.getBackstrokePracticeRecord()+"\nFreestyle rekorder "+results.getFreestylePracticeRecord()+"\nRekorder og placering for konkurrencer"+"\nButterfly rekord: "+results.getButterflyRecord()+" Placering: "+results.getButterflyPlacement()+"\nBackStroke rekord: "+results.getBackstrokeRecord()+" Placering: "+results.getBackstrokePlacement()+"\nFreeStyle rekord: "+results.getFreestyleRecord()+" Placering: "+results.getFreestylePlacement();
     }
     public String fileOutput(){
         return isActive+","+name+","+birthday+","+owedAmount+","+competitionSwimmer+","+trainerIndex+","+lastChargeDate+","+results.getButterflyPracticeRecord()+","+results.getBackstrokePracticeRecord()+","+results.getFreestylePracticeRecord();
@@ -89,10 +89,6 @@ public class Swimmer{
 
             // Opdater lastChargeDate til at være efter betaling
             lastChargeDate = LocalDate.now();
-
-            System.out.println("Årlig kontingent tilføjet til " + name + ": " + yearlyCharge);
-        } else {
-            System.out.println( name+", har betalt indenfor et år. Sidst betalt: "+lastChargeDate);
         }
     }
 

@@ -1,14 +1,14 @@
 import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class FileManager {
     public static void main(String[] randyDandyO){ //For testing
         ArrayList<Trainer> list = getTrainers();
         ArrayList<Swimmer> alist = getMembers();
 
-       // alist.add(new Swimmer(true,"Mie",LocalDate.parse("2001-03-14"), (short) 0,10f,10f,10f,true, (short) 0));
-        alist.get(0).setTrainer(list.get(alist.get(0).trainerIndex));
+        //alist.add(Club.createSwimmer(new Scanner(System.in)));
 
         System.out.println(alist.get(0));
 
@@ -56,7 +56,7 @@ public class FileManager {
             file.close();
 
         }catch(IOException E){ //FileNotFoundException is a subset of IOException; this catches both.
-            System.out.println("Error: unable to read members from file.");
+            System.out.println("Fejl under indlæsning af medlemmer.");
             E.printStackTrace();
         }
         return list;
@@ -77,7 +77,7 @@ public class FileManager {
             out.close();
             file.close();
         }catch(IOException E){
-            System.out.println("Error: unable to save data.");
+            System.out.println("Fejl: data kunne ikke gemmes.");
             E.printStackTrace();
         }
     }
@@ -200,7 +200,7 @@ public class FileManager {
                     line=in.readLine();
                 }
                 else{
-                    System.out.println(" ");
+                    System.out.println("Fejl under indlæsning fra backupfil.");
                     line=in.readLine();
                 }
             }
