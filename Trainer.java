@@ -50,10 +50,16 @@ public class Trainer {
                 return;
             }
             System.out.println();
+            System.out.println("Søg efter træner eller tast enter for at vise alle trænere.");
+            String searchTerm2 = scanner.nextLine();
             System.out.println("Trænerliste:");
+            System.out.println();
+
             for(Trainer t: trainerList){
-                System.out.println(trainerList.indexOf(t)+". "+t.getName());
+                if(t.getName().toLowerCase().contains(searchTerm2.toLowerCase()))
+                    System.out.println(trainerList.indexOf(t)+". "+t.getName());
             }
+
             System.out.println("Vælg den træner, du ønsker at tildele medlemmet. Tast -1 for ingen træner.");
             int trainerIndex = scanner.nextInt();
             scanner.nextLine();
