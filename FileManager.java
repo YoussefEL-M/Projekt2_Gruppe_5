@@ -30,6 +30,9 @@ public class FileManager {
                 boolean competition = Boolean.parseBoolean(bits[4]);
                 short trainerIndex = Short.parseShort(bits[5]);
                 LocalDate lastChargeDate = LocalDate.parse(bits[6]);
+                float butterflyPracticeRecord = Float.parseFloat(bits[7]);
+                float backstrokePracticeRecord = Float.parseFloat(bits[8]);
+                float freestylePracticeRecord = Float.parseFloat(bits[9]);
 
                 ArrayList<SwimMeet> meetList = new ArrayList<>();
                 line = in.readLine();
@@ -46,7 +49,7 @@ public class FileManager {
                     line=in.readLine();
                 }
 
-                list.add(new Swimmer(active,name,birthday,amount,competition,trainerIndex,new Results(meetList),lastChargeDate));
+                list.add(new Swimmer(active,name,birthday,amount,competition,trainerIndex,new Results(meetList,butterflyPracticeRecord,backstrokePracticeRecord,freestylePracticeRecord),lastChargeDate));
 
                 line = in.readLine();
             }
@@ -169,6 +172,9 @@ public class FileManager {
                     boolean competition = Boolean.parseBoolean(bits[5]);
                     short trainerIndex = Short.parseShort(bits[6]);
                     LocalDate lastChargeDate = LocalDate.parse(bits[7]);
+                    float butterflyPracticeRecord = Float.parseFloat(bits[8]);
+                    float backstrokePracticeRecord = Float.parseFloat(bits[9]);
+                    float freestylePracticeRecord = Float.parseFloat(bits[10]);
 
                     ArrayList<SwimMeet> meetList = new ArrayList<>();
                     line = in.readLine();
@@ -185,7 +191,7 @@ public class FileManager {
                         line=in.readLine();
                     }
 
-                    swimmerList.add(new Swimmer(active,name,birthday,amount,competition,trainerIndex,new Results(meetList),lastChargeDate));
+                    swimmerList.add(new Swimmer(active,name,birthday,amount,competition,trainerIndex,new Results(meetList,butterflyPracticeRecord,backstrokePracticeRecord,freestylePracticeRecord),lastChargeDate));
 
                     line = in.readLine();
                 }

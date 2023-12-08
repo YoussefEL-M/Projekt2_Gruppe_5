@@ -41,7 +41,7 @@ public class Swimmer{
         return indexNo+". "+name+", "+age+", "+birthday+", "+(senior? "Senior" : "Junior")+", "+(isActive? "Aktiv" : "Ikke Aktiv")+", Skylder: "+owedAmount+" kr. "+(lastChargeDate != null ? "- Sidste betalingsdato: "+lastChargeDate.toString() : "" )+trainerInfo+"\nRekorderder for øvelse: "+"\nButterfly rekord:"+results.getButterflyPracticeRecord()+"\nBackstroke rekord: "+results.getBackstrokePracticeRecord()+"\nFreestyle rekorder "+results.getFreestylePracticeRecord()+"\nRekorder og placering for konkurrencer"+"\nButterfly rekord: "+results.getButterflyRecord()+" Placering: "+results.getButterflyPlacement()+"\nBackStroke rekord: "+results.getBackstrokeRecord()+" Placering: "+results.getBackstrokePlacement()+"\nFreeStyle rekord: "+results.getFreestyleRecord()+" Placering: "+results.getFreestylePlacement();
     }
     public String fileOutput(){
-        return isActive+","+name+","+birthday+","+owedAmount+","+competitionSwimmer+","+trainerIndex+","+lastChargeDate;
+        return isActive+","+name+","+birthday+","+owedAmount+","+competitionSwimmer+","+trainerIndex+","+lastChargeDate+","+results.getButterflyPracticeRecord()+","+results.getBackstrokePracticeRecord()+","+results.getFreestylePracticeRecord();
     }
     private int calculateAge(LocalDate birthday) {
         LocalDate currentDate = LocalDate.now();

@@ -14,7 +14,7 @@ public class Results {
     private float backstrokePracticeRecord;
     private float butterflyPracticeRecord;
     private float freestylePracticeRecord;
-    static ArrayList<SwimMeet> list;
+    ArrayList<SwimMeet> list;
     float getButterflyRecord(){
         return butterflyRecord;
     }
@@ -46,8 +46,11 @@ public class Results {
     byte getFreestylePlacement(){
         return freestylePlacement;
     }
-    Results(ArrayList<SwimMeet> list){
+    Results(ArrayList<SwimMeet> list,float butterflyPracticeRecord, float backstrokePracticeRecord, float freestylePracticeRecord){
         this.list=list;
+        this.butterflyPracticeRecord=butterflyPracticeRecord;
+        this.backstrokePracticeRecord=backstrokePracticeRecord;
+        this.freestylePracticeRecord=freestylePracticeRecord;
         ArrayList<Float> sortListA = new ArrayList<>();
         ArrayList<Float> sortListB = new ArrayList<>();
         ArrayList<Float> sortListC = new ArrayList<>();
@@ -104,16 +107,26 @@ public class Results {
 
                 switch (discipline.toLowerCase()) {
                     case "butterfly":
-                        butterflyRecord = newTime;
-                        butterflyPlacement = newPlacement;
+                        list.add(new SwimMeet("Manuelt indtastet rekord",LocalDate.now(),Discipline.Butterfly,newTime,newPlacement));
+                        if(newTime<butterflyRecord||butterflyRecord==0)
+                            butterflyRecord=newTime;
+                        if(newPlacement<butterflyPlacement)
+                            butterflyPlacement=newPlacement;
                         break;
                     case "backstroke":
-                        backstrokeRecord = newTime;
-                        backstrokePlacement = newPlacement;
+                        list.add(new SwimMeet("Manuelt indtastet rekord",LocalDate.now(),Discipline.Backstroke,newTime,newPlacement));
+                        if(newTime<backstrokeRecord||backstrokeRecord==0)
+                            backstrokeRecord=newTime;
+                        if(newPlacement<backstrokePlacement)
+                            backstrokePlacement=newPlacement;
                         break;
                     case "freestyle":
-                        freestyleRecord = newTime;
-                        freestylePlacement = newPlacement;
+                        list.add(new SwimMeet("Manuelt indtastet rekord",LocalDate.now(),Discipline.Freestyle,newTime,newPlacement));
+                        if(newTime<freestyleRecord||backstrokeRecord==0)
+                            freestyleRecord=newTime;
+                        if(newPlacement<freestylePlacement)
+                            freestylePlacement=newPlacement;
+
                         break;
                     default:
                         System.out.println("Ugyldig disciplin.");
@@ -220,7 +233,7 @@ public class Results {
                 }
         }
     }
-    static void addSwimMeet(Scanner scanner) {
+    void addSwimMeet(Scanner scanner) {
         try {
             System.out.println("Skriv navnet på konkurrencen:");
             String meetName = scanner.nextLine();

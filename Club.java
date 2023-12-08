@@ -26,14 +26,14 @@ public class Club {
 
                     SwimMeet s1 = new SwimMeet("Default Meet", LocalDate.now(), Discipline.Butterfly, 0.0f, (byte) 0);
 
-                    return new Swimmer(true, name, birthdate, owedAmount, competitionSwimmer, (short) -1, new Results(new ArrayList<>(List.of(s1))),null);
+                    return new Swimmer(true, name, birthdate, owedAmount, competitionSwimmer, (short) -1, new Results(new ArrayList<>(List.of(s1)),0,0,0),null);
                 } else if (valg.equalsIgnoreCase("n")) {
 
                     //Laver et default swimmeet objekt for svømmer
                     SwimMeet s1 = new SwimMeet("Default Meet", LocalDate.now(), Discipline.Butterfly, 0.0f, (byte) 0);
 
                     System.out.println("Ny svømmer oprettet.");
-                    return new Swimmer(false, name, birthdate, owedAmount, competitionSwimmer, (short) -1, new Results(new ArrayList<>(List.of(s1))),null);
+                    return new Swimmer(false, name, birthdate, owedAmount, competitionSwimmer, (short) -1, new Results(new ArrayList<>(List.of(s1)),0,0,0),null);
                 } else {
                     System.out.println("Valg ugyldigt, prøv igen.");
                 }
@@ -326,7 +326,7 @@ public class Club {
                 Swimmer selectedSwimmer = list.get(swimmerIndex);
 
                 System.out.println("Du har valgt at registrere konkurrence for: " + selectedSwimmer.getName());
-                Results.addSwimMeet(scanner);
+                selectedSwimmer.results.addSwimMeet(scanner);
             } else {
                 System.out.println("Ugyldigt indekstal. Prøv igen.");
             }
