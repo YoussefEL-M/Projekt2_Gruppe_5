@@ -368,9 +368,9 @@ public class Club {
             ArrayList<Swimmer> sortList = new ArrayList<>();
             System.out.println();
             System.out.println("Vælg venligst disciplin:");
-            System.out.println("1. Rygcrawl");
-            System.out.println("2. Butterfly");
-            System.out.println("3. Crawl");
+            System.out.println("1. Butterfly");
+            System.out.println("2. Backstroke");
+            System.out.println("3. Freestyle");
 
             int choice = sc.nextInt();
             sc.nextLine();
@@ -387,28 +387,6 @@ public class Club {
                     case 1 -> {
                         if(choice2==1) {
                             for (Swimmer s : list) {
-                                if (s.getBackstrokeRecord() != 0)
-                                    sortList.add(s);
-                            }
-                            sortList.sort(new BackstrokeSort());
-                            for (int i = 0; i <= 4; i++) {
-                                System.out.println(sortList.get(i));
-                            }
-                        }
-                        else{
-                            for (Swimmer s : list) {
-                                if (s.results.getBackstrokePracticeRecord() != 0)
-                                    sortList.add(s);
-                            }
-                            sortList.sort(new BackstrokePracticeSort());
-                            for (int i = 0; i <= 4; i++) {
-                                System.out.println(sortList.get(i));
-                            }
-                        }
-                    }
-                    case 2 -> {
-                        if(choice2==1) {
-                            for (Swimmer s : list) {
                                 if (s.getButterflyRecord() != 0)
                                     sortList.add(s);
                             }
@@ -423,6 +401,28 @@ public class Club {
                                     sortList.add(s);
                             }
                             sortList.sort(new ButterflyPracticeSort());
+                            for (int i = 0; i <= 4; i++) {
+                                System.out.println(sortList.get(i));
+                            }
+                        }
+                    }
+                    case 2 -> {
+                        if(choice2==1) {
+                            for (Swimmer s : list) {
+                                if (s.getBackstrokeRecord() != 0)
+                                    sortList.add(s);
+                            }
+                            sortList.sort(new BackstrokeSort());
+                            for (int i = 0; i <= 4; i++) {
+                                System.out.println(sortList.get(i));
+                            }
+                        }
+                        else{
+                            for (Swimmer s : list) {
+                                if (s.results.getBackstrokePracticeRecord() != 0)
+                                    sortList.add(s);
+                            }
+                            sortList.sort(new BackstrokePracticeSort());
                             for (int i = 0; i <= 4; i++) {
                                 System.out.println(sortList.get(i));
                             }
