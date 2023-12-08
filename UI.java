@@ -128,11 +128,6 @@ public class UI {
                             }
                         }
                     }
-                    case 4 -> {
-                        FileManager.saveMembers(swimmers);
-                        FileManager.saveTrainers(trainers);
-                        System.out.println("Medlemmer og trænere er gemt i systemet.");
-                    }
                 }
             } catch (Exception e) {
                 System.out.println("En fejl er opstået " + e.getMessage());
